@@ -13,7 +13,7 @@
         <body>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container">
-                    <a class="navbar-brand" href="<?php echo Config::get('URL'); ?>apuntes">Turno CAT</a>
+                    <a class="navbar-brand" href="<?php echo Config::get('URL'); ?>apuntes">CALENDARIO DE TURNOS</a>
                 </div>
             </nav>
             <div class="container mt-3">
