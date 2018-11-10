@@ -21,6 +21,7 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Ingresar datos</a></li>
                         <li class="nav-item"><a class="nav-link" href="#" id="boton.profesionales">Asignar turnos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" id="boton.profesionales">Turnos por mes</a></li>
                         <li class="nav-item"><a class="nav-link" href="https://servidor.crecimientofetal.cl/login/logoutturnos">Salir del programa</a></li>
                     </ul>
                 </div>
