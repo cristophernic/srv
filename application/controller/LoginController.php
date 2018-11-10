@@ -31,15 +31,7 @@ class LoginController extends Controller
         } else {
             $redirect = Request::get('redirect') ? Request::get('redirect') : NULL;
             $data = array('redirect' => $redirect, 'userIdRandom' => $this->generateRandomString());
-            if ($redirect == '/apuntes'){
-                $this->View->renderWithoutHeaderAndFooter('login/apuntes', $data);
-            }
-            else if ($redirect == '/turnos'){
-                $this->View->renderWithoutHeaderAndFooter('login/turnos', $data);
-            }
-            else{
-                $this->View->render('login/index', $data);
-            }  
+            $this->View->renderWithoutHeaderAndFooter('login/index', $data);  
         }
     }
 
@@ -84,20 +76,6 @@ class LoginController extends Controller
     {
         LoginModel::logout();
         Redirect::home();
-        exit();
-    }
-
-    public function logoutapuntes()
-    {
-        LoginModel::logout();
-        Redirect::to('apuntes');
-        exit();
-    }
-
-    public function logoutturnos()
-    {
-        LoginModel::logout();
-        Redirect::to('turnos');
         exit();
     }
 
