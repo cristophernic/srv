@@ -30,7 +30,7 @@
             <div class="card">
                     <div class="card-body">
                         <div class="form-row">
-                            <div class="col"><p>Mes</p></div>
+                            <div class="col"><p>MES</p></div>
                             <div class="col">
                                 <select id="fecha.mes" class="form-control">
                                     <option value="01">Enero</option>
@@ -48,7 +48,7 @@
                                 </select>
                             </div>
                             <div class="col">
-                                <p>Año</p>
+                                <p>AÑO</p>
                             </div>
                             <div class="col">
                                 <select id="fecha.ano" class="form-control">
