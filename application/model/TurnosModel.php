@@ -175,7 +175,7 @@ class TurnosModel
         $noche =  $query->rowCount();
 
         $return = new stdClass();
-        $return->conteo = (($dia + $noche) * 12) . ' Hrs ( ' . ($dia + $noche) . ' turnos )'
+        $return->conteo = (($dia + $noche) * 12) . ' Hrs ( ' . ($dia + $noche) . ' turnos )';
     }
 
     public static function getAllTurnos($dia, $mes, $ano)
