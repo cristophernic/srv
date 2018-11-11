@@ -7,8 +7,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Ingresar datos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#" id="boton.profesionales">Asignar turnos</a></li>
+                        <?php if (Session::get("user_account_type") == 6) : ?>
+                            <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Ingresar datos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" id="boton.profesionales">Asignar turnos</a></li>
+                        <?php endif; ?>
                         <li class="nav-item"><a class="nav-link" href="#" id="boton.pormes">Ver turnos por mes</a></li>
                         <li class="nav-item"><a class="nav-link" href="login/logout">Salir del programa</a></li>
                     </ul>
