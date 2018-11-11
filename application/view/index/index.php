@@ -2,7 +2,7 @@
 <html lang="es" class="h-100">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="user-scalable=no,maximum-scale=1, minimum-scale=1, width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
         <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/solid.css" integrity="sha384-VGP9aw4WtGH/uPAOseYxZ+Vz/vaTb1ehm1bwx92Fm8dTrE+3boLfF1SpAtB1z7HW" crossorigin="anonymous">
@@ -150,7 +150,7 @@
 
             $("#boton\\.pormes").on("click", function(){
                 $("#dialog\\.title").html("Calcular horas de turno por mes");
-                $("#dialog\\.body").html('<div class="row"><div class="form-group col-2"><label for="turnos.ano">Año</label><select class="form-control" id="turnos.ano"></select></div><div class="form-group col-2"><label for="turnos.mes">Mes de turno</label><select class="form-control" id="turnos.mes"></select></div><div class="form-group col-3"><label for="turnos.profesionales">Profesional</label><select class="form-control" id="turnos.profesionales"></select></div><div class="form-group col-3"><label for="turnos.conteo">Total de horas</label><input type="text" class="form-control" id="turnos.conteo" disabled></div></div>');
+                $("#dialog\\.body").html('<div class="row"><div class="form-group col-1"><label for="turnos.ano">Año</label><select class="form-control" id="turnos.ano"></select></div><div class="form-group col-3"><label for="turnos.mes">Mes de turno</label><select class="form-control" id="turnos.mes"></select></div><div class="form-group col-4"><label for="turnos.profesionales">Profesional</label><select class="form-control" id="turnos.profesionales"></select></div><div class="form-group col-3"><label for="turnos.conteo">Total de horas</label><input type="text" class="form-control" id="turnos.conteo" disabled></div></div>');
                 $("#dialog\\.view").modal("show");
                 cargarProfesionales();
 
