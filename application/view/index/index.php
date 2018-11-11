@@ -14,6 +14,7 @@
                         <li class="nav-item"><a class="nav-link" href="#" id="boton.pormes">Ver turnos por mes</a></li>
                         <li class="nav-item"><a class="nav-link" href="login/logout">Salir del programa</a></li>
                     </ul>
+                    <p class="navbar-text"><?php echo Session::get('user_name'); ?></p>
                 </div>
             </nav>
             <div class="card">
@@ -511,18 +512,18 @@
                     if (response.profesional_userid == ""){
                         $("#dialog\\.delete").remove();
                         $("#dialog\\.title").html('Asociar una cuenta con un médico');
-                        $("#dialog\\.body").html('<p class="text-center">El administrador ha ingresado los siguientes médicos a la plataforma, seleccione su nombre y presione continuar.</p>');
+                        $("#dialog\\.body").html('<div class="row"><div class="col-12"><p class="text-center">El administrador ha ingresado los siguientes médicos a la plataforma, seleccione su nombre y presione continuar.</p></p><div class="form-group col-12"><label for="turnos.profesionales">Profesional</label><select class="form-control" id="turnos.profesionales"></select></div></div>');
                         $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="">Continuar</button>');
                         $("#dialog\\.view").modal("show");
                     }
                 }
-                    else{
-                        $("#dialog\\.delete").remove();
-                        $("#dialog\\.title").html('Asociar una cuenta con un médico');
-                        $("#dialog\\.body").html('<p class="text-center">El administrador ha ingresado los siguientes médicos a la plataforma, seleccione su nombre y presione continuar.</p>');
-                        $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="">Continuar</button>');
-                        $("#dialog\\.view").modal("show");
-                    }
+                else{
+                    $("#dialog\\.delete").remove();
+                    $("#dialog\\.title").html('Asociar una cuenta con un médico');
+                    $("#dialog\\.body").html('<p class="text-center">El administrador ha ingresado los siguientes médicos a la plataforma, seleccione su nombre y presione continuar.</p>');
+                    $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="">Continuar</button>');
+                    $("#dialog\\.view").modal("show");
+                }
             });
         }
     <?php endif; ?>
