@@ -148,7 +148,7 @@
             });
 
             $("#boton\\.pormes").on("click", function(){
-                $("#dialog\\.title").html("Calcular horas de turno de profesional");
+                $("#dialog\\.title").html("Calcular horas de turno por mes");
                 $("#dialog\\.body").html('<div class="row"><div class="form-group col"><label for="turnos.mes">Mes de turno</label><select class="form-control" id="turnos.mes"></select></div><div class="form-group col"><label for="turnos.profesionales">Profesional</label><select class="form-control" id="turnos.profesionales"></select></div><div class="form-group col"><label for="turnos.conteo">Total de horas</label><input type="text" class="form-control" id="turnos.conteo" disabled></div></div>');
                 $("#dialog\\.view").modal("show");
                 cargarProfesionales();
