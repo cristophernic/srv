@@ -30,13 +30,49 @@
                                     <?php } ?>
                                     <input type="hidden" name="csrf_token" value="<?= Csrf::makeToken(); ?>" />
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" class="btn btn-outline-primary" id="boton.profesional"><i class="fas fa-user-check"></i> Turno</button>
-                                        <button type="submit" class="btn btn-outline-primary"><i class="fas fa-user-check"></i> Administrar</button>
+                                        <button type="submit" type="button" class="btn btn-outline-primary"><i class="fas fa-user-check"></i> Ingresar</button>
+                                        <button class="btn btn-outline-secondary" id="boton.registrarse"><i class="fas fa-user-plus"></i> Registrarse</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                    </div>     
+                    </div>
+                    <div class="col-6 d-none" id="registro.apuntes">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Registrarse</h5>
+                                <form method="post" action="<?php echo Config::get('URL'); ?>register/register_apuntes">
+                                    <div class="form-group">
+                                        <label>Nombre de usuario <small>(todo junto)</small></label>
+                                        <input type="text" class="form-control" name="user_name" pattern="[a-zA-Z0-9]{2,64}"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Correo electrónico</label>
+                                        <input type="email" class="form-control" name="user_email" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Repetir correo</label>
+                                        <input type="email" class="form-control" name="user_email_repeat"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Contraseña <small>(Mayor o igual a 6 carácteres)</small></label>
+                                        <input type="password" class="form-control" name="user_password_new" pattern=".{6,}" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Repetir contraseña</label>
+                                        <input type="password" class="form-control" name="user_password_repeat" pattern=".{6,}" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Escriba los carácteres de la imágen</label>
+                                        <a href="#" onclick="document.getElementById('captcha').src = '<?php echo Config::get('URL'); ?>register/showCaptcha?' + Math.random(); return false">Recargar Captcha</a>
+                                        <img id="captcha" src="<?php echo Config::get('URL'); ?>register/showCaptcha" />
+                                        <input type="text" class="form-control" name="captcha" />
+                                    </div>
+                                    <input type="submit" value="Register" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>   
                 </div>
             </div>
         </div>
@@ -44,11 +80,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
-            $("#boton\\.profesional").on("click", function(e){
+            $("#boton\\.registrarse").on("click", function(e){
                 e.preventDefault();
-                $.get("https://servidor.crecimientofetal.cl/public/index", function(response){
-                    $("html").html(response);
-                });
+                $("#registro\\.apuntes").removeClass("d-none");
             });
         });
     </script>
