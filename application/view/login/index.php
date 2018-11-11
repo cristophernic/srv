@@ -37,13 +37,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 d-none" id="registro.apuntes">
+                    <div class="col-6 d-none" id="registro.turnos">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title text-center">Registrarse</h5>
+                                <h5 class="card-title text-center">Registrar un usuario en turnos</h5>
                                 <form method="post" action="<?php echo Config::get('URL'); ?>register/register_apuntes">
                                     <div class="form-group">
-                                        <label>Nombre de usuario <small>(todo junto)</small></label>
+                                        <label>Nombre del usuario <small>(todo junto)</small></label>
                                         <input type="text" class="form-control" name="user_name" pattern="[a-zA-Z0-9]{2,64}"/>
                                     </div>
                                     <div class="form-group">
@@ -90,7 +90,7 @@
         $(document).ready(function() {
             $("#boton\\.registrarse").on("click", function(e){
                 e.preventDefault();
-                $("#registro\\.apuntes").removeClass("d-none");
+                $("#registro\\.turnos").removeClass("d-none");
             });
         });
     </script>
