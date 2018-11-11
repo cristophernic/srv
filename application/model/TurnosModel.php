@@ -52,7 +52,7 @@ class TurnosModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-            $sql = "SELECT profesional_id, profesional_name, profesional_rut, profesional_telefono, profesional_correo FROM profesionales";
+            $sql = "SELECT profesional_id, profesional_name, profesional_rut, profesional_telefono, profesional_correo FROM profesionales WHERE profesional_userid = 0";
             $query = $database->prepare($sql);
             $query->execute();
 
