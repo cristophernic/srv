@@ -153,6 +153,31 @@ class TurnosModel
         return $query->fetchAll();
     }
 
+    public static function countTurno($mes, $profesional)
+    {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $fecha1 = $ano . "-" . $mes . "-" .'-01';
+        $fecha = new DateTime($ano . '-' . $mes .'-01');
+        $fecha2 = $ano . "-" . $mes . "-" . $fecha->format('t');
+
+        $sql = "SELECT turno_turno FROM turnos WHERE turno_turno = 0 AND turno_profesional = :profesional AND turno_fechain BETWEEN :turno_fechain AND :turno_fechaout";
+        $query = $database->prepare($sql);
+        $query->execute(array(':profesional' => $profesional, ':turno_fechain' => $fecha1, ':turno_fechaout' => $fecha2));
+
+        // fetchAll() is the PDO method that gets all result rows
+        $dia =  $query->rowCount();
+
+        $sql = "SELECT turno_turno FROM turnos WHERE turno_turno = 1 AND turno_profesional = :profesional AND turno_fechain BETWEEN :turno_fechain AND :turno_fechaout";
+        $query = $database->prepare($sql);
+        $query->execute(array(':profesional' => $profesional, ':turno_fechain' => $fecha1, ':turno_fechaout' => $fecha2));
+
+        $noche =  $query->rowCount();
+
+        $return = new stdClass();
+        $return->conteo = (($dia + $noche) * 12) . ' Hrs ( ' . ($dia + $noche) . ' turnos )'
+    }
+
     public static function getAllTurnos($dia, $mes, $ano)
     {
         $database = DatabaseFactory::getFactory()->getConnection();

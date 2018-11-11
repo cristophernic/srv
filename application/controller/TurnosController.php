@@ -62,6 +62,9 @@ class TurnosController extends Controller
             case "comentarioUpdate":
                 $resultado = TurnosModel::updateComentario(Request::post('id'), Request::post('text'));
                 break;
+            case "sumaturnos":
+                $resultado = TurnosModel::countTurno(Request::post('mes'), Request::post('profesional'));
+                break;
         }
 
         return $this->View->renderJSON($resultado);
