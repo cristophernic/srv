@@ -18,19 +18,9 @@ class RegisterController extends Controller
         $registration_successful = RegistrationModel::registerNewUser();
 
         if ($registration_successful) {
-            Redirect::to('login/index');
+            Redirect::home();
         } else {
-            Redirect::to('register/index');
-        }
-    }
-    public function register_apuntes()
-    {
-        $registration_successful = RegistrationModel::registerNewUser();
-
-        if ($registration_successful) {
-            Redirect::to('apuntes');
-        } else {
-            Redirect::to('apuntes');
+            Redirect::home();
         }
     }
     public function verify($user_id, $user_activation_verification_code)
