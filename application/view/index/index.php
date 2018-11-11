@@ -149,8 +149,17 @@
 
             $("#boton\\.pormes").on("click", function(){
                 $("#dialog\\.title").html("Calcular horas de turno de profesional");
-                $("#dialog\\.body").html('<div class="row"><div class="form-group col"><label for="turnos.fecha.in">Fecha de turno</label><select class="form-control" id="turnos.fecha"></select></div><div class="form-group col"><label for="turnos.profesional">Profesional</label><select class="form-control" id="turnos.profesional"></select></div><div class="form-group col"><label for="turnos.conteo">Total de horas</label><input type="text" class="form-control" id="turnos.conteo" disabled></div></div>');
+                $("#dialog\\.body").html('<div class="row"><div class="form-group col"><label for="turnos.mes">Mes de turno</label><select class="form-control" id="turnos.mes"></select></div><div class="form-group col"><label for="turnos.profesionales">Profesional</label><select class="form-control" id="turnos.profesionales"></select></div><div class="form-group col"><label for="turnos.conteo">Total de horas</label><input type="text" class="form-control" id="turnos.conteo" disabled></div></div>');
                 $("#dialog\\.view").modal("show");
+                cargarProfesionales();
+
+                var mes = ['Enero','Febrero','Marzo','Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+                
+                let d = new Date();
+                $.each(mes, function(i, item) {
+                    let option = '<option value="' + parseInt(i +1) + '">' + mes[i] + ' ' + d.getFullYear() + '</option>';
+                    $("#turnos\\.mes").append(option);
+                });
             });
 
             $("#boton\\.profesionales").on("click", function(){
