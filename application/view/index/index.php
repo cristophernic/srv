@@ -501,7 +501,7 @@
             });
       }
       <?php if (Session::get("user_account_type") == 1) : ?>
-        function cargarProfesionales(){
+        function verifiID(){
             let data = {
                 accion : "user_id_profesional",
             }
