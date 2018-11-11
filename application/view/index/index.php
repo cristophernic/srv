@@ -500,7 +500,7 @@
                 }
             });
       }
-    <?php if (Session::get("user_account_type") == 1) : ?>
+      <?php if (Session::get("user_account_type") == 1) : ?>
         function cargarProfesionales(){
             let data = {
                 accion : "user_id_profesional",
