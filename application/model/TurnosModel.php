@@ -51,7 +51,8 @@ class TurnosModel
     public static function getIdProfesional($user_id){
 
         $database = DatabaseFactory::getFactory()->getConnection();
-        $sql = "SELECT profesional_id, profesional_userid FROM profesionales where profesional_userid = :profesional_userid";
+        
+        $sql = "SELECT profesional_id, profesional_userid FROM profesionales WHERE profesional_userid = :profesional_userid";
         $query = $database->prepare($sql);
         $query->execute(array(':profesional_userid' => $user_id));
 
