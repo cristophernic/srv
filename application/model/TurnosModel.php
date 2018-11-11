@@ -176,6 +176,7 @@ class TurnosModel
 
         $return = new stdClass();
         $return->conteo = (($dia + $noche) * 12) . ' Hrs ( ' . ($dia + $noche) . ' turnos )';
+        return $return;
     }
 
     public static function getAllTurnos($dia, $mes, $ano)
