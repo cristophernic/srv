@@ -41,7 +41,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title text-center">Registrar un usuario en turnos</h5>
-                                <form method="post" action="<?php echo Config::get('URL'); ?>register/register">
+                                <form method="post" action="<?php echo Config::get('URL'); ?>register/register_action">
                                     <div class="form-group">
                                         <label>Nombre del usuario <small>(todo junto)</small></label>
                                         <input type="text" class="form-control" name="user_name" pattern="[a-zA-Z0-9]{2,64}"/>
