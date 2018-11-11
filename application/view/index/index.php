@@ -160,6 +160,18 @@
                     let option = '<option value="' + parseInt(i +1) + '">' + mes[i] + ' ' + d.getFullYear() + '</option>';
                     $("#turnos\\.mes").append(option);
                 });
+
+                $("#turnos\\.mes, #turnos\\.profesionales").on("click", function(){
+                    let datos = {
+                        accion: "sumaturnos",
+                        mes: $("#turnos\\.mes").val(),
+                        profesional: $("#turnos\\.profesionales").val(),
+                    }
+
+                    $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
+                        $("#turnos\\.conteo").val(response.conteo);
+                    });
+                });
             });
 
             $("#boton\\.profesionales").on("click", function(){
