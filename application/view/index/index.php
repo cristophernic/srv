@@ -515,6 +515,13 @@
                         $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="">Continuar</button>');
                         $("#dialog\\.view").modal("show");
                     }
+                    else{
+                        $("#dialog\\.delete").remove();
+                        $("#dialog\\.title").html('Asociar una cuenta con un médico');
+                        $("#dialog\\.body").html('<p class="text-center">El administrador ha ingresado los siguientes médicos a la plataforma, seleccione su nombre y presione continuar.</p>');
+                        $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="">Continuar</button>');
+                        $("#dialog\\.view").modal("show");
+                    }
                 }
             });
         }
