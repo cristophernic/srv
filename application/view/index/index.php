@@ -157,7 +157,7 @@
                 var mes = ['Enero','Febrero','Marzo','Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
                 
                 let d = new Date();
-                let option = '<option value="' + parseInt(d.getFullYear() - 1) + '">' + parseInt(d.getFullYear() - 1) + '</option><option value="' + d.getFullYear() + '">' + d.getFullYear() + '</option><option value="' + parseInt(d.getFullYear() + 1) + '">' + parseInt(d.getFullYear() + 1) + '</option><option value="' + parseInt(d.getFullYear() + 2) + '">' + parseInt(d.getFullYear() + 2) + '</option>';
+                let option = '<option value="' + parseInt(d.getFullYear() - 1) + '">' + parseInt(d.getFullYear() - 1) + '</option><option value="' + d.getFullYear() + '" selected>' + d.getFullYear() + '</option><option value="' + parseInt(d.getFullYear() + 1) + '">' + parseInt(d.getFullYear() + 1) + '</option><option value="' + parseInt(d.getFullYear() + 2) + '">' + parseInt(d.getFullYear() + 2) + '</option>';
                 $("#turnos\\.ano").append(option);
 
                 $.each(mes, function(i, item) {
