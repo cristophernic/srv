@@ -162,9 +162,11 @@
                 });
 
                 $("#turnos\\.mes, #turnos\\.profesionales").on("click", function(){
+                    let d = new Date();
                     let datos = {
                         accion: "sumaturnos",
                         mes: $("#turnos\\.mes").val(),
+                        ano: d.getFullYear(),
                         profesional: $("#turnos\\.profesionales").val(),
                     }
 

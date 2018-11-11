@@ -153,7 +153,7 @@ class TurnosModel
         return $query->fetchAll();
     }
 
-    public static function countTurno($mes, $profesional)
+    public static function countTurno($mes, $ano, $profesional)
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 

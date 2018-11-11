@@ -63,7 +63,7 @@ class TurnosController extends Controller
                 $resultado = TurnosModel::updateComentario(Request::post('id'), Request::post('text'));
                 break;
             case "sumaturnos":
-                $resultado = TurnosModel::countTurno(Request::post('mes'), Request::post('profesional'));
+                $resultado = TurnosModel::countTurno(Request::post('mes'), Request::post('ano'), Request::post('profesional'));
                 break;
         }
 
