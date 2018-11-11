@@ -48,10 +48,22 @@ class TurnosModel
         return $query->fetchAll();
     }
 
+    public static function getAllProfesionalesBasic()
+    {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+            $sql = "SELECT profesional_id, profesional_name, profesional_rut, profesional_telefono, profesional_correo FROM profesionales";
+            $query = $database->prepare($sql);
+            $query->execute();
+
+        // fetchAll() is the PDO method that gets all result rows
+        return $query->fetchAll();
+    }
+
     public static function getIdProfesional($user_id){
 
         $database = DatabaseFactory::getFactory()->getConnection();
-        
+
         $sql = "SELECT profesional_id, profesional_userid FROM profesionales WHERE profesional_userid = :profesional_userid";
         $query = $database->prepare($sql);
         $query->execute(array(':profesional_userid' => $user_id));

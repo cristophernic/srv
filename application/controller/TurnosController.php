@@ -68,6 +68,9 @@ class TurnosController extends Controller
             case "user_id_profesional":
                 $resultado = TurnosModel::getIdProfesional(Session::get('user_id'));
                 break;
+            case "profesionalBasic":
+                $resultado = TurnosModel::getAllProfesionalesBasic();
+                break;
         }
 
         return $this->View->renderJSON($resultado);
