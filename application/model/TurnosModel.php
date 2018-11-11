@@ -33,11 +33,28 @@ class TurnosModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT profesional_id, profesional_name, profesional_rut, profesional_telefono, profesional_correo FROM profesionales";
-        $query = $database->prepare($sql);
-        $query->execute();
+        if (Session::get("user_account_type") == 6){
+            $sql = "SELECT profesional_id, profesional_name, profesional_rut, profesional_telefono, profesional_correo FROM profesionales";
+            $query = $database->prepare($sql);
+            $query->execute();
+        }
+        else{
+            $sql = "SELECT profesional_id, profesional_name, profesional_rut, profesional_telefono, profesional_correo FROM profesionales where profesional_id = :profesional_id";
+            $query = $database->prepare($sql);
+            $query->execute(array(':profesional_id' => $profesional_id));
+        }
 
         // fetchAll() is the PDO method that gets all result rows
+        return $query->fetchAll();
+    }
+
+    public static function getIdProfesional($user_id){
+
+        $database = DatabaseFactory::getFactory()->getConnection();
+        $sql = "SELECT profesional_id, profesional_userid FROM profesionales where profesional_userid = :profesional_userid";
+        $query = $database->prepare($sql);
+        $query->execute(array(':profesional_userid' => $user_id));
+
         return $query->fetchAll();
     }
 

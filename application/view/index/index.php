@@ -103,6 +103,11 @@
       </style>
         <script>
         $(document).ready(function() {
+
+            <?php if (Session::get("user_account_type") == 1) : ?>
+                verifiID();
+            <?php endif; ?>
+
             $("#fecha\\.mes").on("change", function(){
                 makeCalendario();
             });
@@ -495,6 +500,24 @@
                 }
             });
       }
+    <?php if (Session::get("user_account_type") == 1) : ?>
+        function cargarProfesionales(){
+            let data = {
+                accion : "user_id_profesional",
+            }
+
+            $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
+                if (Object.keys(response).length > 0) {
+                    if (response.profesional_userid == ""){
+                        $("#dialog\\.delete").remove();
+                        $("#dialog\\.title").html('Asociar una cuenta con un médico');
+                        $("#dialog\\.body").html('<p class="text-center">El administrador ha ingresado los siguientes médicos a la plataforma, seleccione su nombre y presione continuar.</p>');
+                        $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="">Continuar</button>');
+                        $("#dialog\\.view").modal("show");
+                    }
+                }
+            });
+    <?php endif; ?>
         </script>
     </body>
 </html>

@@ -65,6 +65,9 @@ class TurnosController extends Controller
             case "sumaturnos":
                 $resultado = TurnosModel::countTurno(Request::post('mes'), Request::post('ano'), Request::post('profesional'));
                 break;
+            case "user_id_profesional"
+                $resultado = TurnosModel::getIdProfesional(Session::get('user_id'));
+                break;
         }
 
         return $this->View->renderJSON($resultado);
