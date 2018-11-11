@@ -515,6 +515,7 @@
                         $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="">Continuar</button>');
                         $("#dialog\\.view").modal("show");
                     }
+                }
                     else{
                         $("#dialog\\.delete").remove();
                         $("#dialog\\.title").html('Asociar una cuenta con un médico');
@@ -522,7 +523,6 @@
                         $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="">Continuar</button>');
                         $("#dialog\\.view").modal("show");
                     }
-                }
             });
         }
     <?php endif; ?>
