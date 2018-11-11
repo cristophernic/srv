@@ -17,6 +17,6 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $this->View->renderWithoutHeaderAndFooter('index/index');
+        $this->View->render('index/index');
     }
 }

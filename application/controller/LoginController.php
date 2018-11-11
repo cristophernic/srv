@@ -31,7 +31,7 @@ class LoginController extends Controller
         } else {
             $redirect = Request::get('redirect') ? Request::get('redirect') : NULL;
             $data = array('redirect' => $redirect, 'userIdRandom' => $this->generateRandomString());
-            $this->View->renderWithoutHeaderAndFooter('login/index', $data);  
+            $this->View->render('login/index', $data);  
         }
     }
 
