@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7" crossorigin="anonymous">
         <link rel="stylesheet" href="<?php echo Config::get('URL'); ?>css/datepicker.css">
         <title>Turnos</title>
+        <base href="<?php echo Config::get('URL'); ?>">
     </head>
     <body class="h-100">
         <div class="fixed-top">
@@ -22,7 +23,7 @@
                         <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Ingresar datos</a></li>
                         <li class="nav-item"><a class="nav-link" href="#" id="boton.profesionales">Asignar turnos</a></li>
                         <li class="nav-item"><a class="nav-link" href="#" id="boton.pormes">Ver turnos por mes</a></li>
-                        <li class="nav-item"><a class="nav-link" href="https://servidor.crecimientofetal.cl/login/logout">Salir del programa</a></li>
+                        <li class="nav-item"><a class="nav-link" href="login/logout">Salir del programa</a></li>
                     </ul>
                 </div>
             </nav>
