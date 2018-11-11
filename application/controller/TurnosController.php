@@ -15,28 +15,6 @@ class TurnosController extends Controller
         Auth::checkAuthentication();
     }
 
-    /**
-     * This method controls what happens when you move to /note/index in your app.
-     * Gets all notes (of the user).
-     */
-    public function index()
-    {
-
-        if (!Session::userIsLoggedIn() || Session::get("user_account_type") != 6) {
-            Session::destroy();
-            Session::add('feedback_negative', "No autorizado");
-            header('location: ' . Config::get('URL') . 'turnos');
-            exit();
-        }
-        $this->View->renderWithoutHeaderAndFooter('turnos/index');
-    }
-
-    public function calendario()
-    {
-        $this->View->renderJSON();
-    }
-
-
     public function api()
     {
         $accion = Request::post('accion');
