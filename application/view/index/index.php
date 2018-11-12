@@ -103,6 +103,7 @@
           }
       </style>
         <script>
+        var profesional_userid = 0;
         $(document).ready(function() {
 
             <?php if (Session::get("user_account_type") == 1) : ?>
@@ -544,6 +545,10 @@
                                 location.reload();
                             });
                         });
+                        $("#table\\.calendario").empty();
+                    }
+                    else{
+                        profesional_userid = response.profesional_userid;
                     }
                 }
                 else{
@@ -554,15 +559,16 @@
                     $("#dialog\\.view").modal("show");
                     profesionalBasic();
                     $("#dialog\\.delete").on("click",function(){
-                            let data = {
-                                accion : "user_id_set",
-                                id: $("#turnos\\.profesionales").val()
-                            }
+                        let data = {
+                            accion : "user_id_set",
+                            id: $("#turnos\\.profesionales").val()
+                        }
 
-                            $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
-                                location.reload();
-                            });
+                        $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
+                            location.reload();
                         });
+                    });
+                    $("#table\\.calendario").empty();
                 }
             });
         }

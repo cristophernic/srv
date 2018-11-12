@@ -75,7 +75,6 @@ class TurnosController extends Controller
                 $resultado = TurnosModel::setIdProfesional(Request::post('id'));
                 break;
         }
-
         return $this->View->renderJSON($resultado);
 
     }
