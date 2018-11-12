@@ -534,6 +534,16 @@
                         $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="">Continuar</button>');
                         $("#dialog\\.view").modal("show");
                         profesionalBasic();
+                        $("#dialog\\.delete").on("click",function(){
+                            let data = {
+                                accion : "user_id_set",
+                                id: $("#turnos\\.profesionales").val()
+                            }
+
+                            $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
+                                location.reload();
+                            });
+                        });
                     }
                 }
                 else{
@@ -543,6 +553,16 @@
                     $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="">Continuar</button>');
                     $("#dialog\\.view").modal("show");
                     profesionalBasic();
+                    $("#dialog\\.delete").on("click",function(){
+                            let data = {
+                                accion : "user_id_set",
+                                id: $("#turnos\\.profesionales").val()
+                            }
+
+                            $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
+                                location.reload();
+                            });
+                        });
                 }
             });
         }

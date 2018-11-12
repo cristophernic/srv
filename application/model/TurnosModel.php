@@ -71,6 +71,27 @@ class TurnosModel
         return $query->fetchAll();
     }
 
+    public static function setIdProfesional($id){
+        if (!$id || strlen($id) == 0) {
+            Session::add('feedback_negative', Text::get('FEEDBACK_NOTE_CREATION_FAILED'));
+            return false;
+        }
+
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $sql = "UPDATE profesionales SET profesional_userid = :profesional_userid WHERE profesional_id = :profesional_id";
+        $query = $database->prepare($sql);
+        $query->execute(array(':profesional_id' => $id, ':profesional_userid' => Session::get('user_id')));
+
+        if ($query->rowCount() == 1) {
+            return true;
+        }
+
+        // default return
+        Session::add('feedback_negative', Text::get('FEEDBACK_NOTE_CREATION_FAILED'));
+        return false;
+    }
+
     /**
      * Get a single keyword
      * @param int $keyword_id id of the specific keyword
