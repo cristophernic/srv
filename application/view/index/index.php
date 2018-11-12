@@ -120,6 +120,7 @@
 
             makeCalendario();
 
+            <?php if (Session::get("user_account_type") == 6) : ?>
             $("#boton\\.turno").on("click", function(){
                 $("#dialog\\.title").html("INGRESAR DATOS (fecha, horario y profesional de turno)");
                 $("#dialog\\.body").html('<div class="row"><div class="form-group col"><label for="turnos.fecha.in">Fecha de turno</label><input class="form-control" type="date" id="turnos.fecha.in"></div><div class="form-group col"><label for="turnos.hora.in">Horario de turno (12 o 24 hrs)</label><select class="form-control" id="turnos.turno"><option value="0">Diurno</option><option value="1">Nocturno</option><option value="2">Completo</option></select></div></div><div class="row"><div class="form-group col"><label for="turnos.profesionales">Profesional asignado</label><select class="form-control" id="turnos.profesionales"></select></div></div>');
@@ -143,6 +144,7 @@
                     });
                 });
             });
+            <?php endif; ?>
 
             $("#boton\\.pormes").on("click", function(){
                 $("#dialog\\.title").html("Calcular horas de turno por mes");
@@ -175,6 +177,7 @@
                 });
             });
 
+            <?php if (Session::get("user_account_type") == 6) : ?>
             $("#boton\\.profesionales").on("click", function(){
                 cargarProfesionales();
                 $("#dialog\\.title").html("Profesionales registrados en base de datos");
@@ -233,6 +236,7 @@
                     $("#tabla\\.profesional").removeClass("d-none");
                 });
             });
+            <?php endif; ?>
         });
 
       function makeCalendario(){
@@ -323,43 +327,42 @@
                 $("#table\\.calendario tr td").on("click", function(){
                     let turno_id = $(this).data("id");
                     let calendario_id = $(this).data("calendario");
+                    $("#dialog\\.delete").remove();
 
                     if (typeof turno_id === 'number'){
-                        $("#dialog\\.title").html("Obteniendo datos ...");
-                        $("#dialog\\.body").html('<p class="text-center">cargando</p>');
-                        $("#dialog\\.view").modal("show");
-                        $("#dialog\\.delete").remove();
-
                         let data = {
                             accion : "turnosUno",
                             id: turno_id
                         }
                         $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
                             if (Object.keys(response).length > 0) {
-                                let d = new Date(response.turno_fechain.replace(/-/g, '\/'));
-                                let day = ("0" + d.getDate()).slice(-2);
-                                let month = ("0" + (d.getMonth() + 1)).slice(-2); 
-                                let dateComplete = day + "-" + month + "-" + d.getFullYear();
+                                if (profesional_userid == turno_profesional){
+                                    let d = new Date(response.turno_fechain.replace(/-/g, '\/'));
+                                    let day = ("0" + d.getDate()).slice(-2);
+                                    let month = ("0" + (d.getMonth() + 1)).slice(-2); 
+                                    let dateComplete = day + "-" + month + "-" + d.getFullYear();
 
-                                $("#dialog\\.title").html('CAMBIO PROFESIONAL DE TURNO:');
-                                $("#dialog\\.body").html('<div class="row"><div class="col"><p>' + response.turno_profesional_nombre + ', fecha: ' + dateComplete +'</p></div></div><div class="row"><div class="form-group col"><label for="turnos.profesionales" class="text-danger text-center mt-3"><strong>Reemplazar por:</strong></label><select class="form-control" id="turnos.profesionales"></select></div></div>');
-                                $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="' + response.turno_id + '">Guardar</button>');
-                                cargarProfesionales();
+                                    $("#dialog\\.title").html('CAMBIO PROFESIONAL DE TURNO:');
+                                    $("#dialog\\.body").html('<div class="row"><div class="col"><p>' + response.turno_profesional_nombre + ', fecha: ' + dateComplete +'</p></div></div><div class="row"><div class="form-group col"><label for="turnos.profesionales" class="text-danger text-center mt-3"><strong>Reemplazar por:</strong></label><select class="form-control" id="turnos.profesionales"></select></div></div>');
+                                    $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="' + response.turno_id + '">Guardar</button>');
+                                    cargarProfesionales();
 
-                                $("#dialog\\.delete").on("click", function(){
-                                    let id = $(this).data("id");
-                                    let datos = {
-                                        accion: "turnosCambiar",
-                                        id: id,
-                                        profesional: $("#turnos\\.profesionales").val(),
-                                        profesional_nombre: $("#turnos\\.profesionales option:selected").text()
-                                    }
+                                    $("#dialog\\.delete").on("click", function(){
+                                        let id = $(this).data("id");
+                                        let datos = {
+                                            accion: "turnosCambiar",
+                                            id: id,
+                                            profesional: $("#turnos\\.profesionales").val(),
+                                            profesional_nombre: $("#turnos\\.profesionales option:selected").text()
+                                        }
 
-                                    $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
-                                        $("#dialog\\.view").modal("hide");
-                                        makeCalendario();
+                                        $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
+                                            $("#dialog\\.view").modal("hide");
+                                            makeCalendario();
+                                        });
                                     });
-                                });
+                                    $("#dialog\\.view").modal("show");
+                                }
                             }
                         });
                     }
