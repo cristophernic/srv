@@ -39,7 +39,9 @@ class TurnosModel
             $query->execute();
         }
         else{
-            $sql = "SELECT profesional_id, profesional_name, profesional_rut, profesional_telefono, profesional_correo FROM profesionales where profesional_id = :profesional_id";
+            $profesional_id = self::getIdProfesional(Session::get('user_id'));
+            $profesional_id = profesional_id->profesional_userid;
+            $sql = "SELECT DISTINCT profesional_id, profesional_name, profesional_rut, profesional_telefono, profesional_correo FROM profesionales where profesional_id = :profesional_id";
             $query = $database->prepare($sql);
             $query->execute(array(':profesional_id' => $profesional_id));
         }
@@ -68,7 +70,7 @@ class TurnosModel
         $query = $database->prepare($sql);
         $query->execute(array(':profesional_userid' => $user_id));
 
-        return $query->fetchAll();
+        return $query->fetch();
     }
 
     public static function setIdProfesional($id){

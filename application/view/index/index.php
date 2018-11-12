@@ -551,7 +551,7 @@
                         $("#table\\.calendario").remove();
                     }
                     else{
-                        profesional_userid = response[0].profesional_id;
+                        profesional_userid = response.profesional_id;
                     }
                 }
                 else{
