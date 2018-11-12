@@ -545,7 +545,7 @@
                                 location.reload();
                             });
                         });
-                        $("#table\\.calendario").empty();
+                        $("#table\\.calendario").remove();
                     }
                     else{
                         profesional_userid = response.profesional_userid;
