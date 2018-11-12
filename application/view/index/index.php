@@ -8,22 +8,23 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <?php if (Session::get("user_account_type") == 6) : ?>
-                            <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Ingresar datos</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" id="boton.profesionales">Asignar turnos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Asignar turnos</a></li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <?php echo Session::get('user_name'); ?>
+                                Configuración
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Lista de usuarios</a>
+                                <a class="dropdown-item" href="#" id="lista.usuarios.turnos">Lista de usuarios</a>
+                                <a class="dropdown-item" href="#" id="boton.profesionales">Asignar turnos</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Modificar correo</a>
-                                <a class="dropdown-item" href="#">Modificar contraseña</a>
+                                <a class="dropdown-item" href="#" id="modificar.correo">Modificar correo</a>
+                                <a class="dropdown-item" href="#" id="modificar.contrasena">Modificar contraseña</a>
                                 </div>
                             </li>
                         <?php endif; ?>
                         <li class="nav-item"><a class="nav-link" href="#" id="boton.pormes">Ver turnos por mes</a></li>
                         <li class="nav-item"><a class="nav-link" href="login/logout">Salir del programa</a></li>
+                        <span class="navbar-text"><?php echo Session::get('user_name'); ?></span>
                     </ul>
                 </div>
             </nav>
@@ -195,6 +196,25 @@
             });
 
             <?php if (Session::get("user_account_type") == 6) : ?>
+            $("#lista\\.usuarios\\.turnos").on("click", function(){
+
+            });
+
+            $("#modificar\\.contrasena").on("click", fuction(){
+                let datos = {
+                    accion: "sumaturnos",
+                    mes: $("#turnos\\.mes").val(),
+                    ano: $("#turnos\\.ano").val(),
+                    profesional: $("#turnos\\.profesionales").val(),
+                }
+
+                $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
+                    $("#dialog\\.title").html("Profesionales registrados en base de datos");
+                    $("#dialog\\.body").html('<div class="btn-group" role="group" aria-label="Menú"> <button type="button" class="btn btn-outline-success my-2 my-sm-0 mr-1" title="Nueva actividad" id="boton.profesional.nuevo"><i class="fas fa-pen"></i></button> <button type="button" class="btn btn-outline-success my-2 my-sm-0 mr-1 d-none" title="Nueva actividad" id="boton.profesional.guardar"><i class="fas fa-save"></i></button> <button type="button" class="btn btn-outline-success my-2 my-sm-0 mr-1 d-none" title="Nueva actividad" id="boton.profesional.cancelar"><i class="fas fa-ban"></i></button> </div><div id="div.profesional" class="my-3 mx-0 d-none"> <div class="row"><div class="form-group col"> <label for="profesional.nombre">1.- Nombre del profesional</label> <input type="text" class="form-control" id="profesional.nombre"> <input type="hidden" class="form-control" id="profesional.id"></div><div class="form-group col"> <label class="mr-3" for="profesional.rut">2.- R.U.T.</label> <input type="text" class="form-control" id="profesional.rut"></div></div><div class="row"><div class="form-group col"> <label for="profesional.telefono">3.- Teléfono</label> <input type="text" class="form-control" id="profesional.telefono"> </div><div class="form-group col"> <label class="mr-3" for="profesional.correo">4.- Correo Electrónico</label> <input type="text" class="form-control" id="profesional.correo"></div></div></div><table class="table table-hover"> <thead class="table-success"> <tr> <th scope="col">Nombre profesional</th> <th scope="col">Teléfono</th> <th scope="col">Correo Electrónico</th></tr></thead> <tbody id="tabla.profesional"></tbody> </table>');
+                    $("#dialog\\.view").modal("show");
+                });
+            });
+
             $("#boton\\.profesionales").on("click", function(){
                 cargarProfesionales();
                 $("#dialog\\.title").html("Profesionales registrados en base de datos");
