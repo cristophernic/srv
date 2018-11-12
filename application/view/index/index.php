@@ -155,7 +155,7 @@
                 cargarProfesionales();
                 <?php endif; ?>
                 <?php if (Session::get("user_account_type") == 1) : ?>
-                let option = '<option value="' + profesional_userid + '">' + profesional_name + '</option>';4
+                let option = '<option value="' + profesional_userid + '">' + profesional_name + '</option>';
                 $("#turnos\\.profesionales").append(option);
                 <?php endif; ?>
 
