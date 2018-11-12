@@ -198,7 +198,7 @@
 
             });
 
-            $("#modificar\\.contrasena").on("click", fuction(){
+            $("#modificar\\.contrasena").on("click", function(){
                 $("#dialog\\.title").html("Cambiar contraseña");
                 $("#dialog\\.body").html('<div class="row"><div class="form-group col-6"><label for="contrasena.actual">Contraseña actual</label><input class="form-control" type="password" id="contrasena.actual"></div><div class="col-6"></div><div class="form-group col-6"><label for="contrasena.nueva">Nueva contraseña</label><input type="password" class="form-control" id="contrasena.nueva"></div><div class="form-group col-6"><label for="contrasena.repetir">Profesional</label><input class="form-control" type="password" id="contrasena.repetir"></div></div>');
                 $("#dialog\\.view").modal("show");
