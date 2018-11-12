@@ -72,7 +72,7 @@ class TurnosController extends Controller
                 $resultado = TurnosModel::getAllProfesionalesBasic();
                 break;
             case "user_id_set":
-                $resultado = TurnosModel::setIdProfesional(Session::get('id'));
+                $resultado = TurnosModel::setIdProfesional(Request::post('id'));
                 break;
         }
 
