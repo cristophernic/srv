@@ -207,7 +207,7 @@
 
                 $("#dialog\\.delete").on("click", function(){
                     let datos = {
-                        accion: "contraseña",
+                        accion: "contrasena",
                         user_password_current: $("#contrasena\\.actual").val(),
                         user_password_new: $("#contrasena\\.nueva").val(),
                         user_password_repeat: $("#contrasena\\.repetir").val()
