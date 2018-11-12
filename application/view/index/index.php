@@ -343,7 +343,9 @@
                         }
                         $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
                             if (Object.keys(response).length > 0) {
+                                <?php if (Session::get("user_account_type") == 1) : ?>
                                 if (profesional_userid == response.turno_profesional){
+                                <?php endif; ?>
                                     let d = new Date(response.turno_fechain.replace(/-/g, '\/'));
                                     let day = ("0" + d.getDate()).slice(-2);
                                     let month = ("0" + (d.getMonth() + 1)).slice(-2); 
@@ -369,7 +371,9 @@
                                         });
                                     });
                                     $("#dialog\\.view").modal("show");
+                                <?php if (Session::get("user_account_type") == 1) : ?>
                                 }
+                                <?php endif; ?> 
                             }
                         });
                     }
