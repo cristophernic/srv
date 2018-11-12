@@ -568,7 +568,7 @@
                             location.reload();
                         });
                     });
-                    $("#table\\.calendario").empty();
+                    $("#table\\.calendario").remove();
                 }
             });
         }
