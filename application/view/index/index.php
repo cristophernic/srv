@@ -214,7 +214,7 @@
                     }
 
                     $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
-                        alert( response.result == true : "cambiado", "Error al cambiar contraseña, vuelva a escribir las contraseñas")
+                        alert( response.result == true : "cambiado", "Error al cambiar contraseña, vuelva a escribir las contraseñas");
                         if (response.result == false) {$("#dialog\\.view").modal("hide");}
                     });
                 });
