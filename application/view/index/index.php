@@ -13,7 +13,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Configuración</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="#" id="lista.usuarios.turnos">Lista de usuarios</a>
-                                    <a class="dropdown-item" href="#" id="boton.profesionales">Asignar turnos</a>
+                                    <a class="dropdown-item" href="#" id="boton.profesionales">Lista de profesionales</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#" id="modificar.correo">Modificar correo</a>
                                     <a class="dropdown-item" href="#" id="modificar.contrasena">Modificar contraseña</a>
@@ -241,8 +241,7 @@
             });
 
             $("#boton\\.profesionales").on("click", function(){
-                cargarProfesionales();
-                $("#dialog\\.title").html("Profesionales registrados en base de datos");
+                $("#dialog\\.title").html("Usuarios registrados");
                 $("#dialog\\.body").html('<div class="btn-group" role="group" aria-label="Menú"> <button type="button" class="btn btn-outline-success my-2 my-sm-0 mr-1" title="Nueva actividad" id="boton.profesional.nuevo"><i class="fas fa-pen"></i></button> <button type="button" class="btn btn-outline-success my-2 my-sm-0 mr-1 d-none" title="Nueva actividad" id="boton.profesional.guardar"><i class="fas fa-save"></i></button> <button type="button" class="btn btn-outline-success my-2 my-sm-0 mr-1 d-none" title="Nueva actividad" id="boton.profesional.cancelar"><i class="fas fa-ban"></i></button> </div><div id="div.profesional" class="my-3 mx-0 d-none"> <div class="row"><div class="form-group col"> <label for="profesional.nombre">1.- Nombre del profesional</label> <input type="text" class="form-control" id="profesional.nombre"> <input type="hidden" class="form-control" id="profesional.id"></div><div class="form-group col"> <label class="mr-3" for="profesional.rut">2.- R.U.T.</label> <input type="text" class="form-control" id="profesional.rut"></div></div><div class="row"><div class="form-group col"> <label for="profesional.telefono">3.- Teléfono</label> <input type="text" class="form-control" id="profesional.telefono"> </div><div class="form-group col"> <label class="mr-3" for="profesional.correo">4.- Correo Electrónico</label> <input type="text" class="form-control" id="profesional.correo"></div></div></div><table class="table table-hover"> <thead class="table-success"> <tr> <th scope="col">Nombre profesional</th> <th scope="col">Teléfono</th> <th scope="col">Correo Electrónico</th></tr></thead> <tbody id="tabla.profesional"></tbody> </table>');
                 $("#dialog\\.view").modal("show");
 
@@ -298,6 +297,11 @@
                     $("#tabla\\.profesional").removeClass("d-none");
                 });
             });
+
+            $("#lista\\.usuarios\\.turnos").on("click", function(){
+
+            });
+
             <?php endif; ?>
         });
 
