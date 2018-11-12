@@ -40,7 +40,7 @@ class TurnosModel
         }
         else{
             $profesional_id = self::getIdProfesional(Session::get('user_id'));
-            $profesional_id = profesional_id->profesional_userid;
+            $profesional_id = $profesional_id->profesional_userid;
             $sql = "SELECT DISTINCT profesional_id, profesional_name, profesional_rut, profesional_telefono, profesional_correo FROM profesionales where profesional_id = :profesional_id";
             $query = $database->prepare($sql);
             $query->execute(array(':profesional_id' => $profesional_id));
