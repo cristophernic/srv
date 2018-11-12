@@ -95,38 +95,6 @@ class UserModel
         return $query->fetch();
     }
 
-    public static function actividadPreset()
-    {
-        $database = DatabaseFactory::getFactory()->getConnection();
-
-        $query = $database->prepare("SELECT user_actividad FROM users WHERE user_id = :user_id LIMIT 1");
-        $query->execute(array(':user_id' => Session::get('user_id')));
-
-        return $query->fetch();
-    }
-
-    public static function actividadPresetChange()
-    {
-
-        $valor = self::actividadPreset();
-        $valor = ($valor->user_actividad == 0 ? 1 : 0);
-
-        $database = DatabaseFactory::getFactory()->getConnection();
-
-        $query = $database->prepare("UPDATE users SET user_actividad = :user_actividad WHERE user_id = :user_id LIMIT 1");
-        $query->execute(array(':user_actividad' => $valor, ':user_id' => Session::get('user_id')));
-
-        $resultado = new stdClass();
-
-        if ($query->rowCount() == 1) {
-            $resultado->result = true;
-            return $resultado;
-        }
-
-        $resultado->result = false;
-        return $resultado;
-    }
-
     /**
      * Checks if a username is already taken
      *
