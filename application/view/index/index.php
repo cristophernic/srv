@@ -155,8 +155,8 @@
                 cargarProfesionales();
                 <?php endif; ?>
                 <?php if (Session::get("user_account_type") == 1) : ?>
-                let option = '<option value="' + profesional_userid + '">' + profesional_name + '</option>';
-                $("#turnos\\.profesionales").append(option);
+                let options = '<option value="' + profesional_userid + '">' + profesional_name + '</option>';
+                $("#turnos\\.profesionales").append(options);
                 <?php endif; ?>
 
                 var mes = ['Enero','Febrero','Marzo','Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
