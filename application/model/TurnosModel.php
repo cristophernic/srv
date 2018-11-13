@@ -148,9 +148,9 @@ class TurnosModel
 
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "UPDATE turnos SET turno_profesional = :turno_profesional, turno_profesional_nombre = :turno_profesional_nombre WHERE turno_id = :turno_id LIMIT 1";
+        $sql = "UPDATE turnos SET turno_profesional = :turno_profesional WHERE turno_id = :turno_id LIMIT 1";
         $query = $database->prepare($sql);
-        $query->execute(array(':turno_profesional' => $turno_profesional, ':turno_profesional_nombre' => $turno_profesional_nombre, ':turno_id' => $turno_id));
+        $query->execute(array(':turno_profesional' => $turno_profesional, ':turno_id' => $turno_id));
 
         if ($query->rowCount() == 1) {
             return true;
