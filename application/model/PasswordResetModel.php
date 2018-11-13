@@ -279,7 +279,7 @@ class PasswordResetModel
         ));
 
         // if one result exists, return true, else false. Could be written even shorter btw.
-        return ($query->rowCount() == 1 ? true : false);
+        return $query->rowCount();
     }
 
 
@@ -297,20 +297,20 @@ class PasswordResetModel
     {
         // validate the passwords
         if (!self::validatePasswordChange($user_name, $user_password_current, $user_password_new, $user_password_repeat)) {
-            return caca;
+            return false;
         }
 
         // crypt the password (with the PHP 5.5+'s password_hash() function, result is a 60 character hash string)
         $user_password_hash = password_hash($user_password_new, PASSWORD_DEFAULT);
 
         // write the password to database (as hashed and salted string)
-        if (self::saveChangedPassword($user_name, $user_password_hash)) {
-            Session::add('feedback_positive', Text::get('FEEDBACK_PASSWORD_CHANGE_SUCCESSFUL'));
-            return true;
-        } else {
-            Session::add('feedback_negative', Text::get('FEEDBACK_PASSWORD_CHANGE_FAILED'));
-            return false;
-        }
+        return self::saveChangedPassword($user_name, $user_password_hash) //) {
+        //    Session::add('feedback_positive', Text::get('FEEDBACK_PASSWORD_CHANGE_SUCCESSFUL'));
+        //    return true;
+        //} else {
+        //    Session::add('feedback_negative', Text::get('FEEDBACK_PASSWORD_CHANGE_FAILED'));
+        //    return false;
+        //}
     }
 
 
