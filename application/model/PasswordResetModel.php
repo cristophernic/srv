@@ -276,11 +276,11 @@ class PasswordResetModel
         return $query->rowCount() . "caca";
 
         // if one result exists, return true, else false. Could be written even shorter btw.
-        if ($query->rowCount() == 1) {
-            return true;
-        }
+        //if ($query->rowCount() == 1) {
+        //    return true;
+        //}
 
-        return false;
+        //return false;
     }
 
 
