@@ -157,7 +157,7 @@ class UserModel
         $database = DatabaseFactory::getFactory()->getConnection();
 
         $query = $database->prepare("UPDATE users SET user_nombre = :user_nombre WHERE user_id = :user_id LIMIT 1");
-        $query->execute(array(':user_nombre' => $user_nombre, ':user_id' => Session::get('user_id')));
+        $query->execute(array(':user_nombre' => $user_name, ':user_id' => Session::get('user_id')));
         if ($query->rowCount() == 1) {
             return true;
         }
