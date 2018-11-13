@@ -18,6 +18,7 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#" id="boton.pormes">Ver turnos por mes</a>
                                 <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" id="modificar.nombre">Modificar nombre</a>
                                 <a class="dropdown-item" href="#" id="modificar.correo">Modificar correo</a>
                                 <a class="dropdown-item" href="#" id="modificar.contrasena">Modificar contraseña</a>
                                 <a class="dropdown-item" href="login/logout">Salir del programa</a>
