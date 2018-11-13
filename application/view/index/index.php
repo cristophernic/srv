@@ -160,7 +160,7 @@
                 cargarProfesionales();
                 <?php endif; ?>
                 <?php if (Session::get("user_account_type") == 1) : ?>
-                let options = '<option value="' + profesional_userid + '">' + profesional_name + '</option>';
+                let options = '<option value="<?php echo Session::get('user_id'); ?>"><?php echo Session::get('user_name'); ?></option>';
                 $("#turnos\\.profesionales").append(options);
                 <?php endif; ?>
 
