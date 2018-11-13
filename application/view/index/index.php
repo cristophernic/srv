@@ -230,15 +230,21 @@
                 $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete">Guardar</button>');
 
                 $("#dialog\\.delete").on("click", function(){
-                    let datos = {
-                        accion: "telefono",
-                        user_telefono: $("#cambiar\\.telefono").val()
+                    if ($("#cambiar\\.telefono").isNumeric())
+                        let datos = {
+                            accion: "telefono",
+                            user_telefono: $("#cambiar\\.telefono").val()
+                        }
+
+                        $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
+                            alert( response == true ? "cambiado" : "Error al cambiar teléfono, escriba un número");
+                            if (response == true) {$("#dialog\\.view").modal("hide");}
+                        });
+                    }
+                    else{
+                        alert("escriba un número, no se aceptan espacios, + y puntos");
                     }
 
-                    $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
-                        alert( response == true ? "cambiado" : "Error al cambiar teléfono, escriba un número");
-                        if (response == true) {$("#dialog\\.view").modal("hide");}
-                    });
                 });
             });
 
