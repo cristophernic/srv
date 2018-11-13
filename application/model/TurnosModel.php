@@ -93,7 +93,7 @@ class TurnosModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT turnos.turno_id, turnos.turno_profesional, turnos.turno_fechain, turnos.turno_turno, users.user_nombre FROM turnos WHERE turno_id = :turno_id INNER JOIN users ON turnos.turno_profesional = users.user_id";
+        $sql = "SELECT turnos.turno_id, turnos.turno_profesional, turnos.turno_fechain, turnos.turno_turno, users.user_nombre FROM turnos INNER JOIN users ON turnos.turno_profesional = users.user_id WHERE turno_id = :turno_id LIMIT 1";
         $query = $database->prepare($sql);
         $query->execute(array(':turno_id' => $id_turno));
 
