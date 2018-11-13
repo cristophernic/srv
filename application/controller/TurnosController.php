@@ -63,7 +63,7 @@ class TurnosController extends Controller
                 $resultado = TurnosModel::setIdProfesional(Request::post('id'));
                 break;
             case "contrasena":
-                $resultado = PasswordResetModel::changePassword(Session::get('user_name'), Request::post('user_password_current'), Request::post('user_password_new'), Request::post('user_password_repeat'));
+                $resultado = PasswordResetModel::changePassword(Session::get('user_id'), Request::post('user_password_current'), Request::post('user_password_new'), Request::post('user_password_repeat'));
             case "email":
                 $resultado = UserModel::editUserEmail(Request::post('user_email'));
             case "nombre":

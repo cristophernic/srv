@@ -265,15 +265,15 @@ class PasswordResetModel
      *
      * @return bool
      */
-    public static function saveChangedPassword($user_name, $user_password_hash)
+    public static function saveChangedPassword($user_id, $user_password_hash)
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
         $sql = "UPDATE users SET user_password_hash = :user_password_hash
-                 WHERE user_name = :user_name";
+                 WHERE user_id = :user_id";
         $query = $database->prepare($sql);
         $query->execute(array(
-            ':user_password_hash' => $user_password_hash, ':user_name' => $user_name
+            ':user_password_hash' => $user_password_hash, ':user_id' => $user_id
         ));
 
         // if one result exists, return true, else false. Could be written even shorter btw.
@@ -295,10 +295,10 @@ class PasswordResetModel
      *
      * @return bool
      */
-    public static function changePassword($user_name, $user_password_current, $user_password_new, $user_password_repeat)
+    public static function changePassword($user_id, $user_password_current, $user_password_new, $user_password_repeat)
     {
         // validate the passwords
-        if (!self::validatePasswordChange($user_name, $user_password_current, $user_password_new, $user_password_repeat)) {
+        if (!self::validatePasswordChange($user_id, $user_password_current, $user_password_new, $user_password_repeat)) {
             return "caca";
         }
 
@@ -306,7 +306,7 @@ class PasswordResetModel
         $user_password_hash = password_hash($user_password_new, PASSWORD_DEFAULT);
 
         // write the password to database (as hashed and salted string)
-        return self::saveChangedPassword($user_name, $user_password_hash); //) {
+        return self::saveChangedPassword($user_id, $user_password_hash); //) {
         //    Session::add('feedback_positive', Text::get('FEEDBACK_PASSWORD_CHANGE_SUCCESSFUL'));
         //    return true;
         //} else {
@@ -326,14 +326,14 @@ class PasswordResetModel
      *
      * @return bool
      */
-    public static function validatePasswordChange($user_name, $user_password_current, $user_password_new, $user_password_repeat)
+    public static function validatePasswordChange($user_id, $user_password_current, $user_password_new, $user_password_repeat)
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT user_password_hash, user_failed_logins FROM users WHERE user_name = :user_name LIMIT 1;";
+        $sql = "SELECT user_password_hash, user_failed_logins FROM users WHERE user_id = :user_id LIMIT 1;";
         $query = $database->prepare($sql);
         $query->execute(array(
-            ':user_name' => $user_name
+            ':user_id' => $user_id
         ));
 
         $user = $query->fetch();
