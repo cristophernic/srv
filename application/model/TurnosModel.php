@@ -37,7 +37,7 @@ class TurnosModel
         $fecha = new DateTime($ano . '-' . $mes .'-01');
         $fecha2 = $ano . "-" . $mes . "-" . $fecha->format('t');
 
-        $sql = "SELECT turnos.turno_id, turnos.turno_profesional, turnos.turno_fechain, turnos.turno_turno, users.user_nombre FROM turnos WHERE turno_fechain BETWEEN :turno_fechain AND :turno_fechaout INNER JOIN users ON turnos.turno_profesional = users.user_id";
+        $sql = "SELECT turnos.turno_id, turnos.turno_profesional, turnos.turno_fechain, turnos.turno_turno, users.user_nombre FROM turnos INNER JOIN users ON turnos.turno_profesional = users.user_id WHERE turnos.turno_fechain BETWEEN :turno_fechain AND :turno_fechaout";
         $query = $database->prepare($sql);
         $query->execute(array(':turno_fechain' => $fecha1, ':turno_fechaout' => $fecha2));
 
