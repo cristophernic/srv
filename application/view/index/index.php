@@ -9,21 +9,21 @@
                     <ul class="navbar-nav mr-auto">
                         <?php if (Session::get("user_account_type") == 6) : ?>
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Asignar turnos</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Configuración</a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#" id="lista.usuarios.turnos">Lista de usuarios</a>
-                                    <a class="dropdown-item" href="#" id="boton.profesionales">Lista de profesionales</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" id="modificar.correo">Modificar correo</a>
-                                    <a class="dropdown-item" href="#" id="modificar.contrasena">Modificar contraseña</a>
-                                </div>
-                            </li>
+                            <li class="nav-item"><a class="dropdown-item" href="#" id="lista.usuarios.turnos">Lista de usuarios</a></li>
                         <?php endif; ?>
-                        <li class="nav-item"><a class="nav-link" href="#" id="boton.pormes">Ver turnos por mes</a></li>
-                        <li class="nav-item"><a class="nav-link" href="login/logout">Salir del programa</a></li>
                     </ul>
-                    <span class="navbar-text"><?php echo Session::get('user_name'); ?></span>
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo Session::get('user_name'); ?></a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#" id="boton.pormes">Ver turnos por mes</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" id="modificar.correo">Modificar correo</a>
+                                <a class="dropdown-item" href="#" id="modificar.contrasena">Modificar contraseña</a>
+                                <a class="dropdown-item" href="login/logout">Salir del programa</a>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </nav>
             <div class="card">
