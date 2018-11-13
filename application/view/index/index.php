@@ -453,8 +453,8 @@
                 $("#turno\\.profesional\\.in").empty();
                 if (Object.keys(data).length > 0) {
                     $.each(response, function(i, item) {
-                        let fila = '<tr><td data-id="'+item["profesional_id"]+'"> <i class="fas fa-pen"></i> ' + item["profesional_name"] + '</td><td>' + item["profesional_telefono"] + '<td class="columna-profesional">' + item["profesional_correo"] + '<button type="button" data-id="' + item["profesional_id"] + '" class="btn btn-outline-warning px-3 eliminar-profesional float-right d-none"><i class="fas fa-trash"></i></button></td></tr>';
-                        let option = '<option value="' + item["profesional_id"] + '">' + item["profesional_name"] + '</option>';
+                        let fila = '<tr><td data-id="'+item.user_id+'"> <i class="fas fa-pen"></i> ' + item["profesional_name"] + '</td><td>' + item["profesional_telefono"] + '<td>' + item.user_email + '</td></tr>';
+                        let option = '<option value="' + item.user_id + '">' + item["profesional_name"] + '</option>';
                         $("#turnos\\.profesionales").append(option);
                         $("#tabla\\.profesional").append(fila);
                         $("#turno\\.profesional\\.in").append(fila);
