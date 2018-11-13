@@ -19,7 +19,6 @@ class TurnosModel
             $return->diaDeLaSemana = $diaDeLaSemana;
             $return->diasEnElMes = $diasEnElMes;
             $return->turnos = self::getMonthTurnos($mes, $ano);
-            $return->profesionales = UserModel::getPublicProfilesOfAllUsers();
             $return->comentarios = self::getAllComentarios($mes, $ano);
 
             return $return;
@@ -38,7 +37,7 @@ class TurnosModel
         $fecha = new DateTime($ano . '-' . $mes .'-01');
         $fecha2 = $ano . "-" . $mes . "-" . $fecha->format('t');
 
-        $sql = "SELECT turno_id, turno_profesional, turno_fechain, turno_turno FROM turnos WHERE turno_fechain BETWEEN :turno_fechain AND :turno_fechaout";
+        $sql = "SELECT turnos.turno_id, turnos.turno_profesional, turnos.turno_fechain, turnos.turno_turno, users.user_nombre FROM turnos WHERE turno_fechain BETWEEN :turno_fechain AND :turno_fechaout INNER JOIN users ON turnos.turno_profesional = users.user_id";
         $query = $database->prepare($sql);
         $query->execute(array(':turno_fechain' => $fecha1, ':turno_fechaout' => $fecha2));
 
