@@ -36,6 +36,7 @@ class UserModel
             $all_users_profiles[$user->user_id]->user_id = $user->user_id;
             $all_users_profiles[$user->user_id]->user_name = $user->user_name;
             $all_users_profiles[$user->user_id]->user_email = $user->user_email;
+            $all_users_profiles[$user->user_id]->user_nombre = $user->user_nombre; 
         }
 
         return $all_users_profiles;
