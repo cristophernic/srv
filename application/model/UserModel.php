@@ -19,7 +19,7 @@ class UserModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT user_id, user_name, user_email FROM users WHERE NOT user_account_type = 6";
+        $sql = "SELECT user_id, user_name, user_email, user_nombre FROM users WHERE NOT user_account_type = 6";
         $query = $database->prepare($sql);
         $query->execute();
 

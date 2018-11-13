@@ -453,7 +453,7 @@
                 $("#turno\\.profesional\\.in").empty();
                 if (Object.keys(data).length > 0) {
                     $.each(response, function(i, item) {
-                        let fila = '<tr><td data-id="'+item.user_id+'"> <i class="fas fa-pen"></i> ' + item.user_nombre + '</td><td>' + item["profesional_telefono"] + '<td>' + item.user_email + '</td></tr>';
+                        let fila = '<tr><td data-id="'+item.user_id+'">' + item.user_nombre + '</td><td>' + item["profesional_telefono"] + '<td>' + item.user_email + '</td></tr>';
                         let option = '<option value="' + item.user_id + '">' + item.user_nombre + '</option>';
                         $("#turnos\\.profesionales").append(option);
                         $("#tabla\\.profesional").append(fila);
