@@ -302,12 +302,12 @@
                             });
 
                             if (diaF.length > 0){
-                                diaT = diaF[0].turno_profesional;
+                                diaT = diaF[0].user_nombre;
                                 diaI = diaF[0].turno_id;
                             }
 
                             if (nocheF.length > 0){
-                                nocheT = nocheF[0].turno_profesional;
+                                nocheT = nocheF[0].user_nombre;
                                 nocheI = nocheF[0].turno_id;
                             }
 

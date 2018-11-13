@@ -77,7 +77,7 @@ class TurnosModel
         $database = DatabaseFactory::getFactory()->getConnection();
 
         $fecha = $ano . "-" . $mes . "-" . $dia;
-        $sql = "SELECT turno_id, turno_profesional, turno_fechain, turno_turno, turno_profesional_nombre FROM turnos WHERE turno_fechain = :turno_fechain";
+        $sql = "SELECT turnos.turno_id, turnos.turno_profesional, turnos.turno_fechain, turnos.turno_turno, users.user_nombre FROM turnos WHERE turno_fechain = :turno_fechain INNER JOIN users ON turnos.turno_profesional = users.user_id";
         $query = $database->prepare($sql);
         $query->execute(array(':turno_fechain' => $fecha));
 
