@@ -383,7 +383,7 @@
                         $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
                             if (Object.keys(response).length > 0) {
                                 <?php if (Session::get("user_account_type") == 1) : ?>
-                                if (profesional_userid == response.turno_profesional){
+                                if (<?php echo Session::get('user_id'); ?> == response.turno_profesional){
                                 <?php endif; ?>
                                     let d = new Date(response.turno_fechain.replace(/-/g, '\/'));
                                     let day = ("0" + d.getDate()).slice(-2);
