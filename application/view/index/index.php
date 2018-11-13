@@ -230,7 +230,7 @@
                 $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete">Guardar</button>');
 
                 $("#dialog\\.delete").on("click", function(){
-                    if ($.isNumeric($("#cambiar\\.telefono").val()){
+                    if ($.isNumeric($("#cambiar\\.telefono").val())){
                         let datos = {
                             accion: "telefono",
                             user_telefono: $("#cambiar\\.telefono").val()
