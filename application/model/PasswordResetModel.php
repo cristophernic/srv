@@ -304,7 +304,7 @@ class PasswordResetModel
         $user_password_hash = password_hash($user_password_new, PASSWORD_DEFAULT);
 
         // write the password to database (as hashed and salted string)
-        return self::saveChangedPassword($user_name, $user_password_hash) //) {
+        return self::saveChangedPassword($user_name, $user_password_hash); //) {
         //    Session::add('feedback_positive', Text::get('FEEDBACK_PASSWORD_CHANGE_SUCCESSFUL'));
         //    return true;
         //} else {
