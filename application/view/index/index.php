@@ -302,12 +302,12 @@
                             });
 
                             if (diaF.length > 0){
-                                diaT = diaF[0].turno_profesional_nombre;
+                                diaT = diaF[0].turno_profesional;
                                 diaI = diaF[0].turno_id;
                             }
 
                             if (nocheF.length > 0){
-                                nocheT = nocheF[0].turno_profesional_nombre;
+                                nocheT = nocheF[0].turno_profesional;
                                 nocheI = nocheF[0].turno_id;
                             }
 
@@ -359,7 +359,6 @@
                                             accion: "turnosCambiar",
                                             id: id,
                                             profesional: $("#turnos\\.profesionales").val(),
-                                            profesional_nombre: $("#turnos\\.profesionales option:selected").text()
                                         }
 
                                         $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){

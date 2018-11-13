@@ -19,6 +19,7 @@ class TurnosModel
             $return->diaDeLaSemana = $diaDeLaSemana;
             $return->diasEnElMes = $diasEnElMes;
             $return->turnos = self::getMonthTurnos($mes, $ano);
+            $return->profesionales = UserModel::getPublicProfilesOfAllUsers();
             $return->comentarios = self::getAllComentarios($mes, $ano);
 
             return $return;
@@ -106,7 +107,7 @@ class TurnosModel
      * @param string $keyword_text keyword text that will be created
      * @return bool feedback (was the keyword created properly ?)
      */
-    public static function createTurnos($profesional,$profesional_nombre, $fechainic,$turno)
+    public static function createTurnos($profesional, $fechainic,$turno)
     {
         if (!$profesional) {
             Session::add('feedback_negative', Text::get('FEEDBACK_NOTE_CREATION_FAILED'));
@@ -114,15 +115,15 @@ class TurnosModel
         }
 
         if ($turno == 2){
-            self::createTurnos($profesional,$profesional_nombre, $fechainic,0);
-            self::createTurnos($profesional,$profesional_nombre, $fechainic,1);
+            self::createTurnos($profesional,$fechainic,0);
+            self::createTurnos($profesional,$fechainic,1);
         }
         else {
             $database = DatabaseFactory::getFactory()->getConnection();
 
-            $sql = "INSERT INTO turnos (turno_profesional, turno_profesional_nombre, turno_fechain, turno_turno) VALUES (:turno_profesional, :turno_profesional_nombre, :turno_fechain, :turno_turno)";
+            $sql = "INSERT INTO turnos (turno_profesional, turno_fechain, turno_turno) VALUES (:turno_profesional, :turno_fechain, :turno_turno)";
             $query = $database->prepare($sql);
-            $query->execute(array(':turno_profesional' => $profesional, ':turno_profesional_nombre' => $profesional_nombre, ':turno_fechain' => $fechainic, ':turno_turno' => intval($turno)));
+            $query->execute(array(':turno_profesional' => $profesional, ':turno_fechain' => $fechainic, ':turno_turno' => intval($turno)));
 
             if ($query->rowCount() == 1) {
                 return true;
