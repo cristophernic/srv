@@ -66,6 +66,8 @@ class TurnosController extends Controller
                 $resultado = PasswordResetModel::changePassword(Session::get('user_name'), Request::post('user_password_current'), Request::post('user_password_new'), Request::post('user_password_repeat'));
             case "email":
                 $resultado = UserModel::editUserEmail(Request::post('user_email'));
+            case "nombre":
+                $resultado = UserModel::saveUserName(Request::post('user_nombre'));
         }
         return $this->View->renderJSON($resultado);
 

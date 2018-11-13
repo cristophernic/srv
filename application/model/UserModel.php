@@ -151,6 +151,19 @@ class UserModel
         return false;
     }
 
+
+    public static function saveUserName($user_name)
+    {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $query = $database->prepare("UPDATE users SET user_nombre = :user_nombre WHERE user_id = :user_id LIMIT 1");
+        $query->execute(array(':user_nombre' => $user_nombre, ':user_id' => Session::get('user_id')));
+        if ($query->rowCount() == 1) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Writes new email address to database
      *

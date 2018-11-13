@@ -201,6 +201,26 @@
             });
             <?php endif; ?>
 
+            $("#modificar.nombre").on("click", function(){
+                $("#dialog\\.title").html("Cambiar nombre");
+                $("#dialog\\.body").html('<div class="row"><div class="form-group col-6"><label for="cambiar.nombre">Cambiar Nombre</label><input class="form-control" type="text" id="cambiar.nombre"></div><div>');
+                $("#dialog\\.view").modal("show");
+                $("#dialog\\.delete").remove();
+                $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete">Guardar</button>');
+
+                $("#dialog\\.delete").on("click", function(){
+                    let datos = {
+                        accion: "nombre",
+                        user_nombre: $("#cambiar\\.nombre").val()
+                    }
+
+                    $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
+                        alert( response == true ? "cambiado" : "Error al cambiar nombre, escriba un nombre");
+                        if (response == true) {$("#dialog\\.view").modal("hide");}
+                    });
+                });
+            });
+
             $("#modificar\\.correo").on("click", function(){
                 $("#dialog\\.title").html("Cambiar correo");
                 $("#dialog\\.body").html('<div class="row"><div class="form-group col-6"><label for="cambiar.correo">Nuevo email</label><input class="form-control" type="email" id="cambiar.correo"></div><div>');
