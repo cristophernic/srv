@@ -201,7 +201,7 @@
             });
             <?php endif; ?>
 
-            $("#modificar.nombre").on("click", function(){
+            $("#modificar\\.nombre").on("click", function(){
                 $("#dialog\\.title").html("Cambiar nombre");
                 $("#dialog\\.body").html('<div class="row"><div class="form-group col-6"><label for="cambiar.nombre">Cambiar Nombre</label><input class="form-control" type="text" id="cambiar.nombre"></div><div>');
                 $("#dialog\\.view").modal("show");
