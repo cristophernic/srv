@@ -9,7 +9,7 @@
                     <ul class="navbar-nav mr-auto">
                         <?php if (Session::get("user_account_type") == 6) : ?>
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Asignar turnos</a></li>
-                            <li class="nav-item"><a class="dropdown-item" href="#" id="lista.usuarios.turnos">Lista de usuarios</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" id="lista.usuarios.turnos">Lista de usuarios</a></li>
                         <?php endif; ?>
                     </ul>
                     <ul class="navbar-nav">
