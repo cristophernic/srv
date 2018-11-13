@@ -19,7 +19,7 @@ class UserModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT user_id, user_name, user_email, user_nombre FROM users WHERE NOT user_account_type = 6";
+        $sql = "SELECT user_id, user_name, user_email, user_nombre, user_telefono FROM users WHERE NOT user_account_type = 6";
         $query = $database->prepare($sql);
         $query->execute();
 
@@ -158,6 +158,19 @@ class UserModel
 
         $query = $database->prepare("UPDATE users SET user_nombre = :user_nombre WHERE user_id = :user_id LIMIT 1");
         $query->execute(array(':user_nombre' => $user_name, ':user_id' => Session::get('user_id')));
+        if ($query->rowCount() == 1) {
+            return true;
+        }
+        return false;
+    }
+
+
+    public static function saveTelefono($user_telefono)
+    {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $query = $database->prepare("UPDATE users SET user_telefono = :user_telefono WHERE user_id = :user_id LIMIT 1");
+        $query->execute(array(':user_telefono' => $user_telefono, ':user_id' => Session::get('user_id')));
         if ($query->rowCount() == 1) {
             return true;
         }

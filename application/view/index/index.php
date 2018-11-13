@@ -21,6 +21,7 @@
                                 <a class="dropdown-item" href="#" id="modificar.nombre">Modificar nombre</a>
                                 <a class="dropdown-item" href="#" id="modificar.correo">Modificar correo</a>
                                 <a class="dropdown-item" href="#" id="modificar.contrasena">Modificar contraseña</a>
+                                <a class="dropdown-item" href="#" id="modificar.telefono">Modificar Teléfono</a>
                                 <a class="dropdown-item" href="login/logout">Salir del programa</a>
                             </div>
                         </li>
@@ -216,6 +217,26 @@
 
                     $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
                         alert( response == true ? "cambiado" : "Error al cambiar nombre, escriba un nombre");
+                        if (response == true) {$("#dialog\\.view").modal("hide");}
+                    });
+                });
+            });
+
+            $("#modificar\\.telefono").on("click", function(){
+                $("#dialog\\.title").html("Cambiar telefono");
+                $("#dialog\\.body").html('<div class="row"><div class="form-group col-6"><label for="cambiar.telefono">Cambiar Telefono</label><input class="form-control" type="number" id="cambiar.telefono"></div><div>');
+                $("#dialog\\.view").modal("show");
+                $("#dialog\\.delete").remove();
+                $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete">Guardar</button>');
+
+                $("#dialog\\.delete").on("click", function(){
+                    let datos = {
+                        accion: "telefono",
+                        user_telefono: $("#cambiar\\.telefono").val()
+                    }
+
+                    $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
+                        alert( response == true ? "cambiado" : "Error al cambiar teléfono, escriba un número");
                         if (response == true) {$("#dialog\\.view").modal("hide");}
                     });
                 });
