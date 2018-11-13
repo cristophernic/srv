@@ -296,7 +296,7 @@ class PasswordResetModel
     {
         // validate the passwords
         if (!self::validatePasswordChange($user_id, $user_password_current, $user_password_new, $user_password_repeat)) {
-            return "caca";
+            return false;
         }
 
         // crypt the password (with the PHP 5.5+'s password_hash() function, result is a 60 character hash string)
