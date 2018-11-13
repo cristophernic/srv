@@ -69,7 +69,7 @@ class TurnosController extends Controller
             case "nombre":
                 $resultado = UserModel::saveUserName(Request::post('user_nombre'));
             case "telefono":
-                $resultado = UserModel::saveUserTelefono(Request::post('user_telefono'));
+                $resultado = UserModel::saveTelefono(Request::post('user_telefono'));
         }
         return $this->View->renderJSON($resultado);
 
