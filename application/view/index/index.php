@@ -9,7 +9,7 @@
                     <ul class="navbar-nav mr-auto">
                         <?php if (Session::get("user_account_type") == 6) : ?>
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Asignar turnos</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" id="lista.usuarios.turnos">Lista de usuarios</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" id="boton.usuarios">Lista de usuarios</a></li>
                         <?php endif; ?>
                     </ul>
                     <ul class="navbar-nav">
@@ -112,13 +112,7 @@
           }
       </style>
         <script>
-        var profesional_userid = 0;
-        var profesional_name = "";
         $(document).ready(function() {
-
-            <?php if (Session::get("user_account_type") == 1) : ?>
-                verifiID();
-            <?php endif; ?>
 
             $("#fecha\\.mes").on("change", function(){
                 makeCalendario();
@@ -198,27 +192,13 @@
 
             });
 
-            $("#modificar\\.contrasena").on("click", function(){
-                $("#dialog\\.title").html("Cambiar contraseña");
-                $("#dialog\\.body").html('<div class="row"><div class="form-group col-6"><label for="contrasena.actual">Contraseña actual</label><input class="form-control" type="password" id="contrasena.actual"></div><div class="col-6"></div><div class="form-group col-6"><label for="contrasena.nueva">Nueva contraseña</label><input type="password" class="form-control" id="contrasena.nueva"></div><div class="form-group col-6"><label for="contrasena.repetir">Profesional</label><input class="form-control" type="password" id="contrasena.repetir"></div></div>');
+            $("#boton\\.usuarios").on("click", function(){
+                cargarProfesionales();
+                $("#dialog\\.title").html("Profesionales registrados en base de datos");
+                $("#dialog\\.body").html('<table class="table table-hover"> <thead class="table-success"> <tr> <th scope="col">Nombre profesional</th> <th scope="col">Teléfono</th> <th scope="col">Correo Electrónico</th></tr></thead> <tbody id="tabla.profesional"></tbody> </table>');
                 $("#dialog\\.view").modal("show");
-                $("#dialog\\.delete").remove();
-                $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete">Guardar</button>');
-
-                $("#dialog\\.delete").on("click", function(){
-                    let datos = {
-                        accion: "contrasena",
-                        user_password_current: $("#contrasena\\.actual").val(),
-                        user_password_new: $("#contrasena\\.nueva").val(),
-                        user_password_repeat: $("#contrasena\\.repetir").val()
-                    }
-
-                    $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
-                        alert( response == true ? "cambiado" : "Error al cambiar contraseña, vuelva a escribir las contraseñas");
-                        if (response == true) {$("#dialog\\.view").modal("hide");}
-                    });
-                });
             });
+            <?php endif; ?>
 
             $("#modificar\\.correo").on("click", function(){
                 $("#dialog\\.title").html("Cambiar correo");
@@ -240,70 +220,27 @@
                 });
             });
 
-            $("#boton\\.profesionales").on("click", function(){
-                cargarProfesionales();
-                $("#dialog\\.title").html("Profesionales registrados en base de datos");
-                $("#dialog\\.body").html('<div class="btn-group" role="group" aria-label="Menú"> <button type="button" class="btn btn-outline-success my-2 my-sm-0 mr-1" title="Nueva actividad" id="boton.profesional.nuevo"><i class="fas fa-pen"></i></button> <button type="button" class="btn btn-outline-success my-2 my-sm-0 mr-1 d-none" title="Nueva actividad" id="boton.profesional.guardar"><i class="fas fa-save"></i></button> <button type="button" class="btn btn-outline-success my-2 my-sm-0 mr-1 d-none" title="Nueva actividad" id="boton.profesional.cancelar"><i class="fas fa-ban"></i></button> </div><div id="div.profesional" class="my-3 mx-0 d-none"> <div class="row"><div class="form-group col"> <label for="profesional.nombre">1.- Nombre del profesional</label> <input type="text" class="form-control" id="profesional.nombre"> <input type="hidden" class="form-control" id="profesional.id"></div><div class="form-group col"> <label class="mr-3" for="profesional.rut">2.- R.U.T.</label> <input type="text" class="form-control" id="profesional.rut"></div></div><div class="row"><div class="form-group col"> <label for="profesional.telefono">3.- Teléfono</label> <input type="text" class="form-control" id="profesional.telefono"> </div><div class="form-group col"> <label class="mr-3" for="profesional.correo">4.- Correo Electrónico</label> <input type="text" class="form-control" id="profesional.correo"></div></div></div><table class="table table-hover"> <thead class="table-success"> <tr> <th scope="col">Nombre profesional</th> <th scope="col">Teléfono</th> <th scope="col">Correo Electrónico</th></tr></thead> <tbody id="tabla.profesional"></tbody> </table>');
+            $("#modificar\\.contrasena").on("click", function(){
+                $("#dialog\\.title").html("Cambiar contraseña");
+                $("#dialog\\.body").html('<div class="row"><div class="form-group col-6"><label for="contrasena.actual">Contraseña actual</label><input class="form-control" type="password" id="contrasena.actual"></div><div class="col-6"></div><div class="form-group col-6"><label for="contrasena.nueva">Nueva contraseña</label><input type="password" class="form-control" id="contrasena.nueva"></div><div class="form-group col-6"><label for="contrasena.repetir">Profesional</label><input class="form-control" type="password" id="contrasena.repetir"></div></div>');
                 $("#dialog\\.view").modal("show");
-
                 $("#dialog\\.delete").remove();
+                $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete">Guardar</button>');
 
-                $("#boton\\.profesional\\.nuevo").on("click", function(){
-                    $("#div\\.profesional").removeClass("d-none");
-                    $("#boton\\.profesional\\.nuevo").addClass("d-none");
-                    $("#boton\\.profesional\\.guardar").removeClass("d-none")
-                    $("#boton\\.profesional\\.cancelar").removeClass("d-none");
-                    $("#tabla\\.profesional").addClass("d-none");
-                    $("#profesional\\.id").val("");
-                });
-
-                $("#boton\\.profesional\\.guardar").on("click", function(){
-                    $("#div\\.profesional").addClass("d-none");
+                $("#dialog\\.delete").on("click", function(){
                     let datos = {
-                        accion: "profesionalesNuevo",
-                        nombre: $("#profesional\\.nombre").val(),
-                        rut: $("#profesional\\.rut").val(),
-                        telefono: $("#profesional\\.telefono").val(),
-                        correo: $("#profesional\\.correo").val(),
-                        id: $("#profesional\\.id").val()
-                    }
-
-                    if ($("#profesional\\.id").val() !== ""){
-                        datos.accion = "profesionalesUpdate";
+                        accion: "contrasena",
+                        user_password_current: $("#contrasena\\.actual").val(),
+                        user_password_new: $("#contrasena\\.nueva").val(),
+                        user_password_repeat: $("#contrasena\\.repetir").val()
                     }
 
                     $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
-                        $("#profesional\\.nombre").val("");
-                        $("#profesional\\.rut").val("");
-                        $("#profesional\\.telefono").val("");
-                        $("#profesional\\.correo").val("");
-                        $("#profesional\\.id").val("");
-                        $("#boton\\.profesional\\.nuevo").removeClass("d-none");
-                        $("#boton\\.profesional\\.guardar").addClass("d-none");
-                        $("#boton\\.profesional\\.cancelar").addClass("d-none");
-                        $("#tabla\\.profesional").removeClass("d-none");
-                        cargarProfesionales();
+                        alert( response == true ? "cambiado" : "Error al cambiar contraseña, vuelva a escribir las contraseñas");
+                        if (response == true) {$("#dialog\\.view").modal("hide");}
                     });
                 });
-
-                $("#boton\\.profesional\\.cancelar").on("click", function(){
-                    $("#div\\.profesional").addClass("d-none");
-                    $("#profesional\\.nombre").val("");
-                    $("#profesional\\.rut").val("");
-                    $("#profesional\\.telefono").val("");
-                    $("#profesional\\.correo").val("");
-                    $("#boton\\.profesional\\.nuevo").removeClass("d-none");
-                    $("#boton\\.profesional\\.guardar").addClass("d-none");
-                    $("#boton\\.profesional\\.cancelar").addClass("d-none");
-                    $("#tabla\\.profesional").removeClass("d-none");
-                });
             });
-
-            $("#lista\\.usuarios\\.turnos").on("click", function(){
-
-            });
-            
-            <?php endif; ?>
         });
 
       function makeCalendario(){
@@ -511,7 +448,7 @@
             }
 
             $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
-                $("#tabla\\.profesional").empty();
+                $("#tabla\\.profesionales").empty();
                 $("#turnos\\.profesionales").empty();
                 $("#turno\\.profesional\\.in").empty();
                 if (Object.keys(data).length > 0) {
@@ -522,131 +459,8 @@
                         $("#tabla\\.profesional").append(fila);
                         $("#turno\\.profesional\\.in").append(fila);
                     });
-
-                    $(".columna-profesional").on("mouseenter",function(){
-                        $(this).children("button").removeClass("d-none");
-                    }).on("mouseleave", function(){
-                        $(this).children("button").addClass("d-none");
-                    });
-
-                    $(".eliminar-profesional").on("click", function(){
-                        let profesional_id = $(this).data("id");
-                        $("#dialog\\.delete").remove();
-                        $("#dialog\\.title").html('Eliminar Profesional')
-                        $("#dialog\\.body").html('<p class="text-center">¿Está seguro que desea eliminar el profesional seleccionado?</p>')
-                        $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="' + profesional_id + '">Eliminar</button>');
-            
-                        $("#dialog\\.delete").on("click", function(){
-                            let profesional_id = $(this).data("id");
-                            var solicitud = {
-                                accion: "profesionalesEliminar",
-                                id: parseInt(profesional_id)
-                            };
-                            $.post("https://turnoscat.crecimientofetal.cl/turnos/api", solicitud).done(function(data){
-                                $("#dialog\\.body").empty();
-                                $("#boton\\.profesionales").trigger("click");
-                            });
-                        });
-                        $("#dialog\\.view").modal("show");
-                    });
-
-                    $("#tabla\\.profesional tr td").on("click", function(){
-                        let profesional_id = $(this).data("id");
-
-                        let datos = {
-                            accion: "profesional",
-                            id: profesional_id
-                        }
-
-                        $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
-                            if (Object.keys(response).length > 0) {
-                                $("#profesional\\.id").val(response.profesional_id);
-                                $("#profesional\\.nombre").val(response.profesional_name);
-                                $("#profesional\\.rut").val(response.profesional_rut);
-                                $("#profesional\\.telefono").val(response.profesional_telefono);
-                                $("#profesional\\.correo").val(response.profesional_correo);
-                                $("#div\\.profesional").removeClass("d-none");
-                                $("#boton\\.profesional\\.nuevo").addClass("d-none");
-                                $("#boton\\.profesional\\.guardar").removeClass("d-none")
-                                $("#boton\\.profesional\\.cancelar").removeClass("d-none");
-                                $("#tabla\\.profesional").addClass("d-none");
-                            }
-                        });
-                    });
                 }
             });
       }
-
-      <?php if (Session::get("user_account_type") == 1) : ?>
-
-        function profesionalBasic(){
-            let data = {
-                accion : "profesionalBasic",
-            }
-
-            $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
-                $("#turnos\\.profesionales").empty();
-                if (Object.keys(data).length > 0) {
-                    $.each(response, function(i, item) {
-                        let option = '<option value="' + item["profesional_id"] + '">' + item["profesional_name"] + '</option>';
-                        $("#turnos\\.profesionales").append(option);
-                    });
-                }
-            });
-        }
-
-        function verifiID(){
-            let data = {
-                accion : "user_id_profesional",
-            }
-
-            $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
-                if (Object.keys(response).length > 0) {
-                    if (response.profesional_userid == ""){
-                        $("#dialog\\.delete").remove();
-                        $("#dialog\\.title").html('Asociar una cuenta con un médico');
-                        $("#dialog\\.body").html('<div class="row"><div class="col-12"><p class="text-center">El administrador ha ingresado los siguientes médicos a la plataforma, seleccione su nombre y presione continuar.</p></p><div class="form-group col-12"><label for="turnos.profesionales" class="text-center text-danger">Profesional</label><select class="form-control" id="turnos.profesionales"></select></div></div>');
-                        $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="">Continuar</button>');
-                        $("#dialog\\.view").modal("show");
-                        profesionalBasic();
-                        $("#dialog\\.delete").on("click",function(){
-                            let data = {
-                                accion : "user_id_set",
-                                id: $("#turnos\\.profesionales").val()
-                            }
-
-                            $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
-                                location.reload();
-                            });
-                        });
-                        $("#table\\.calendario").remove();
-                    }
-                    else{
-                        profesional_userid = response.profesional_id;
-                        profesional_name = response.profesional_name;
-                    }
-                }
-                else{
-                    $("#dialog\\.delete").remove();
-                    $("#dialog\\.title").html('Asociar una cuenta con un médico');
-                    $("#dialog\\.body").html('<div class="row"><div class="col-12"><p class="text-center">El administrador ha ingresado los siguientes médicos a la plataforma, seleccione su nombre y presione continuar.</p></p><div class="form-group col-12"><label for="turnos.profesionales" class="text-center text-danger">Profesional</label><select class="form-control" id="turnos.profesionales"></select></div></div>');
-                    $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="">Continuar</button>');
-                    $("#dialog\\.view").modal("show");
-                    profesionalBasic();
-                    $("#dialog\\.delete").on("click",function(){
-                        let data = {
-                            accion : "user_id_set",
-                            id: $("#turnos\\.profesionales").val()
-                        }
-
-                        $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
-                            location.reload();
-                        });
-                    });
-                    $("#table\\.calendario").remove();
-                }
-            });
-        }
-    <?php endif; ?>
         </script>
     </body>
