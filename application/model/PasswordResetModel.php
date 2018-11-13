@@ -273,14 +273,12 @@ class PasswordResetModel
         $query = $database->prepare($sql);
         $query->execute(array(':user_password_hash' => $user_password_hash, ':user_id' => $user_id));
 
-        return $query->rowCount() . "caca";
-
         // if one result exists, return true, else false. Could be written even shorter btw.
-        //if ($query->rowCount() == 1) {
-        //    return true;
-        //}
+        if ($query->rowCount() == 1) {
+            return true;
+        }
 
-        //return false;
+        return false;
     }
 
 
@@ -305,13 +303,11 @@ class PasswordResetModel
         $user_password_hash = password_hash($user_password_new, PASSWORD_DEFAULT);
 
         // write the password to database (as hashed and salted string)
-        return self::saveChangedPassword($user_id, $user_password_hash); //) {
-        //    Session::add('feedback_positive', Text::get('FEEDBACK_PASSWORD_CHANGE_SUCCESSFUL'));
-        //    return true;
-        //} else {
-        //    Session::add('feedback_negative', Text::get('FEEDBACK_PASSWORD_CHANGE_FAILED'));
-        //    return false;
-        //}
+        if (self::saveChangedPassword($user_id, $user_password_hash)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
