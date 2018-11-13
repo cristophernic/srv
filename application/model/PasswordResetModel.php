@@ -269,13 +269,11 @@ class PasswordResetModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "UPDATE users SET user_password_hash = :user_password_hash
-                 WHERE user_id = :user_id";
+        $sql = "UPDATE users SET user_password_hash = :user_password_hash WHERE user_id = :user_id";
         $query = $database->prepare($sql);
-        $query->execute(array(
-            ':user_password_hash' => $user_password_hash, ':user_id' => $user_id
-        ));
+        $query->execute(array(':user_password_hash' => $user_password_hash, ':user_id' => $user_id));
 
+        return $query->fetchAll();
         // if one result exists, return true, else false. Could be written even shorter btw.
         if ($query->rowCount() == 1) {
             return true;
