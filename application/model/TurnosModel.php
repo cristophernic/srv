@@ -93,7 +93,7 @@ class TurnosModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT turno_id, turno_profesional, turno_fechain, turno_turno, turno_profesional_nombre FROM turnos WHERE turno_id = :turno_id LIMIT 1";
+        $sql = "SELECT turno_id, turno_profesional, turno_fechain, turno_turno FROM turnos WHERE turno_id = :turno_id LIMIT 1";
         $query = $database->prepare($sql);
         $query->execute(array(':turno_id' => $id_turno));
 
