@@ -21,7 +21,7 @@
                                 <a class="dropdown-item" href="#" id="modificar.nombre">Modificar nombre</a>
                                 <a class="dropdown-item" href="#" id="modificar.correo">Modificar correo</a>
                                 <a class="dropdown-item" href="#" id="modificar.contrasena">Modificar contraseña</a>
-                                <a class="dropdown-item" href="#" id="modificar.telefono">Modificar Teléfono</a>
+                                <a class="dropdown-item" href="#" id="modificar.telefono">Modificar teléfono</a>
                                 <a class="dropdown-item" href="login/logout">Salir del programa</a>
                             </div>
                         </li>
