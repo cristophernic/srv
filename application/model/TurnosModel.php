@@ -201,16 +201,14 @@ class TurnosModel
             $query->execute(array(':comentario_fecha' => $comentario_fecha));
 
             if ($query->rowCount() == 1) {
-                return true;
-                return $query->fetch();
+                $return->comentario = $query->fetch();
             }
-        }
-        else{
-            //bla
+            else{
+                $return->comentario = '';
+            }
         }
 
         return $return;
-        
     }
 
     public static function createComentario($fecha,$text)
