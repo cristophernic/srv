@@ -442,7 +442,7 @@
                                         $("#dialog\\.title").html("Crear comentario para el día " + dateComplete);
                                         $("#dialog\\.body").html('<div class="row"><div class="form-group col"><label for="comentarios.text">Comentario:</label><input class="form-control" id="comentarios.text" type="text" value=""></div></div>');
                                         $("#dialog\\.delete").remove();
-                                        $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="' + data.id + '">Guardar</button>');
+                                        $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="' + data.fecha + '">Guardar</button>');
                                         
                                         $("#dialog\\.delete").on("click", function(){
                                             let id = $(this).data("id");
@@ -461,9 +461,9 @@
                                     }
                                     else{
                                         $("#dialog\\.title").html('Comentario para el día ' + dateComplete);
-                                        $("#dialog\\.body").html('<div class="row"><div class="form-group col"><label for="comentarios.text">Comentario:</label><input class="form-control" id="comentarios.text" type="text" value="' + response.comentario_text.replace(/<br \/>/g,"\n") +'"></div></div>');
+                                        $("#dialog\\.body").html('<div class="row"><div class="form-group col"><label for="comentarios.text">Comentario:</label><input class="form-control" id="comentarios.text" type="text" value="' + response.comentario.comentario_text.replace(/<br \/>/g,"\n") +'"></div></div>');
                                         $("#dialog\\.delete").remove();
-                                        $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="' + response.comentario_id + '">Guardar</button>');
+                                        $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="' + response.comentario.comentario_id + '">Guardar</button>');
                                         $("#dialog\\.delete").on("click", function(){
                                             let id = $(this).data("id");
                                             let datos = {
