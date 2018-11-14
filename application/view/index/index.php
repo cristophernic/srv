@@ -422,26 +422,16 @@
                         });
                     }
                     else if (typeof calendario_id === 'number'){
-
-                        $("#dialog\\.title").html("Obteniendo datos ...");
-                        $("#dialog\\.body").html('<p class="text-center">cargando</p>');
-                        $("#dialog\\.view").modal("show");
-                        $("#dialog\\.delete").remove();
-
                         let mes = $("#fecha\\.mes").val();
                         let ano = $("#fecha\\.ano").val();
                         let dia = ano + '-' + mes + '-' + ("0" + calendario_id).slice(-2);
                         let data = {
-                            accion : "comentarioUno",
-                            id: dia
+                            accion : "comentario",
+                            fecha: dia
                         }
 
-                        let d = new Date(dia.replace(/-/g, '\/'));
-                        let day = ("0" + d.getDate()).slice(-2);
-                        let month = ("0" + (d.getMonth() + 1)).slice(-2); 
-                        let dateComplete = day + "-" + month + "-" + d.getFullYear();
-
                         $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
+
                             if (Object.keys(response).length > 0) {
                                 $("#dialog\\.title").html('Comentario para el día ' + dateComplete);
                                 $("#dialog\\.body").html('<div class="row"><div class="form-group col"><label for="comentarios.text">Comentario:</label><input class="form-control" id="comentarios.text" type="text" value="' + response.comentario_text.replace(/<br \/>/g,"\n") +'"></div></div>');
@@ -460,6 +450,7 @@
                                         makeCalendario();
                                     });
                                 });
+                                $("#dialog\\.view").modal("show");
                             }
                             else{
                                 $("#dialog\\.title").html("Crear comentario para el día " + dateComplete);
@@ -480,11 +471,10 @@
                                         makeCalendario();
                                     });
                                 });
+                                $("#dialog\\.view").modal("show");
                             }
                         });
                     }
-
-
                 });
             });
       }

@@ -1,12 +1,7 @@
 <?php
 
-/**
- * NoteModel
- * This is basically a simple CRUD (Create/Read/Update/Delete) demonstration.
- */
 class TurnosModel
 {
-
     public static function calendar($mes, $ano){
         
         try {
@@ -41,7 +36,17 @@ class TurnosModel
         $query = $database->prepare($sql);
         $query->execute(array(':turno_fechain' => $fecha1, ':turno_fechaout' => $fecha2));
 
-        // fetchAll() is the PDO method that gets all result rows
+        return $query->fetchAll();
+    }
+
+    public static function getProfesionalesTurnos($fecha)
+    {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $sql = "SELECT turno_id, turno_profesional, turno_fechain, turno_turno FROM turnos WHERE turno_fechain = :turno_fechain";
+        $query = $database->prepare($sql);
+        $query->execute(array(':turno_fechain' => $fecha));
+
         return $query->fetchAll();
     }
 
@@ -57,7 +62,6 @@ class TurnosModel
         $query = $database->prepare($sql);
         $query->execute(array(':profesional' => $profesional, ':turno_fechain' => $fecha1, ':turno_fechaout' => $fecha2));
 
-        // fetchAll() is the PDO method that gets all result rows
         $dia =  $query->rowCount();
 
         $sql = "SELECT turno_turno FROM turnos WHERE turno_turno = 1 AND turno_profesional = :profesional AND turno_fechain BETWEEN :turno_fechain AND :turno_fechaout";
@@ -80,15 +84,9 @@ class TurnosModel
         $query = $database->prepare($sql);
         $query->execute(array(':turno_fechain' => $fecha));
 
-        // fetchAll() is the PDO method that gets all result rows
         return $query->fetchAll();
     }
 
-    /**
-     * Get a single keyword
-     * @param int $keyword_id id of the specific keyword
-     * @return object a single object (the result)
-     */
     public static function getTurno($id_turno)
     {
         $database = DatabaseFactory::getFactory()->getConnection();
@@ -97,15 +95,9 @@ class TurnosModel
         $query = $database->prepare($sql);
         $query->execute(array(':turno_id' => $id_turno));
 
-        // fetch() is the PDO method that gets a single result
         return $query->fetch();
     }
 
-    /**
-     * Set a keyword (create a new one)
-     * @param string $keyword_text keyword text that will be created
-     * @return bool feedback (was the keyword created properly ?)
-     */
     public static function createTurnos($profesional, $fechainic,$turno)
     {
         if (!$profesional) {
@@ -128,18 +120,11 @@ class TurnosModel
                 return true;
             }
 
-            // default return
             Session::add('feedback_negative', Text::get('FEEDBACK_NOTE_CREATION_FAILED'));
             return false;
         }
     }
 
-    /**
-     * Update an existing keyword
-     * @param int $keyword_id id of the specific keyword
-     * @param string $keyword_text new text of the specific keyword
-     * @return bool feedback (was the update successful ?)
-     */
     public static function changeTurnos($turno_id, $turno_profesional, $turno_profesional_nombre)
     {
         if (!$turno_id || !$turno_profesional) {
@@ -160,11 +145,6 @@ class TurnosModel
         return false;
     }
 
-    /**
-     * Delete a specific keyword
-     * @param int $keyword_id id of the keyword
-     * @return bool feedback (was the keyword deleted properly ?)
-     */
     public static function deleteTurnos($turno_id)
     {
         if (!$turno_id) {
@@ -181,7 +161,6 @@ class TurnosModel
             return true;
         }
 
-        // default return
         Session::add('feedback_negative', Text::get('FEEDBACK_NOTE_DELETION_FAILED'));
         return false;
     }
@@ -198,20 +177,40 @@ class TurnosModel
         $query = $database->prepare($sql);
         $query->execute(array(':comentario_fechain' => $fecha1, ':comentario_fechaout' => $fecha2));
 
-        // fetchAll() is the PDO method that gets all result rows
         return $query->fetchAll();
     }
 
     public static function getComentario($comentario_fecha)
     {
-        $database = DatabaseFactory::getFactory()->getConnection();
+        $return = new stdClass();
+        $return->autorizado = false;
 
-        $sql = "SELECT comentario_id, comentario_fecha, comentario_text FROM comentarios WHERE comentario_fecha = :comentario_fecha LIMIT 1";
-        $query = $database->prepare($sql);
-        $query->execute(array(':comentario_fecha' => $comentario_fecha));
+        $turnos = self::getProfesionalesTurnos($comentario_fecha);
 
-        // fetch() is the PDO method that gets a single result
-        return $query->fetch();
+        foreach ($turnos as $turno) {
+            if ($turno->turno_profesional == $Session::get('user_id')){
+                $return->autorizado = true;
+            }
+        }
+
+        if ($return->autorizado){
+            $database = DatabaseFactory::getFactory()->getConnection();
+
+            $sql = "SELECT comentario_id, comentario_fecha, comentario_text FROM comentarios WHERE comentario_fecha = :comentario_fecha LIMIT 1";
+            $query = $database->prepare($sql);
+            $query->execute(array(':comentario_fecha' => $comentario_fecha));
+
+            if ($query->rowCount() == 1) {
+                return true;
+                return $query->fetch();
+            }
+        }
+        else{
+            //bla
+        }
+
+        return $return;
+        
     }
 
     public static function createComentario($fecha,$text)
@@ -231,7 +230,6 @@ class TurnosModel
             return true;
         }
 
-        // default return
         Session::add('feedback_negative', Text::get('FEEDBACK_NOTE_CREATION_FAILED'));
         return false;
     }
@@ -255,5 +253,4 @@ class TurnosModel
         Session::add('feedback_negative', Text::get('FEEDBACK_NOTE_EDITING_FAILED'));
         return false;
     }
-
 }
