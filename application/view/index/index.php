@@ -430,6 +430,11 @@
                             fecha: dia
                         }
 
+                        let d = new Date(data.dia.replace(/-/g, '\/'));
+                        let day = ("0" + d.getDate()).slice(-2);
+                        let month = ("0" + (d.getMonth() + 1)).slice(-2); 
+                        let dateComplete = day + "-" + month + "-" + d.getFullYear();
+
                         $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
                             if (Object.keys(response).length > 0) {
                                 if (response.autorizado == false){
