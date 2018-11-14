@@ -431,47 +431,55 @@
                         }
 
                         $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
-
                             if (Object.keys(response).length > 0) {
-                                $("#dialog\\.title").html('Comentario para el día ' + dateComplete);
-                                $("#dialog\\.body").html('<div class="row"><div class="form-group col"><label for="comentarios.text">Comentario:</label><input class="form-control" id="comentarios.text" type="text" value="' + response.comentario_text.replace(/<br \/>/g,"\n") +'"></div></div>');
-                                $("#dialog\\.delete").remove();
-                                $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="' + response.comentario_id + '">Guardar</button>');
-                                $("#dialog\\.delete").on("click", function(){
-                                    let id = $(this).data("id");
-                                    let datos = {
-                                        accion: "comentarioUpdate",
-                                        id: id,
-                                        text: $("#comentarios\\.text").val().replace(/\r\n|\r|\n/g,"<br />"), 
-                                    }
+                                if (response.autorizado == false){
+                                    $("#dialog\\.title").html('No puedes comentar');
+                                    $("#dialog\\.body").html('<p class="text-center">No autorizado</p>');
+                                    $("#dialog\\.delete").remove();
+                                }
+                                else{
+                                    if (typeof response.comentario === 'string'){
+                                        $("#dialog\\.title").html("Crear comentario para el día " + dateComplete);
+                                        $("#dialog\\.body").html('<div class="row"><div class="form-group col"><label for="comentarios.text">Comentario:</label><input class="form-control" id="comentarios.text" type="text" value=""></div></div>');
+                                        $("#dialog\\.delete").remove();
+                                        $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="' + data.id + '">Guardar</button>');
+                                        
+                                        $("#dialog\\.delete").on("click", function(){
+                                            let id = $(this).data("id");
+                                            let datos = {
+                                                accion: "comentarioGuardar",
+                                                fecha: id,
+                                                text: $("#comentarios\\.text").val().replace(/\r\n|\r|\n/g,"<br />"), 
+                                            }
 
-                                    $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
-                                        $("#dialog\\.view").modal("hide");
-                                        makeCalendario();
-                                    });
-                                });
-                                $("#dialog\\.view").modal("show");
-                            }
-                            else{
-                                $("#dialog\\.title").html("Crear comentario para el día " + dateComplete);
-                                $("#dialog\\.body").html('<div class="row"><div class="form-group col"><label for="comentarios.text">Comentario:</label><input class="form-control" id="comentarios.text" type="text" value=""></div></div>');
-                                $("#dialog\\.delete").remove();
-                                $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="' + data.id + '">Guardar</button>');
-                                
-                                $("#dialog\\.delete").on("click", function(){
-                                    let id = $(this).data("id");
-                                    let datos = {
-                                        accion: "comentarioGuardar",
-                                        fecha: id,
-                                        text: $("#comentarios\\.text").val().replace(/\r\n|\r|\n/g,"<br />"), 
+                                            $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
+                                                $("#dialog\\.view").modal("hide");
+                                                makeCalendario();
+                                            });
+                                        });
+                                        $("#dialog\\.view").modal("show");
                                     }
+                                    else{
+                                        $("#dialog\\.title").html('Comentario para el día ' + dateComplete);
+                                        $("#dialog\\.body").html('<div class="row"><div class="form-group col"><label for="comentarios.text">Comentario:</label><input class="form-control" id="comentarios.text" type="text" value="' + response.comentario_text.replace(/<br \/>/g,"\n") +'"></div></div>');
+                                        $("#dialog\\.delete").remove();
+                                        $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="' + response.comentario_id + '">Guardar</button>');
+                                        $("#dialog\\.delete").on("click", function(){
+                                            let id = $(this).data("id");
+                                            let datos = {
+                                                accion: "comentarioUpdate",
+                                                id: id,
+                                                text: $("#comentarios\\.text").val().replace(/\r\n|\r|\n/g,"<br />"), 
+                                            }
 
-                                    $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
-                                        $("#dialog\\.view").modal("hide");
-                                        makeCalendario();
-                                    });
-                                });
-                                $("#dialog\\.view").modal("show");
+                                            $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
+                                                $("#dialog\\.view").modal("hide");
+                                                makeCalendario();
+                                            });
+                                        });
+                                        $("#dialog\\.view").modal("show");
+                                    }
+                                }
                             }
                         });
                     }
