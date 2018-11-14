@@ -441,6 +441,7 @@
                                     $("#dialog\\.title").html('No puedes comentar');
                                     $("#dialog\\.body").html('<p class="text-center">No autorizado</p>');
                                     $("#dialog\\.delete").remove();
+                                    $("#dialog\\.view").modal("show");
                                 }
                                 else{
                                     if (typeof response.comentario === 'string'){
