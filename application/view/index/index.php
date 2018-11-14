@@ -145,8 +145,14 @@
                     }
 
                     $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
-                        $("#dialog\\.view").modal("hide");
-                        makeCalendario();
+                        if (response.resultado == false){
+                            $("#dialog\\.title").html("Error");
+                            $("#dialog\\.body").html('<p class="text-center">No puede asignar un médico a un turno ya ocupado</p>');
+                        }
+                        else{
+                            $("#dialog\\.view").modal("hide");
+                            makeCalendario();
+                        }
                     });
                 });
             });
