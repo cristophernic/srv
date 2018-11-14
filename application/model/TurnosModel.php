@@ -100,9 +100,11 @@ class TurnosModel
 
     public static function createTurnos($profesional, $fechainic,$turno)
     {
+        $return = new stdClass();
+        $return->resultado = false;
+
         if (!$profesional) {
-            Session::add('feedback_negative', Text::get('FEEDBACK_NOTE_CREATION_FAILED'));
-            return 'fuck';
+            $return->resultado = false;
         }
 
         if ($turno == 2){
@@ -112,17 +114,27 @@ class TurnosModel
         else {
             $database = DatabaseFactory::getFactory()->getConnection();
 
-            $sql = "INSERT INTO turnos (turno_profesional, turno_fechain, turno_turno) VALUES (:turno_profesional, :turno_fechain, :turno_turno)";
+            $sql = "SELECT turno_profesional, turno_fechain, turno_turno FROM turnos WHERE turno_profesional = :turno_profesional AND turno_fechain = :turno_fechain AND turno_turno = :turno_turno)";
             $query = $database->prepare($sql);
             $query->execute(array(':turno_profesional' => $profesional, ':turno_fechain' => $fechainic, ':turno_turno' => intval($turno)));
 
             if ($query->rowCount() == 1) {
-                return true;
+                $return->resultado = false;
             }
+            else{
+                $sql = "INSERT INTO turnos (turno_profesional, turno_fechain, turno_turno) VALUES (:turno_profesional, :turno_fechain, :turno_turno)";
+                $query = $database->prepare($sql);
+                $query->execute(array(':turno_profesional' => $profesional, ':turno_fechain' => $fechainic, ':turno_turno' => intval($turno)));
 
-            Session::add('feedback_negative', Text::get('FEEDBACK_NOTE_CREATION_FAILED'));
-            return false;
+                if ($query->rowCount() == 1) {
+                    $return->resultado = true;
+                }
+
+                $return->resultado = false;
+            }
         }
+
+        return $return;
     }
 
     public static function changeTurnos($turno_id, $turno_profesional, $turno_profesional_nombre)
