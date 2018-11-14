@@ -185,7 +185,7 @@ class TurnosModel
         $return = new stdClass();
         $return->autorizado = false;
 
-        $turnos = self::($comentario_fecha);
+        $turnos = self::getProfesionalesTurnos($comentario_fecha);
 
         foreach ($turnos as $turno) {
             if ($turno->turno_profesional == Session::get('user_id')){
