@@ -147,7 +147,8 @@
                     $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
                         if (response.resultado == false){
                             $("#dialog\\.title").html("Error");
-                            $("#dialog\\.body").html('<p class="text-center">No puede asignar un médico a un turno ya ocupado</p>');
+                            $("#dialog\\.body").html('<p class="text-center">No puede asignar un médico a un turno ya ocupado, si desea cambiar, debe hacer click sobre el turno.</p>');
+                            $("#dialog\\.delete").remove();
                         }
                         else{
                             $("#dialog\\.view").modal("hide");
