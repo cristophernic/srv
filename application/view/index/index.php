@@ -348,8 +348,10 @@
                         if (Object.keys(turnosDia).length > 0) {
                             let diaT = "";
                             let nocheT = "";
+                            let diaP = "";
                             let diaI = "";
                             let nocheI = "";
+                            let nocheP = "";
 
                             const diaF = turnosDia.filter(elDia => {
                                 return parseInt(elDia.turno_turno) === 0;
@@ -362,14 +364,30 @@
                             if (diaF.length > 0){
                                 diaT = diaF[0].user_nombre;
                                 diaI = diaF[0].turno_id;
+                                diaP = diaF[0].turno_profesional;
                             }
 
                             if (nocheF.length > 0){
                                 nocheT = nocheF[0].user_nombre;
                                 nocheI = nocheF[0].turno_id;
+                                nocheP = diaF[0].turno_profesional;
                             }
 
-                            fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td class="text-center" data-id="' + diaI +'">' + diaT +'</td><td class="text-center" data-id="' + nocheI +'">' + nocheT +'</td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
+                            if (diaP == <?php echo Session::get('user_id'); ?>){
+                                diaP = "text-danger";
+                            }
+                            else{
+                                diaP = "";
+                            }
+
+                            if (nocheP == <?php echo Session::get('user_id'); ?>){
+                                nocheP = "text-danger";
+                            }
+                            else{
+                                nocheP = "";
+                            }
+
+                            fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td class="text-center' + diaP +'" data-id="' + diaI +'">' + diaT +'</td><td class="text-center' + nocheP +'" data-id="' + nocheI +'">' + nocheT +'</td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
                         }
                         else{
                             fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td class="text-center"></td><td class="text-center"></td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';    
