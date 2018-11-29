@@ -370,7 +370,7 @@
                             if (nocheF.length > 0){
                                 nocheT = nocheF[0].user_nombre;
                                 nocheI = nocheF[0].turno_id;
-                                nocheP = diaF[0].turno_profesional;
+                                nocheP = nocheF[0].turno_profesional;
                             }
 
                             if (diaP == <?php echo Session::get('user_id'); ?>){
