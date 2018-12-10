@@ -129,8 +129,6 @@ class TurnosModel
                 if ($query->rowCount() == 1) {
                     $return->resultado = true;
                 }
-
-                $return->resultado = false;
             }
         }
 
