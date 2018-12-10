@@ -108,8 +108,8 @@ class TurnosModel
         }
 
         if ($turno == 2){
-            self::createTurnos($profesional,$fechainic,0);
-            self::createTurnos($profesional,$fechainic,1);
+            $return->resultado = self::createTurnos($profesional,$fechainic,0);
+            $return->resultado = self::createTurnos($profesional,$fechainic,1);
         }
         else {
             $database = DatabaseFactory::getFactory()->getConnection();
