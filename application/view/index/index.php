@@ -47,7 +47,7 @@
                                     <option value="08">Agosto</option>
                                     <option value="09">Septiembre</option>
                                     <option value="10">Octubre</option>
-                                    <option value="11" selected>Noviembre</option>
+                                    <option value="11">Noviembre</option>
                                     <option value="12">Diciembre</option>
                                 </select>
                             </div>
@@ -57,8 +57,9 @@
                             <div class="col">
                                 <select id="fecha.ano" class="form-control">
                                     <option value="2017">2017</option>
-                                    <option value="2018" selected>2018</option>
+                                    <option value="2018">2018</option>
                                     <option value="2019">2019</option>
+                                    <option value="2019">2020</option>
                                 </select>
                             </div>
                         </div>
@@ -119,10 +120,15 @@
         <script>
         $(document).ready(function() {
 
+            let now = new Date();
+            let month = ("0" + (now.getMonth() + 1)).slice(-2);
+            
+            $("#fecha\\.mes").val(month);
             $("#fecha\\.mes").on("change", function(){
                 makeCalendario();
             });
 
+            $("#fecha\\.ano").val(now.getFullYear());
             $("#fecha\\.ano").on("change", function(){
                 makeCalendario();
             });
