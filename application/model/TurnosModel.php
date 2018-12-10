@@ -119,7 +119,7 @@ class TurnosModel
             $query->execute(array(':turno_profesional' => $profesional, ':turno_fechain' => $fechainic, ':turno_turno' => intval($turno)));
 
             if ($query->rowCount() == 1) {
-                $return->resultado = false;
+                $return->resultado = true;
             }
             else{
                 $sql = "INSERT INTO turnos (turno_profesional, turno_fechain, turno_turno) VALUES (:turno_profesional, :turno_fechain, :turno_turno)";
