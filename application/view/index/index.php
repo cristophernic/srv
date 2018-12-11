@@ -17,6 +17,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuario activo: <?php echo Session::get('user_name'); ?></a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#" id="boton.pormes">Ver turnos por mes</a>
+                                <a class="dropdown-item" href="#" id="boton.imprimir">Imprimir turnos del mes</a>
                                 <a class="dropdown-item" href="login/logout">Salir del programa</a>
                                 <div class="dropdown-divider"></div>
                                     <a class="dropdown-item dropdown-toggle" href="#" id="modificarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Modificar</a>
@@ -70,7 +71,7 @@
             <div class="col mt-5">
                 <div class="card ml-3">
                     <div class="card-body">
-                        <table class="table table-td table-hover table-bordered">
+                        <table class="table table-td table-hover table-bordered" id="table">
                             <thead class="bg-light">
                                 <tr>
                                     <th scope="col">Días / Fecha</th>
@@ -304,6 +305,16 @@
                         if (response == true) {$("#dialog\\.view").modal("hide");}
                     });
                 });
+            });
+
+            $("#boton\\.imprimir").on("click", function(){
+                var documento = '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="user-scalable=no,maximum-scale=1, minimum-scale=1, width=device-width, initial-scale=1, shrink-to-fit=no"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"><link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/solid.css" integrity="sha384-VGP9aw4WtGH/uPAOseYxZ+Vz/vaTb1ehm1bwx92Fm8dTrE+3boLfF1SpAtB1z7HW" crossorigin="anonymous"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7" crossorigin="anonymous"><title>Turnos</title></head><body><h1 class="text-center">Turnos Cat para el mes :MES</h1>:Tabla</body><script>document.addEventListener("DOMContentLoaded",function(event){var ventimp=window;ventimp.print();ventimp.close();});<\/script></html>'
+                var calendario =  $("#table").clone();
+                documento = documento.replace(':Tabla', calendario);
+                documento = documento.replace(':MES', $("#fecha\\.mes option:selected").text() + ' ' + $("#fecha\\.ano option:selected").text() );
+                var ventimp = window.open(' ', 'popimpr');
+                ventimp.document.write(documento);
+                ventimp.document.close();
             });
         });
 
