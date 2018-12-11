@@ -312,6 +312,7 @@
                 documento = documento.replace(':MES', $("#fecha\\.mes option:selected").text() + ' ' + $("#fecha\\.ano option:selected").text() );
                 var calendario =  $("#table").html();
                 calendario = calendario.replace(/\r?\n/g, '');
+                calendario = calendario.replace(/\r?\\/g, '');
                 documento = documento.replace(':Tabla', calendario);
                 var ventimp = window.open(' ', 'popimpr');
                 ventimp.document.write(documento);
