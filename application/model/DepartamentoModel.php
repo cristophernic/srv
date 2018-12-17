@@ -14,7 +14,7 @@ class DepartamentoModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT user_id, departamento_id, departamento_text, departamento_jefe FROM departamentos WHERE user_id = :user_id";
+        $sql = "SELECT user_id, departamento_id, departamento_name, departamento_jefe FROM departamentos WHERE user_id = :user_id";
         $query = $database->prepare($sql);
         $query->execute(array(':user_id' => Session::get('user_id')));
 
@@ -31,7 +31,7 @@ class DepartamentoModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT user_id, departamento_id, departamento_text, departamento_jefe FROM departamentos WHERE user_id = :user_id AND departamento_id = :departamento_id LIMIT 1";
+        $sql = "SELECT user_id, departamento_id, departamento_name, departamento_jefe FROM departamentos WHERE user_id = :user_id AND departamento_id = :departamento_id LIMIT 1";
         $query = $database->prepare($sql);
         $query->execute(array(':user_id' => Session::get('user_id'), ':departamento_id' => $departamento_id));
 
@@ -53,9 +53,9 @@ class DepartamentoModel
 
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "INSERT INTO departamentos (departamento_text, user_id,departamento_jefe) VALUES (:departamento_text, :user_id, :departamento_jefe)";
+        $sql = "INSERT INTO departamentos (departamento_name, user_id,departamento_jefe) VALUES (:departamento_name, :user_id, :departamento_jefe)";
         $query = $database->prepare($sql);
-        $query->execute(array(':departamento_text' => $departamento_text, ':departamento_jefe' => $departamento_jefe,':user_id' => Session::get('user_id')));
+        $query->execute(array(':departamento_name' => $departamento_text, ':departamento_jefe' => $departamento_jefe,':user_id' => Session::get('user_id')));
 
         if ($query->rowCount() == 1) {
             return true;
@@ -80,9 +80,9 @@ class DepartamentoModel
 
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "UPDATE departamentos SET departamento_text = :departamento_text WHERE departamento_id = :departamento_id AND user_id = :user_id LIMIT 1";
+        $sql = "UPDATE departamentos SET departamento_name = :departamento_name WHERE departamento_id = :departamento_id AND user_id = :user_id LIMIT 1";
         $query = $database->prepare($sql);
-        $query->execute(array(':departamento_id' => $departamento_id, ':departamento_text' => $departamento_text, ':user_id' => Session::get('user_id')));
+        $query->execute(array(':departamento_id' => $departamento_id, ':departamento_name' => $departamento_text, ':user_id' => Session::get('user_id')));
 
         if ($query->rowCount() == 1) {
             return true;
