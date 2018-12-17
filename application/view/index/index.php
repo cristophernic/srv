@@ -255,14 +255,10 @@
             });
 
             <?php if (Session::get("user_account_type") == 6) : ?>
-            $("#lista\\.usuarios\\.turnos").on("click", function(){
-
-            });
-
             $("#boton\\.usuarios").on("click", function(){
                 cargarProfesionales();
                 $("#dialog\\.title").html("Profesionales registrados en base de datos");
-                $("#dialog\\.body").html('<table class="table table-hover"> <thead class="table-success"> <tr> <th scope="col">Nombre profesional</th> <th scope="col">Teléfono</th> <th scope="col">Correo Electrónico</th></tr></thead> <tbody id="tabla.profesional"></tbody> </table>');
+                $("#dialog\\.body").html('<div class="row"><div class="col-12"><div class="form-group"><label for="departamento.formulario.texto">Departamento</label><select class="form-control" id="departamento.lista"></select></div></div></div><table class="table table-hover"> <thead class="table-success"> <tr> <th scope="col">Nombre profesional</th> <th scope="col">Teléfono</th> <th scope="col">Correo Electrónico</th></tr></thead> <tbody id="tabla.profesional"></tbody> </table>');
                 $("#dialog\\.view").modal("show");
             });
             <?php endif; ?>
@@ -625,11 +621,17 @@
         $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
             $("#departamentos\\.tabla").empty();
             $("#departamentos\\.lista").empty();
+            $("#departamento\\.lista").empty();
+
+            let option = '<option value="null">Todos</option>';
+            $("#departamento\\.lista").append(option);
+
             if (Object.keys(data).length > 0) {
                 $.each(response, function(i, item) {
                     let option = '<option value="' + item.departamento_id + '">' + item.departamento_name + '</option>';
                     $("#departamentos\\.tabla").append(option);
                     $("#departamentos\\.lista").append(option);
+                    $("#departamento\\.lista").append(option);
                 });
             }
         });
