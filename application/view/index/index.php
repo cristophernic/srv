@@ -629,8 +629,9 @@
 
             if (Object.keys(data).length > 0) {
                 $.each(response, function(i, item) {
+                    let fila = '<tr><td data-id="'+item.departamento_id+'">' + item.departamento_name + '</td><td>' + item.departamento_jefe + '</td></tr>';
                     let option = '<option value="' + item.departamento_id + '">' + item.departamento_name + '</option>';
-                    $("#departamentos\\.tabla").append(option);
+                    $("#departamentos\\.tabla").append(fila);
                     $("#departamentos\\.lista").append(option);
                     $("#departamento\\.lista").append(option);
                 });
