@@ -21,7 +21,7 @@ class TurnosController extends Controller
         $resultado = "";
         switch ($accion) {
             case "calendario":
-                $resultado = TurnosModel::calendar(Request::post('mes'),Request::post('ano'));
+                $resultado = TurnosModel::calendar(Request::post('departamento'), Request::post('mes'),Request::post('ano'));
                 break;
             case "profesionales":
                 $resultado = UserModel::getPublicProfilesOfAllUsers();

@@ -36,6 +36,11 @@
             <div class="card">
                     <div class="card-body">
                         <div class="form-row">
+                            <div class="col"><p>Departamento</p></div>
+                            <div class="col">
+                                <select id="departamentos.header" class="form-control">
+                                </select>
+                            </div>
                             <div class="col"><p>MES</p></div>
                             <div class="col">
                                 <select id="fecha.mes" class="form-control">
@@ -134,8 +139,26 @@
             $("#fecha\\.ano").on("change", function(){
                 makeCalendario();
             });
+            $("#departamentos\\.header").on("change", function(){
+                makeCalendario();
+            });
 
-            makeCalendario();
+            let data = {
+                accion : "departamentos",
+            }
+
+            $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
+                $("#departamentos\\.header").empty();
+
+                if (Object.keys(data).length > 0) {
+                    $.each(response, function(i, item) {
+                        let option = '<option value="' + item.departamento_id + '">' + item.departamento_name + '</option>';
+                        $("#departamentos\\.header").append(option);
+                    });
+                    makeCalendario();
+                }
+            });
+
 
             <?php if (Session::get("user_account_type") == 6) : ?>
             $("#boton\\.turno").on("click", function(){
@@ -374,6 +397,7 @@
       function makeCalendario(){
             let data = {
                 accion : "calendario",
+                departamento: $("#departamentos\\.header").val(),
                 mes: $("#fecha\\.mes").val(),
                 ano: $("#fecha\\.ano").val()
             }
