@@ -171,9 +171,10 @@
 
             $("#boton\\.departamentos").on("click", function(){
                 $("#dialog\\.title").html("Departamentos");
-                $("#dialog\\.body").html('<div class="row"> <div class="col"> <div class="btn-group" role="group"><button type="button" class="btn btn-primary" id="departamentos.boton.nuevo">Nuevo</button><button type="button" class="btn btn-primary d-none" id="departamentos.boton.guardar">Guardar</button><button type="button" class="btn btn-secondary d-none" id="departamentos.boton.cancelar">Cancelar</button></div></div></div><div class="row"> <div class="col-12"> <div class="card d-none" id="departamento.formulario"> <div class="card-body"> <h5 class="card-title text-right" id="departamento.formulario.titulo">Nuevo departamento</h5> <div class="form-group"><label for="departamento.formulario.texto">Nombre del departamento</label><input class="form-control" type="text" id="departamento.formulario.texto"></div><div class="form-group"><label for="departamento.formulario.texto">Jefe de departamento</label><select class="form-control" id="departamento.formulario.jefe"></select></div></div></div></div><div class="col-12"> <table class="table"><thead><tr><th scope="col">#</th><th scope="col">Departamento</th><th scope="col">Jefe de unidad</th></tr></thead><tbody id="departamentos.tabla"></tbody></table> </div></div>');
+                $("#dialog\\.body").html('<div class="row"> <div class="col"> <div class="btn-group" role="group"><button type="button" class="btn btn-primary" id="departamentos.boton.nuevo">Nuevo</button><button type="button" class="btn btn-primary d-none" id="departamentos.boton.guardar">Guardar</button><button type="button" class="btn btn-secondary d-none" id="departamentos.boton.cancelar">Cancelar</button></div></div></div><div class="row"><div class="col-12"> <div class="card d-none" id="departamento.formulario"> <div class="card-body"> <h5 class="card-title text-right" id="departamento.formulario.titulo">Nuevo departamento</h5> <div class="form-group"><label for="departamento.formulario.texto">Nombre del departamento</label><input class="form-control" type="text" id="departamento.formulario.texto"></div><div class="form-group"><label for="departamento.formulario.texto">Jefe de departamento</label><select class="form-control" id="departamento.formulario.jefe"></select></div></div></div></div><div class="col-12"> <table class="table"><thead><tr><th scope="col">#</th><th scope="col">Departamento</th><th scope="col">Jefe de unidad</th></tr></thead><tbody id="departamentos.tabla"></tbody></table> </div></div>');
                 $("#dialog\\.view").modal("show");
                 cargarDepartamentos();
+                cargarProfesionales();
                 $("#dialog\\.delete").remove();
 
                 $("#departamentos\\.boton\\.nuevo").on("click", function(){
@@ -601,6 +602,7 @@
                 $("#tabla\\.profesionales").empty();
                 $("#turnos\\.profesionales").empty();
                 $("#turno\\.profesional\\.in").empty();
+                $("#departamento\\.formulario\\.jefe").empty();
                 if (Object.keys(data).length > 0) {
                     $.each(response, function(i, item) {
                         let fila = '<tr><td data-id="'+item.user_id+'">' + item.user_nombre + '</td><td>' + item.user_telefono + '<td>' + item.user_email + '</td></tr>';
@@ -608,6 +610,7 @@
                         $("#turnos\\.profesionales").append(option);
                         $("#tabla\\.profesional").append(fila);
                         $("#turno\\.profesional\\.in").append(fila);
+                        $("#departamento\\.formulario\\.jefe").append(fila);
                     });
                 }
             });
