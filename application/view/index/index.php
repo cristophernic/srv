@@ -9,7 +9,7 @@
                     <ul class="navbar-nav mr-auto">
                         <?php if (Session::get("user_account_type") == 6) : ?>
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Asignar turnos</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" id="boton.departamentos">Departamentos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" id="boton.departamentos">Unidad o departamentos</a></li>
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.usuarios">Lista de usuarios</a></li>
                         <?php endif; ?>
                     </ul>
@@ -629,7 +629,7 @@
 
             if (Object.keys(data).length > 0) {
                 $.each(response, function(i, item) {
-                    let fila = '<tr><td data-id="'+item.departamento_id+'">' + item.departamento_name + '</td><td>' + item.departamento_jefe + '</td></tr>';
+                    let fila = '<tr><td data-id="'+item.departamento_id+'">' + item.departamento_id + '</td><td>' + item.departamento_name + '</td><td>' + item.departamento_jefe + '</td></tr>';
                     let option = '<option value="' + item.departamento_id + '">' + item.departamento_name + '</option>';
                     $("#departamentos\\.tabla").append(fila);
                     $("#departamentos\\.lista").append(option);
