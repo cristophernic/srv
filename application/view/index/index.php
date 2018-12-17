@@ -610,7 +610,7 @@
                         $("#turnos\\.profesionales").append(option);
                         $("#tabla\\.profesional").append(fila);
                         $("#turno\\.profesional\\.in").append(fila);
-                        $("#departamento\\.formulario\\.jefe").append(fila);
+                        $("#departamento\\.formulario\\.jefe").append(option);
                     });
                 }
             });
