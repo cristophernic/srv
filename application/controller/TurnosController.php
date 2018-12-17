@@ -78,7 +78,7 @@ class TurnosController extends Controller
                 $resultado = DepartementosModel::getAllDepartamentos();
                 break;
             case "departamentosNuevo":
-                $resultado = DepartementosModel::createDepartamento($departamento_text);
+                $resultado = DepartementosModel::createDepartamento(Request::post('departamento_text'), Request::post('departamento_jefe'));
                 break;
         }
         return $this->View->renderJSON($resultado);

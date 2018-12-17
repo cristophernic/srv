@@ -190,7 +190,8 @@
                 $("#departamentos\\.boton\\.guardar").on("click", function(){
                     let departamento = {
                         accion: "departamentosNuevo",
-                        departamento_name: $("#departamento\\.formulario\\.texto").val()
+                        departamento_name: $("#departamento\\.formulario\\.texto").val(),
+                        departamento_jefe: $("#departamento\\.formulario\\.jefe option:selected").val()
                     }
 
                     $.post("https://turnoscat.crecimientofetal.cl/turnos/api", departamento).done(function(response){

@@ -14,7 +14,7 @@ class DepartamentoModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT user_id, departamento_id, departamento_text FROM departamentos WHERE user_id = :user_id";
+        $sql = "SELECT user_id, departamento_id, departamento_text, departamento_jefe FROM departamentos WHERE user_id = :user_id";
         $query = $database->prepare($sql);
         $query->execute(array(':user_id' => Session::get('user_id')));
 
@@ -31,7 +31,7 @@ class DepartamentoModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT user_id, departamento_id, departamento_text FROM departamentos WHERE user_id = :user_id AND departamento_id = :departamento_id LIMIT 1";
+        $sql = "SELECT user_id, departamento_id, departamento_text, departamento_jefe FROM departamentos WHERE user_id = :user_id AND departamento_id = :departamento_id LIMIT 1";
         $query = $database->prepare($sql);
         $query->execute(array(':user_id' => Session::get('user_id'), ':departamento_id' => $departamento_id));
 
@@ -44,7 +44,7 @@ class DepartamentoModel
      * @param string $departamento_text departamento text that will be created
      * @return bool feedback (was the departamento created properly ?)
      */
-    public static function createDepartamento($departamento_text)
+    public static function createDepartamento($departamento_text, $departamento_jefe)
     {
         if (!$departamento_text || strlen($departamento_text) == 0) {
             Session::add('feedback_negative', Text::get('FEEDBACK_NOTE_CREATION_FAILED'));
@@ -53,9 +53,9 @@ class DepartamentoModel
 
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "INSERT INTO departamentos (departamento_text, user_id) VALUES (:departamento_text, :user_id)";
+        $sql = "INSERT INTO departamentos (departamento_text, user_id,departamento_jefe) VALUES (:departamento_text, :user_id, :departamento_jefe)";
         $query = $database->prepare($sql);
-        $query->execute(array(':departamento_text' => $departamento_text, ':user_id' => Session::get('user_id')));
+        $query->execute(array(':departamento_text' => $departamento_text, ':departamento_jefe' => $departamento_jefe,':user_id' => Session::get('user_id')));
 
         if ($query->rowCount() == 1) {
             return true;
