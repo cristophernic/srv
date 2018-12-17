@@ -176,7 +176,7 @@
                 cargarDepartamentos();
                 $("#dialog\\.delete").remove();
 
-                $("#departamentos.boton.nuevo").on("click", function(){
+                $("#departamentos\\.boton\\.nuevo").on("click", function(){
                     $("#departamentos\\.boton\\.nuevo").addClass("d-none");
                     $("#departamentos\\.boton\\.guardar").removeClass("d-none");
                     $("#departamentos\\.boton\\.cancelar").removeClass("d-none");
@@ -186,7 +186,7 @@
                     $("#departamentos\\.tabla").addClass("d-none");
                 });
 
-                $("#departamentos.boton.guardar").on("click", function(){
+                $("#departamentos\\.boton\\.guardar").on("click", function(){
                     let departamento = {
                         accion: "departamentosNuevo",
                         departamento_name: $("#departamento\\.formulario\\.texto").val()
@@ -204,7 +204,7 @@
                     $("#departamentos\\.tabla").removeClass("d-none");
                 });
                 
-                $("#departamentos.boton.cancelar").on("click", function(){
+                $("#departamentos\\.boton\\.cancelar").on("click", function(){
                     $("#departamentos\\.boton\\.nuevo").removeClass("d-none");
                     $("#departamentos\\.boton\\.guardar").addClass("d-none");
                     $("#departamentos\\.boton\\.cancelar").addClass("d-none");
