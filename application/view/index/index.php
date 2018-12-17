@@ -257,7 +257,7 @@
             <?php if (Session::get("user_account_type") == 6) : ?>
             $("#boton\\.usuarios").on("click", function(){
                 cargarProfesionales();
-                cargarProfesionales();
+                cargarDepartamentos();
                 $("#dialog\\.title").html("Profesionales registrados en base de datos");
                 $("#dialog\\.body").html('<div class="row"><div class="col-12"><div class="form-group"><label for="departamento.formulario.texto">Departamento</label><select class="form-control" id="departamento.lista"></select></div></div></div><table class="table table-hover"> <thead class="table-success"> <tr> <th scope="col">Nombre profesional</th> <th scope="col">Teléfono</th> <th scope="col">Correo Electrónico</th></tr></thead> <tbody id="tabla.profesional"></tbody> </table>');
                 $("#dialog\\.view").modal("show");
