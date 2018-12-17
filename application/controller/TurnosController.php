@@ -74,6 +74,12 @@ class TurnosController extends Controller
             case "telefono":
                 $resultado = UserModel::saveTelefono(Request::post('user_telefono'));
                 break;
+            case "departamentos":
+                $resultado = DepartementosModel::getAllDepartamentos();
+                break;
+            case "departamentosNuevo":
+                $resultado = DepartementosModel::createDepartamento($departamento_text);
+                break;
         }
         return $this->View->renderJSON($resultado);
 

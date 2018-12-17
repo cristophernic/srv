@@ -9,6 +9,7 @@
                     <ul class="navbar-nav mr-auto">
                         <?php if (Session::get("user_account_type") == 6) : ?>
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Asignar turnos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" id="boton.departamentos">Departamentos</a></li>
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.usuarios">Lista de usuarios</a></li>
                         <?php endif; ?>
                     </ul>
@@ -165,6 +166,51 @@
                             makeCalendario();
                         }
                     });
+                });
+            });
+
+            $("#boton\\.departamentos").on("click", function(){
+                $("#dialog\\.title").html("Departamentos");
+                $("#dialog\\.body").html('<div class="row"> <div class="col"> <div class="btn-group" role="group"><button type="button" class="btn btn-primary" id="departamentos.boton.nuevo">Nuevo</button><button type="button" class="btn btn-primary d-none" id="departamentos.boton.guardar">Guardar</button><button type="button" class="btn btn-secondary d-none" id="departamentos.boton.cancelar">Cancelar</button></div></div></div><div class="row"> <div class="col-12"> <div class="card d-none" id="departamento.formulario"> <div class="card-body"> <h5 class="card-title" id="departamento.formulario.titulo">Nuevo departamento</h5> <div class="form-group"><label for="departamento.formulario.texto">Fecha de turno</label><input class="form-control" type="date" id="departamento.formulario.texto"></div></div></div></div><div class="col-12"> <table class="table"><thead><tr><th scope="col">#</th><th scope="col">Departamento</th><th scope="col">Jefe de unidad</th></tr></thead><tbody id="departamentos.tabla"></tbody></table> </div></div>');
+                $("#dialog\\.view").modal("show");
+                cargarDepartamentos();
+                $("#dialog\\.delete").remove();
+
+                $("#departamentos.boton.nuevo").on("click", function(){
+                    $("#departamentos\\.boton\\.nuevo").addClass("d-none");
+                    $("#departamentos\\.boton\\.guardar").removeClass("d-none");
+                    $("#departamentos\\.boton\\.cancelar").removeClass("d-none");
+                    $("#departamento\\.formulario").removeClass("d-none");
+                    $("#departamento\\.formulario\\.titulo").html("Nuevo Departamento");
+                    $("#departamento\\.formulario\\.texto").val("");
+                    $("#departamentos\\.tabla").addClass("d-none");
+                });
+
+                $("#departamentos.boton.guardar").on("click", function(){
+                    let departamento = {
+                        accion: "departamentosNuevo",
+                        departamento_name: $("#departamento\\.formulario\\.texto").val()
+                    }
+
+                    $.post("https://turnoscat.crecimientofetal.cl/turnos/api", departamento).done(function(response){
+                        cargarDepartamentos();
+                    });
+
+                    $("#departamentos\\.boton\\.nuevo").removeClass("d-none");
+                    $("#departamentos\\.boton\\.guardar").addClass("d-none");
+                    $("#departamentos\\.boton\\.cancelar").addClass("d-none");
+                    $("#departamento\\.formulario").addClass("d-none");
+                    $("#departamento\\.formulario\\.texto").val("");
+                    $("#departamentos\\.tabla").removeClass("d-none");
+                });
+                
+                $("#departamentos.boton.cancelar").on("click", function(){
+                    $("#departamentos\\.boton\\.nuevo").removeClass("d-none");
+                    $("#departamentos\\.boton\\.guardar").addClass("d-none");
+                    $("#departamentos\\.boton\\.cancelar").addClass("d-none");
+                    $("#departamento\\.formulario").addClass("d-none");
+                    $("#departamento\\.formulario\\.texto").val("");
+                    $("#departamentos\\.tabla").removeClass("d-none");
                 });
             });
             <?php endif; ?>
@@ -546,7 +592,7 @@
             });
       }
 
-      function cargarProfesionales(){
+    function cargarProfesionales(){
         let data = {
                 accion : "profesionales",
             }
@@ -565,6 +611,24 @@
                     });
                 }
             });
-      }
-        </script>
-    </body>
+    }
+
+    function cargarDepartamentos(){
+        let data = {
+            accion : "departamentos",
+        }
+
+        $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
+            $("#departamentos\\.tabla").empty();
+            $("#departamentos\\.lista").empty();
+            if (Object.keys(data).length > 0) {
+                $.each(response, function(i, item) {
+                    let option = '<option value="' + item.departamento_id + '">' + item.departamento_name + '</option>';
+                    $("#departamentos\\.tabla").append(option);
+                    $("#departamentos\\.lista").append(option);
+                });
+            }
+        });
+    }
+    </script>
+</body>
