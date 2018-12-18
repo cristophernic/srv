@@ -43,6 +43,34 @@ class UserModel
         return $all_users_profiles;
     }
 
+    public static function getPublicProfilesOfAllUsersAndDepartaments()
+    {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $sql = "SELECT users.user_id, user_departamento.departamento_id, departamentos.departamento_name, users.user_nombre, users.user_telefono, users.user_email FROM users INNER JOIN user_departamento ON user_departamento.user_id = users.user_id INNER JOIN departamentos ON departamentos.departamento_id = user_departamento.departamento_id WHERE NOT users.user_account_type = 6 ORDER BY departamentos.departamento_name;";
+        $query = $database->prepare($sql);
+        $query->execute();
+
+        $all_users_profiles = array();
+
+        foreach ($query->fetchAll() as $user) {
+
+            // all elements of array passed to Filter::XSSFilter for XSS sanitation, have a look into
+            // application/core/Filter.php for more info on how to use. Removes (possibly bad) JavaScript etc from
+            // the user's values
+            array_walk_recursive($user, 'Filter::XSSFilter');
+
+            $all_users_profiles[$user->user_id] = new stdClass();
+            $all_users_profiles[$user->user_id]->user_id = $user->user_id;
+            $all_users_profiles[$user->user_id]->departamento_id = $user->departamento_id;
+            $all_users_profiles[$user->user_id]->departamento_name = $user->departamento_name;
+            $all_users_profiles[$user->user_id]->user_nombre = $user->user_nombre;
+            $all_users_profiles[$user->user_id]->user_telefono = $user->user_telefono;
+            $all_users_profiles[$user->user_id]->user_email = $user->user_email;
+        }
+
+        return $all_users_profiles;
+    }
     /**
      * Gets a user's profile data, according to the given $user_id
      * @param int $user_id The user's id

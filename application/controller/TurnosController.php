@@ -26,6 +26,9 @@ class TurnosController extends Controller
             case "profesionales":
                 $resultado = UserModel::getPublicProfilesOfAllUsers();
                 break;
+            case "profesionalesDepartamento":
+                $resultado = UserModel::getPublicProfilesOfAllUsersAndDepartaments();
+                break;
             case "turnos":
                 $resultado = TurnosModel::getAllTurnos(Request::post('dia'),Request::post('mes'), Request::post('ano'));
                 break;
