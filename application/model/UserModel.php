@@ -78,9 +78,9 @@ class UserModel
 
         $sql = "SELECT users.user_id, user_departamento.departamento_id, departamentos.departamento_name, users.user_nombre, users.user_telefono, users.user_email FROM users INNER JOIN user_departamento ON user_departamento.user_id = users.user_id INNER JOIN departamentos ON departamentos.departamento_id = user_departamento.departamento_id WHERE NOT users.user_account_type = 6 AND user_departamento.departamento_id = :departamento_id ORDER BY departamentos.departamento_name;";
         $query = $database->prepare($sql);
-        $query->execute();
+        $query->execute(array(':departamento_id' => $departamento_id));
 
-        $all_users_profiles = array(array(':departamento_id' => $departamento_id));
+        $all_users_profiles = array();
 
         foreach ($query->fetchAll() as $user) {
 
