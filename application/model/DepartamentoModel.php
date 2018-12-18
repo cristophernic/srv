@@ -14,9 +14,9 @@ class DepartamentoModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT user_id, departamento_id, departamento_name, departamento_jefe FROM departamentos WHERE user_id = :user_id";
+        $sql = "SELECT departamento_id, departamento_name, departamento_jefe FROM departamentos";
         $query = $database->prepare($sql);
-        $query->execute(array(':user_id' => Session::get('user_id')));
+        $query->execute();
 
         // fetchAll() is the PDO method that gets all result rows
         return $query->fetchAll();
@@ -31,9 +31,9 @@ class DepartamentoModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT user_id, departamento_id, departamento_name, departamento_jefe FROM departamentos WHERE user_id = :user_id AND departamento_id = :departamento_id LIMIT 1";
+        $sql = "SELECT departamento_id, departamento_name, departamento_jefe FROM departamentos WHERE departamento_id = :departamento_id LIMIT 1";
         $query = $database->prepare($sql);
-        $query->execute(array(':user_id' => Session::get('user_id'), ':departamento_id' => $departamento_id));
+        $query->execute(array(':departamento_id' => $departamento_id));
 
         // fetch() is the PDO method that gets a single result
         return $query->fetch();
@@ -53,9 +53,9 @@ class DepartamentoModel
 
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "INSERT INTO departamentos (departamento_name, user_id,departamento_jefe) VALUES (:departamento_name, :user_id, :departamento_jefe)";
+        $sql = "INSERT INTO departamentos (departamento_name, departamento_jefe) VALUES (:departamento_name, :departamento_jefe)";
         $query = $database->prepare($sql);
-        $query->execute(array(':departamento_name' => $departamento_text, ':departamento_jefe' => $departamento_jefe,':user_id' => Session::get('user_id')));
+        $query->execute(array(':departamento_name' => $departamento_text, ':departamento_jefe' => $departamento_jefe,));
 
         if ($query->rowCount() == 1) {
             return true;
