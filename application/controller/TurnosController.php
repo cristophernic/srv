@@ -83,6 +83,9 @@ class TurnosController extends Controller
             case "departamentosNuevo":
                 $resultado = DepartamentoModel::createDepartamento(Request::post('departamento_name'), Request::post('departamento_jefe'));
                 break;
+            case "profesionalesFiltrados":
+                $resultado = UserModel::getPublicProfilesOfAllUsersAndDepartamentsFilter(Request::post('departamento_id'));
+                break;
         }
         return $this->View->renderJSON($resultado);
 

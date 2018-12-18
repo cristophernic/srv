@@ -251,6 +251,30 @@
                         });
                     }
                 });
+
+                $("#usuario\\.departamento\\.filtrar").on("click", function(){
+                    let data = {
+                        accion : "profesionalesFiltrados",
+                        departamento_id: $("#usuario\\.departamento\\.filtrar option:selected").val();
+                    }
+
+                    $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
+                        $("#usuarios\\.tabla").empty();
+                        if (Object.keys(data).length > 0) {
+                            $.each(response, function(i, item) {
+                                let fila = '<tr><td data-id="'+item.user_id+'">' + item.user_id + '</td><td>' + item.departamento_name + '</td><td>' + item.user_nombre + '</td><td>' + item.user_telefono + '</td><td>' + item.user_email + '</td><td><div class="btn-group" role="group"><button type="button" class="btn btn-outline-secondary editar-udep">Editar</button><button type="button" class="btn btn-outline-secondary remover-udep">Remover</button></div></td></tr>';
+                                $("#usuarios\\.tabla").append(fila);
+                            });
+
+                            $(".editar-udep").on("click", function(){
+
+                            });
+                            $(".remover-udep").on("click", function(){
+
+                            });
+                        }
+                    });
+                });
             })
 
 
