@@ -250,7 +250,6 @@
                     }
                 });
 
-
                 data = {
                     accion : "profesionalesDepartamento",
                 }
@@ -352,7 +351,7 @@
                                     let departamento_id = $(this).data("id");
 
                                     $("#dialog\\.title").html("Eliminar");
-                                    $("#dialog\\.body").html('<p>¿Está seguro de eliminar el departamento y todos sus integrantes?</p><div role="group" aria-label="Botones" class="btn-group my-3" data-id="'+departamento_id+'"><button type="button" class="btn btn-outline-primary" id="mensaje.si" data-id="'+ departamento_id +'">Si</button><button type="button" class="btn btn-primary" id="mensaje.no">No</button>');
+                                    $("#dialog\\.body").html('<p>¿Está seguro de eliminar el departamento y todos sus integrantes?</p><div role="group" aria-label="Botones" class="btn-group my-3" data-id="'+departamento_id+'"><button type="button" class="btn btn-outline-primary" id="mensaje.si" data-id="'+ departamento_id +'">Si</button><button type="button" class="btn btn-outline-primary" id="mensaje.no">No</button>');
                                     $("#dialog\\.view").modal("show");
                                     $("#dialog\\.delete").remove();
                                     
