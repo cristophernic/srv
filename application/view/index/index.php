@@ -275,7 +275,7 @@
                         }
                     });
                 });
-            })
+            });
 
 
             $("#boton\\.departamentos").on("click", function(){
