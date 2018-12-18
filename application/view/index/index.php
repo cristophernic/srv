@@ -316,15 +316,15 @@
                     $("#departamento\\.formulario\\.nuevo").addClass("d-none");
                     $("#departamento\\.formulario\\.guardar").removeClass("d-none");
                     $("#departamento\\.formulario\\.cancelar").removeClass("d-none");
-                    $("#departamento.formulario").removeClass("d-none");
-                    $("#departamento.formulario.texto").val("");
+                    $("#departamento\\.formulario").removeClass("d-none");
+                    $("#departamento\\.formulario\\.texto").val("");
                 });
 
                 $("#departamento\\.formulario\\.guardar").on("click", function(){
                     let data = {
                         accion : "departamentosNuevo",
-                        departamento_name: $("#departamento.formulario.texto").val(),
-                        departamento_jefe: $("#departamento.formulario.jefe option:selected").val(),
+                        departamento_name: $("#departamento\\.formulario\\.texto").val(),
+                        departamento_jefe: $("#departamento\\.formulario\\.jefe option:selected").val(),
                     }
                     
                     $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
@@ -355,17 +355,16 @@
                     $("#departamento\\.formulario\\.nuevo").removeClass("d-none");
                     $("#departamento\\.formulario\\.guardar").addClass("d-none");
                     $("#departamento\\.formulario\\.cancelar").addClass("d-none");
-                    $("#departamento.formulario").addClass("d-none");
-                    $("#departamento.formulario.texto").val("");
-
+                    $("#departamento\\.formulario").addClass("d-none");
+                    $("#departamento\\.formulario\\.texto").val("");
                 });
 
                 $("#departamento\\.formulario\\.cancelar").on("click", function(){
                     $("#departamento\\.formulario\\.nuevo").removeClass("d-none");
                     $("#departamento\\.formulario\\.guardar").addClass("d-none");
                     $("#departamento\\.formulario\\.cancelar").addClass("d-none");
-                    $("#departamento.formulario").addClass("d-none");
-                    $("#departamento.formulario.texto").val("");
+                    $("#departamento\\.formulario").addClass("d-none");
+                    $("#departamento\\.formulario\\.texto").val("");
                 });
             });
             <?php endif; ?>
