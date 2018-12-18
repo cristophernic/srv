@@ -14,7 +14,7 @@ class DepartamentoModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT departamento_id, departamento_name, departamento_jefe FROM departamentos";
+        $sql = "SELECT T1.departamento_id, T1.departamento_name, T1.departamento_jefe, T2.user_nombre, COUNT(T3.departamento_id) AS user_cantidad FROM departamentos AS T1 INNER JOIN users AS T2 ON (T1.departamento_jefe = T2.user_id) LEFT JOIN user_departamento AS T3 ON (T1.departamento_id = T3.departamento_id) group by T1.departamento_id";
         $query = $database->prepare($sql);
         $query->execute();
 
