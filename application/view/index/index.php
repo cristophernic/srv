@@ -209,7 +209,7 @@
                     $("#usuarios\\.tabla").empty();
                     if (Object.keys(data).length > 0) {
                         $.each(response, function(i, item) {
-                            let fila = '<tr><td data-id="'+item.user_id+'">' + item.user_id + '</td><td>' + item.departamento_name + '<td></td>' + item.user_nombre + '<td></td>' + item.user_telefono + '<td></td>' + item.user_telefono +'</td></tr>';
+                            let fila = '<tr><td data-id="'+item.user_id+'">' + item.user_id + '</td><td>' + item.departamento_name + '</td><td>' + item.user_nombre + '</td><td>' + item.user_telefono + '</td><td>' + item.user_telefono +'</td></tr>';
                             let option = '<option value="' + item.user_id + '">' + item.user_nombre + '</option>';
                             $("#departamento\\.formulario\\.jefe").append(option);
                             $("#usuario\\.formulario\\.usuario").append(option);
