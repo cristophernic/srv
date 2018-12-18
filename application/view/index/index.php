@@ -255,7 +255,7 @@
                 $("#usuario\\.departamento\\.filtrar").on("click", function(){
                     let data = {
                         accion : "profesionalesFiltrados",
-                        departamento_id: $("#usuario\\.departamento\\.filtrar option:selected").val();
+                        departamento_id: $("#usuario\\.departamento\\.filtrar option:selected").val()
                     }
 
                     $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
