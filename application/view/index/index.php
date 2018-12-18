@@ -253,9 +253,10 @@
                 });
 
                 $("#usuario\\.departamento\\.filtrar").on("click", function(){
+                    let filtrar = $("#usuario\\.departamento\\.filtrar option:selected").val();
                     let data = {
                         accion : "profesionalesFiltrados",
-                        departamento_id: $("#usuario\\.departamento\\.filtrar option:selected").val()
+                        departamento_id: filtrar
                     }
 
                     $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
