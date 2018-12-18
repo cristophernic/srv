@@ -224,7 +224,7 @@
                 });
 
 
-                let data = {
+                data = {
                     accion : "profesionalesDepartamento",
                 }
 
