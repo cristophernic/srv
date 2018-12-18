@@ -342,11 +342,35 @@
 
                             if (Object.keys(data).length > 0) {
                                 $.each(response, function(i, item) {
-                                    let fila = '<tr><td data-id="'+item.departamento_id+'">' + item.departamento_id + '</td><td>' + item.departamento_name + '</td><td>' + item.user_nombre + '</td><td>'+ item.user_cantidad+'</td></tr>';
+                                    let fila = '<tr><td data-id="'+item.departamento_id+'">' + item.departamento_id + '</td><td>' + item.departamento_name + '</td><td>' + item.user_nombre + '</td><td>'+ item.user_cantidad+'</td><td><div class="btn-group" role="group"><button type="button" class="btn btn-outline-secondary editar-departamento" data-id="' + item.departamento_id + '">Editar</button><button type="button" class="btn btn-outline-secondary remover-departamento" data-id="'+ item.departamento_id +'">Eliminar</button></div></td></tr>';
                                     let option = '<option value="' + item.departamento_id + '">' + item.departamento_name + '</option>';
                                     $("#departamentos\\.tabla").append(fila);
                                     $("#usuario\\.formulario\\.departamento").append(option);
                                     $("#usuario\\.departamento\\.filtrar").append(option);
+                                });
+
+                                $(".remover-departamento").on("click", function(){
+                                    let departamento_id = $(this).data("id");
+
+                                    $("#dialog\\.title").html("Eliminar");
+                                    $("#dialog\\.body").html('<p>¿Está seguro de eliminar el departamento y todos sus integrantes?</p><div role="group" aria-label="Botones" class="btn-group my-3" data-id="'+departamento_id+'"><button type="button" class="btn btn-outline-primary" id="mensaje.si" data-id="'+ departamento_id +'">Si</button><button type="button" class="btn btn-primary" id="mensaje.no">No</button>');
+                                    $("#dialog\\.view").modal("show");
+                                    $("#dialog\\.delete").remove();
+                                    
+                                    $("#mensaje\\.no").on("click", function(){
+                                        $("#boton\\.configuracion").trigger("click");
+                                    });
+
+                                    $("#mensaje\\.si").on("click", function(){
+                                        let data = {
+                                            accion : "departamentosEliminar",
+                                            departamento_id:$(this).data("id")
+                                        }
+
+                                        $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
+                                            $("#boton\\.configuracion").trigger("click");
+                                        });
+                                    });
                                 });
                             }
                         });
