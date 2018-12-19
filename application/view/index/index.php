@@ -767,7 +767,8 @@
                         let dia = ano + '-' + mes + '-' + ("0" + calendario_id).slice(-2);
                         let data = {
                             accion : "comentario",
-                            fecha: dia
+                            fecha: dia,
+                            departamento_id: $("#departamentos\\.header option:selected").val()
                         }
 
                         let d = new Date(ano + '/' + mes + '/' + ("0" + calendario_id).slice(-2));
@@ -795,7 +796,8 @@
                                             let datos = {
                                                 accion: "comentarioGuardar",
                                                 fecha: id,
-                                                text: $("#comentarios\\.text").val().replace(/\r\n|\r|\n/g,"<br />"), 
+                                                text: $("#comentarios\\.text").val().replace(/\r\n|\r|\n/g,"<br />"),
+                                                departamento_id: $("#departamentos\\.header option:selected").val() 
                                             }
 
                                             $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
@@ -815,7 +817,8 @@
                                             let datos = {
                                                 accion: "comentarioUpdate",
                                                 id: id,
-                                                text: $("#comentarios\\.text").val().replace(/\r\n|\r|\n/g,"<br />"), 
+                                                text: $("#comentarios\\.text").val().replace(/\r\n|\r|\n/g,"<br />"),
+                                                departamento_id: $("#departamentos\\.header option:selected").val()
                                             }
 
                                             $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){

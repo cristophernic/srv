@@ -45,13 +45,13 @@ class TurnosController extends Controller
                 $resultado = TurnosModel::changeTurnos(Request::post('id'), Request::post('profesional'), Request::post('profesional_nombre'));
                 break;
             case "comentario":
-                $resultado = TurnosModel::getComentario(Request::post('fecha'));
+                $resultado = TurnosModel::getComentario(Request::post('fecha'), Request::post('departamento_id'));
                 break;
             case "comentarioGuardar":
-                $resultado = TurnosModel::createComentario(Request::post('fecha'), Request::post('text'));
+                $resultado = TurnosModel::createComentario(Request::post('fecha'), Request::post('text'), Request::post('departamento_id'));
                 break;
             case "comentarioUpdate":
-                $resultado = TurnosModel::updateComentario(Request::post('id'), Request::post('text'));
+                $resultado = TurnosModel::updateComentario(Request::post('id'), Request::post('text'), Request::post('departamento_id'));
                 break;
             case "sumaturnos":
                 $resultado = TurnosModel::countTurno(Request::post('mes'), Request::post('ano'), Request::post('profesional'));

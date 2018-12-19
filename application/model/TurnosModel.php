@@ -39,13 +39,13 @@ class TurnosModel
         return $query->fetchAll();
     }
 
-    public static function getProfesionalesTurnos($fecha)
+    public static function getProfesionalesTurnos($fecha, $departamento_id)
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT turno_id, turno_profesional, turno_fechain, turno_turno FROM turnos WHERE turno_fechain = :turno_fechain";
+        $sql = "SELECT turno_id, turno_profesional, turno_fechain, turno_turno, turno_departamento FROM turnos WHERE turno_fechain = :turno_fechain AND turno_departamento = :turno_departamento";
         $query = $database->prepare($sql);
-        $query->execute(array(':turno_fechain' => $fecha));
+        $query->execute(array(':turno_fechain' => $fecha, ':turno_departamento' => $departamento_id));
 
         return $query->fetchAll();
     }
@@ -175,7 +175,7 @@ class TurnosModel
         return false;
     }
 
-    public static function getAllComentarios($mes, $ano)
+    public static function getAllComentarios($mes, $ano, $departamento_id)
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
@@ -183,19 +183,19 @@ class TurnosModel
         $fecha = new DateTime($ano . '-' . $mes .'-01');
         $fecha2 = $ano . "-" . $mes . "-" . $fecha->format('t');
 
-        $sql = "SELECT comentario_id, comentario_fecha, comentario_text FROM comentarios WHERE comentario_fecha BETWEEN :comentario_fechain AND :comentario_fechaout";
+        $sql = "SELECT comentario_id, comentario_fecha, comentario_text FROM comentarios WHERE departamento_id = :departamento_id AND comentario_fecha BETWEEN :comentario_fechain AND :comentario_fechaout";
         $query = $database->prepare($sql);
-        $query->execute(array(':comentario_fechain' => $fecha1, ':comentario_fechaout' => $fecha2));
+        $query->execute(array(':departamento_id' => $departamento_id,':comentario_fechain' => $fecha1, ':comentario_fechaout' => $fecha2));
 
         return $query->fetchAll();
     }
 
-    public static function getComentario($comentario_fecha)
+    public static function getComentario($comentario_fecha, $departamento_id)
     {
         $return = new stdClass();
         $return->autorizado = false;
 
-        $turnos = self::getProfesionalesTurnos($comentario_fecha);
+        $turnos = self::getProfesionalesTurnos($comentario_fecha, $departamento_id);
 
         foreach ($turnos as $turno) {
             if ($turno->turno_profesional == Session::get('user_id')){
@@ -206,9 +206,9 @@ class TurnosModel
         if ($return->autorizado){
             $database = DatabaseFactory::getFactory()->getConnection();
 
-            $sql = "SELECT comentario_id, comentario_fecha, comentario_text FROM comentarios WHERE comentario_fecha = :comentario_fecha LIMIT 1";
+            $sql = "SELECT comentario_id, comentario_fecha, comentario_text, departamento_id FROM comentarios WHERE comentario_fecha = :comentario_fecha AND departamento_id = :departamento_id LIMIT 1";
             $query = $database->prepare($sql);
-            $query->execute(array(':comentario_fecha' => $comentario_fecha));
+            $query->execute(array(':comentario_fecha' => $comentario_fecha, ':departamento_id' => $departamento_id));
 
             if ($query->rowCount() == 1) {
                 $return->comentario = $query->fetch();
@@ -221,7 +221,7 @@ class TurnosModel
         return $return;
     }
 
-    public static function createComentario($fecha,$text)
+    public static function createComentario($fecha,$text,$departamento_id)
     {
         if (!$fecha) {
             Session::add('feedback_negative', Text::get('FEEDBACK_NOTE_CREATION_FAILED'));
@@ -230,9 +230,9 @@ class TurnosModel
 
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "INSERT INTO comentarios (comentario_fecha, comentario_text) VALUES (:comentario_fecha, :comentario_text)";
+        $sql = "INSERT INTO comentarios (comentario_fecha, comentario_text, departamento_id) VALUES (:comentario_fecha, :comentario_text, :departamento_id)";
         $query = $database->prepare($sql);
-        $query->execute(array(':comentario_fecha' => $fecha, ':comentario_text' => $text));
+        $query->execute(array(':comentario_fecha' => $fecha, ':comentario_text' => $text, ':departamento_id' => $departamento_id));
 
         if ($query->rowCount() == 1) {
             return true;
@@ -242,7 +242,7 @@ class TurnosModel
         return false;
     }
 
-    public static function updateComentario($comentario_id, $text)
+    public static function updateComentario($comentario_id, $text, $departamento_id)
     {
         if (!$comentario_id) {
             return false;
@@ -250,9 +250,9 @@ class TurnosModel
 
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "UPDATE comentarios SET comentario_text = :comentario_text WHERE comentario_id = :comentario_id LIMIT 1";
+        $sql = "UPDATE comentarios SET comentario_text = :comentario_text WHERE comentario_id = :comentario_id AND departamento_id = :departamento_id LIMIT 1";
         $query = $database->prepare($sql);
-        $query->execute(array(':comentario_text' => $text, ':comentario_id' => $comentario_id));
+        $query->execute(array(':comentario_text' => $text, ':comentario_id' => $comentario_id, ':departamento_id' => $departamento_id));
 
         if ($query->rowCount() == 1) {
             return true;
