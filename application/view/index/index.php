@@ -9,6 +9,7 @@
                     <ul class="navbar-nav mr-auto">
                         <?php if (Session::get("user_account_type") == 6) : ?>
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Asignar turnos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" id="boton.configuracion">Configuración</a></li>
                         <?php endif; ?>
                     </ul>
                     <ul class="navbar-nav">
@@ -17,9 +18,6 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#" id="boton.pormes">Ver turnos por mes</a>
                                 <a class="dropdown-item" href="#" id="boton.imprimir">Ver resumen del mes</a>
-                                <?php if (Session::get("user_account_type") == 6) : ?>
-                                <a class="dropdown-item" id="boton.configuracion">Configuración</a>
-                                <?php endif; ?>
                                 <a class="dropdown-item" href="login/logout">Salir del programa</a>
                                 <div class="dropdown-divider"></div>
                                     <a class="dropdown-item dropdown-toggle" href="#" id="modificarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Modificar</a>
