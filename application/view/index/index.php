@@ -400,7 +400,7 @@
                     $("#usuarios\\.formulario\\.nuevo").removeClass("d-none");
                     $("#usuarios\\.formulario\\.guardar").addClass("d-none");
                     $("#usuarios\\.formulario\\.cancelar").addClass("d-none");
-                    $("#usuarios\\.formulario").removeClass("d-none");
+                    $("#usuarios\\.formulario").addClass("d-none");
 
                     let data = {
                         accion : "userDepartamentoNew",
