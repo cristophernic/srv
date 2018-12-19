@@ -66,6 +66,28 @@ class DepartamentoModel
         return false;
     }
 
+    public static function createUserDepartamento($departamento_id, $user_id)
+    {
+        if (!$departamento_text || strlen($departamento_text) == 0) {
+            Session::add('feedback_negative', Text::get('FEEDBACK_NOTE_CREATION_FAILED'));
+            return false;
+        }
+
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $sql = "INSERT INTO departamentos (departamento_name, departamento_jefe) VALUES (:departamento_name, :departamento_jefe)";
+        $query = $database->prepare($sql);
+        $query->execute(array(':departamento_name' => $departamento_text, ':departamento_jefe' => $departamento_jefe,));
+
+        if ($query->rowCount() == 1) {
+            return true;
+        }
+
+        // default return
+        Session::add('feedback_negative', Text::get('FEEDBACK_NOTE_CREATION_FAILED'));
+        return false;
+    }
+
     /**
      * Update an existing departamento
      * @param int $departamento_id id of the specific departamento
