@@ -101,6 +101,20 @@
                     event.preventDefault();
                     return;
                 }
+                else{
+                    $( "input[name='user_name']" ).removeClass("is-invalid").parent().children('<div>').remove();
+                }
+
+                if ($( "input[name='user_rut']" ).val() == ""){
+                    $("#registro\\.mensaje").text( "Ingrese un rut sin puntos y sin guión." ).show().fadeOut( 1000 );
+                    $( "input[name='user_rut']" ).addClass("is-invalid").parent().append('<div class="invalid-feedback">Ingrese un rut sin puntos y sin guión.</div>');
+                    event.preventDefault();
+                    return;
+                }
+                else{
+                    $( "input[name='user_rut']" ).removeClass("is-invalid").parent().children('<div>').remove();
+                }
+
                 if ($( "input[name='user_password_new']" ).val() == ""){
                     $("#registro\\.mensaje").text( "Ingrese una contraseña" ).show().fadeOut( 1000 );
                     event.preventDefault();
