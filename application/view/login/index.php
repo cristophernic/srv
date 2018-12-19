@@ -95,6 +95,31 @@
             });
 
             $("#form\\.registrarse").submit(function( event ) {
+                if ($( "input[name='user_name']" ).val() == ""){
+                    $("#registro\\.mensaje").text( "Ingrese un nombre de usuario" ).show().fadeOut( 1000 );
+                    $( "input[name='user_name']" ).addClass("is-invalid");
+                    event.preventDefault();
+                }
+                if ($( "input[name='user_password_new']" ).val() == ""){
+                    $("#registro\\.mensaje").text( "Ingrese una contraseña" ).show().fadeOut( 1000 );
+                    event.preventDefault();
+                }
+                if ($( "input[name='user_password_new']" ).val() == ""){
+                    $("#registro\\.mensaje").text( "Ingrese una contraseña" ).show().fadeOut( 1000 );
+                    event.preventDefault();
+                }
+                if ($( "input[name='user_password_new']" ).val() == ""){
+                    $("#registro\\.mensaje").text( "Ingrese una contraseña" ).show().fadeOut( 1000 );
+                    event.preventDefault();
+                }
+                if ($( "input[name='user_password_new']" ).val() == ""){
+                    $("#registro\\.mensaje").text( "Ingrese una contraseña" ).show().fadeOut( 1000 );
+                    event.preventDefault();
+                }
+                if ($( "input[name='user_password_new']" ).val() == ""){
+                    $("#registro\\.mensaje").text( "Ingrese una contraseña" ).show().fadeOut( 1000 );
+                    event.preventDefault();
+                }
                 if ( $( "input[name='user_password_new']" ).val() == $( "input[name='user_password_repeat']" ).val() ) {
                     $("#registro\\.mensaje").text( "validando." ).show()
                     return;
