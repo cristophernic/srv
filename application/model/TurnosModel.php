@@ -14,7 +14,7 @@ class TurnosModel
             $return->diaDeLaSemana = $diaDeLaSemana;
             $return->diasEnElMes = $diasEnElMes;
             $return->turnos = self::getMonthTurnos($departamento, $mes, $ano);
-            $return->comentarios = self::getAllComentarios($mes, $ano);
+            $return->comentarios = self::getAllComentarios($mes, $ano, $departamento);
 
             return $return;
 
