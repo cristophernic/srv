@@ -50,7 +50,7 @@ class TurnosModel
         return $query->fetchAll();
     }
 
-    public static function countTurno($mes, $ano, $profesional)
+    public static function countTurno($mes, $ano, $profesional, $departamento_id)
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
@@ -58,15 +58,15 @@ class TurnosModel
         $fecha = new DateTime($ano . '-' . $mes .'-01');
         $fecha2 = $ano . "-" . $mes . "-" . $fecha->format('t');
 
-        $sql = "SELECT turno_turno FROM turnos WHERE turno_turno = 0 AND turno_profesional = :profesional AND turno_fechain BETWEEN :turno_fechain AND :turno_fechaout";
+        $sql = "SELECT turno_turno FROM turnos WHERE turno_departamento = :departamento_id AND turno_turno = 0 AND turno_profesional = :profesional AND turno_fechain BETWEEN :turno_fechain AND :turno_fechaout";
         $query = $database->prepare($sql);
-        $query->execute(array(':profesional' => $profesional, ':turno_fechain' => $fecha1, ':turno_fechaout' => $fecha2));
+        $query->execute(array(':departamento_id'  => $departamento_id, ':profesional' => $profesional, ':turno_fechain' => $fecha1, ':turno_fechaout' => $fecha2));
 
         $dia =  $query->rowCount();
 
-        $sql = "SELECT turno_turno FROM turnos WHERE turno_turno = 1 AND turno_profesional = :profesional AND turno_fechain BETWEEN :turno_fechain AND :turno_fechaout";
+        $sql = "SELECT turno_turno FROM turnos WHERE turno_departamento = :departamento_id AND turno_turno = 1 AND turno_profesional = :profesional AND turno_fechain BETWEEN :turno_fechain AND :turno_fechaout";
         $query = $database->prepare($sql);
-        $query->execute(array(':profesional' => $profesional, ':turno_fechain' => $fecha1, ':turno_fechaout' => $fecha2));
+        $query->execute(array(':departamento_id'  => $departamento_id,':profesional' => $profesional, ':turno_fechain' => $fecha1, ':turno_fechaout' => $fecha2));
 
         $noche =  $query->rowCount();
 
