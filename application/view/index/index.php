@@ -124,6 +124,7 @@
           }
       </style>
         <script>
+            var JEFEA = ";"
         $(document).ready(function() {
 
             let now = new Date();
@@ -140,6 +141,14 @@
             });
             $("#departamentos\\.header").on("change", function(){
                 makeCalendario();
+                let datos = {
+                    accion: "departamento",
+                    departamento_id: $("#departamentos\\.header option:selected").val()
+                }
+
+                $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
+                    JEFEA = data.user_nombre;
+                });
             });
 
             let data = {
@@ -615,19 +624,12 @@
                 let meses = ["Enero","Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
                 let today = (day)+ "-" + meses[month] + "-" + now.getFullYear();
 
-                let datos = {
-                    accion: "departamento",
-                    departamento_id: $("#departamentos\\.header option:selected").val()
-                }
-
-                $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
                     documento = documento.replace(':Tabla', calendario);
                     documento = documento.replace(':FECHA', today);
-                    documento = documento.replace(':JEFE', data.user_nombre);
+                    documento = documento.replace(':JEFE', JEFEA data.user_nombre);
                     var ventimp = window.open(' ', 'popimpr');
                     ventimp.document.write(documento);
                     ventimp.document.close();
-                });
             });
         });
 
