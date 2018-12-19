@@ -75,7 +75,7 @@ class DepartamentoModel
 
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "INSERT INTO user_departamentos (departamento_id, user_id) VALUES (:departamento_id, :user_id)";
+        $sql = "INSERT INTO user_departamento (departamento_id, user_id) VALUES (:departamento_id, :user_id)";
         $query = $database->prepare($sql);
         $query->execute(array(':departamento_id' => $departamento_id, ':user_id' => $user_id));
 
