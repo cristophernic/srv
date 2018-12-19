@@ -476,8 +476,10 @@
 
             $("#boton\\.pormes").on("click", function(){
                 $("#dialog\\.title").html("Calcular horas de turno por mes");
-                $("#dialog\\.body").html('<div class="row"><div class="form-group col-2"><label for="turnos.ano">Año</label><select class="form-control" id="turnos.ano"></select></div><div class="form-group col-3"><label for="turnos.mes">Mes de turno</label><select class="form-control" id="turnos.mes"></select></div><div class="form-group col-4"><label for="turnos.profesionales">Profesional</label><select class="form-control" id="turnos.profesionales"></select></div><div class="form-group col-3"><label for="turnos.conteo">Total de horas</label><input type="text" class="form-control" id="turnos.conteo" disabled></div></div>');
+                $("#dialog\\.body").html('<div class="row"><div class="form-group col-6"><label for="turnos.departamento">Departamento</label><input class="form-control" type="text" id="turnos.departamento" disabled=""></div><div class="form-group col-6"><label for="turnos.ano">Año</label><select class="form-control" id="turnos.ano"></select></div><div class="form-group col-6"><label for="turnos.mes">Mes de turno</label><select class="form-control" id="turnos.mes"></select></div><div class="form-group col-6"><label for="turnos.profesionales">Profesional</label><select class="form-control" id="turnos.profesionales"></select></div><div class="form-group col-12"><label for="turnos.conteo">Total de horas</label><input type="text" class="form-control" id="turnos.conteo" disabled></div></div>');
                 $("#dialog\\.view").modal("show");
+                $("#turnos\\.departamento").val($("#departamentos\\.header option:selected").text());
+                
                 <?php if (Session::get("user_account_type") == 6) : ?>
                 let data = {
                     accion : "profesionalesFiltrados",
@@ -627,6 +629,7 @@
                 documento = documento.replace(':Tabla', calendario);
                 documento = documento.replace(':FECHA', today);
                 documento = documento.replace(':JEFE', JEFEA);
+                documento = documento.replace(':DEPARTAMENTO', $("#departamentos\\.header option:selected").text())
                 var ventimp = window.open(' ', 'popimpr');
                 ventimp.document.write(documento);
                 ventimp.document.close();
