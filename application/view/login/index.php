@@ -41,7 +41,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title text-center">Registrar un usuario en turnos</h5>
-                                <form method="post" action="<?php echo Config::get('URL'); ?>register/register_action">
+                                <form id="boton.registrarse" method="post" action="<?php echo Config::get('URL'); ?>register/register_action">
                                     <div class="form-group">
                                         <label>Nombre del usuario <small>(todo junto)</small></label>
                                         <input type="text" class="form-control" name="user_name" pattern="[a-zA-Z0-9]{2,64}"/>
@@ -76,6 +76,7 @@
                                         <img id="captcha" src="<?php echo Config::get('URL'); ?>register/showCaptcha" />
                                         <input type="text" class="form-control" name="captcha" />
                                     </div>
+                                    <p class="text-warning" style="display:none;" id="registro.mensaje"></p>
                                     <input type="submit" value="Register" />
                                 </form>
                             </div>
@@ -92,6 +93,26 @@
                 e.preventDefault();
                 $("#registro\\.turnos").removeClass("d-none");
             });
+        });
+
+        $("#boton\\.registrarse").submit(function( event ) {
+            if ( $( "input[name='user_password_new']" ).val() == $( "input[name='user_password_repeat']" ).val() ) {
+                $("#registro.mensaje").text( "validando." ).show()
+                return;
+            }
+            else{
+                $("#registro.mensaje").text( "NO COINCIDEN LAS CONTRASEÑAS" ).show().fadeOut( 1000 );
+                event.preventDefault();
+            }
+            
+            if ( $( "input[name='user_email']" ).val() == $( "input[name='user_email_repeat']" ).val() ) {
+                $("#registro.mensaje").text( "validando." ).show()
+                return;
+            }
+            else{
+                $("#registro.mensaje").text( "NO COINCIDEN LOS EMAILS" ).show().fadeOut( 1000 );
+                event.preventDefault();
+            }
         });
     </script>
 </html>
