@@ -124,7 +124,7 @@
           }
       </style>
         <script>
-            var JEFEA = ";"
+            var JEFEA = "";
         $(document).ready(function() {
 
             let now = new Date();
@@ -147,7 +147,7 @@
                 }
 
                 $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
-                    JEFEA = data.user_nombre;
+                    JEFEA = response.user_nombre;
                 });
             });
 
