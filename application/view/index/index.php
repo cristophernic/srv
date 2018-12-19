@@ -230,7 +230,7 @@
 
                     if (Object.keys(data).length > 0) {
                         $.each(response, function(i, item) {
-                            let fila = '<tr><td data-id="'+item.departamento_id+'">' + item.departamento_id + '</td><td>' + item.departamento_name + '</td><td>' + item.user_nombre + '</td><td>'+ item.user_cantidad+'</td><td><div class="btn-group" role="group"><button type="button" class="btn btn-outline-secondary editar-departamento" data-id="' + item.departamento_id + '">Editar</button><button type="button" class="btn btn-outline-secondary remover-departamento" data-id="'+ item.departamento_id +'">Eliminar</button></div></td></tr>';
+                            let fila = '<tr><td data-id="'+item.departamento_id+'">' + item.departamento_id + '</td><td>' + item.departamento_name + '</td><td>' + item.user_nombre + '</td><td>'+ item.user_cantidad+'</td><td><div class="btn-group" role="group"><button type="button" class="btn btn-outline-secondary editar-departamento" data-id="' + item.departamento_id + '">Modificar</button><button type="button" class="btn btn-outline-secondary remover-departamento" data-id="'+ item.departamento_id +'">Eliminar</button></div></td></tr>';
                             let option = '<option value="' + item.departamento_id + '">' + item.departamento_name + '</option>';
                             $("#departamentos\\.tabla").append(fila);
                             $("#usuario\\.formulario\\.departamento").append(option);
@@ -277,7 +277,7 @@
                     $("#usuarios\\.tabla").empty();
                     if (Object.keys(data).length > 0) {
                         $.each(response, function(i, item) {
-                            let fila = '<tr><td data-id="'+item.user_id+'">' + item.user_id + '</td><td>' + item.departamento_name + '</td><td>' + item.user_nombre + '</td><td>' + item.user_telefono + '</td><td>' + item.user_email + '</td><td><div class="btn-group" role="group"><button type="button" class="btn btn-outline-secondary editar-udep">Editar</button><button type="button" class="btn btn-outline-secondary remover-udep">Remover</button></div></td></tr>';
+                            let fila = '<tr><td data-id="'+item.user_id+'">' + item.user_id + '</td><td>' + item.departamento_name + '</td><td>' + item.user_nombre + '</td><td>' + item.user_telefono + '</td><td>' + item.user_email + '</td><td><div class="btn-group" role="group"><button type="button" class="btn btn-outline-secondary editar-udep">Modificar</button><button type="button" class="btn btn-outline-secondary remover-udep">Remover</button></div></td></tr>';
                             let option = '<option value="' + item.user_id + '">' + item.user_nombre + '</option>';
                             $("#departamento\\.formulario\\.jefe").append(option);
                             $("#usuario\\.formulario\\.usuario").append(option);
@@ -313,7 +313,7 @@
                         $("#usuarios\\.tabla").empty();
                         if (Object.keys(data).length > 0) {
                             $.each(response, function(i, item) {
-                                let fila = '<tr><td data-id="'+item.user_id+'">' + item.user_id + '</td><td>' + item.departamento_name + '</td><td>' + item.user_nombre + '</td><td>' + item.user_telefono + '</td><td>' + item.user_email + '</td><td><div class="btn-group" role="group"><button type="button" class="btn btn-outline-secondary editar-udep">Editar</button><button type="button" class="btn btn-outline-secondary remover-udep">Remover</button></div></td></tr>';
+                                let fila = '<tr><td data-id="'+item.user_id+'">' + item.user_id + '</td><td>' + item.departamento_name + '</td><td>' + item.user_nombre + '</td><td>' + item.user_telefono + '</td><td>' + item.user_email + '</td><td><div class="btn-group" role="group"><button type="button" class="btn btn-outline-secondary editar-udep">Modificar</button><button type="button" class="btn btn-outline-secondary remover-udep">Remover</button></div></td></tr>';
                                 $("#usuarios\\.tabla").append(fila);
                             });
 
@@ -357,7 +357,7 @@
 
                             if (Object.keys(data).length > 0) {
                                 $.each(response, function(i, item) {
-                                    let fila = '<tr><td data-id="'+item.departamento_id+'">' + item.departamento_id + '</td><td>' + item.departamento_name + '</td><td>' + item.user_nombre + '</td><td>'+ item.user_cantidad+'</td><td><div class="btn-group" role="group"><button type="button" class="btn btn-outline-secondary editar-departamento" data-id="' + item.departamento_id + '">Editar</button><button type="button" class="btn btn-outline-secondary remover-departamento" data-id="'+ item.departamento_id +'">Eliminar</button></div></td></tr>';
+                                    let fila = '<tr><td data-id="'+item.departamento_id+'">' + item.departamento_id + '</td><td>' + item.departamento_name + '</td><td>' + item.user_nombre + '</td><td>'+ item.user_cantidad+'</td><td><div class="btn-group" role="group"><button type="button" class="btn btn-outline-secondary editar-departamento" data-id="' + item.departamento_id + '">Modificar</button><button type="button" class="btn btn-outline-secondary remover-departamento" data-id="'+ item.departamento_id +'">Eliminar</button></div></td></tr>';
                                     let option = '<option value="' + item.departamento_id + '">' + item.departamento_name + '</option>';
                                     $("#departamentos\\.tabla").append(fila);
                                     $("#usuario\\.formulario\\.departamento").append(option);
@@ -438,7 +438,7 @@
                             $("#usuarios\\.tabla").empty();
                             if (Object.keys(data).length > 0) {
                                 $.each(response, function(i, item) {
-                                    let fila = '<tr><td data-id="'+item.user_id+'">' + item.user_id + '</td><td>' + item.departamento_name + '</td><td>' + item.user_nombre + '</td><td>' + item.user_telefono + '</td><td>' + item.user_email + '</td><td><div class="btn-group" role="group"><button type="button" class="btn btn-outline-secondary editar-udep">Editar</button><button type="button" class="btn btn-outline-secondary remover-udep">Remover</button></div></td></tr>';
+                                    let fila = '<tr><td data-id="'+item.user_id+'">' + item.user_id + '</td><td>' + item.departamento_name + '</td><td>' + item.user_nombre + '</td><td>' + item.user_telefono + '</td><td>' + item.user_email + '</td><td><div class="btn-group" role="group"><button type="button" class="btn btn-outline-secondary editar-udep">Modificar</button><button type="button" class="btn btn-outline-secondary remover-udep">Remover</button></div></td></tr>';
                                     let option = '<option value="' + item.user_id + '">' + item.user_nombre + '</option>';
                                     $("#departamento\\.formulario\\.jefe").append(option);
                                     $("#usuario\\.formulario\\.usuario").append(option);
