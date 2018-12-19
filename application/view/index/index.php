@@ -615,11 +615,18 @@
                 let meses = ["Enero","Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
                 let today = (day)+ "-" + meses[month] + "-" + now.getFullYear();
 
-                documento = documento.replace(':Tabla', calendario);
-                documento = documento.replace(':FECHA', today);
-                var ventimp = window.open(' ', 'popimpr');
-                ventimp.document.write(documento);
-                ventimp.document.close();
+                let datos = {
+                    accion: "departamento",
+                    departamento_id: $("#departamentos\\.header option:selected").val()
+                }
+
+                $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
+                    documento = documento.replace(':Tabla', calendario);
+                    documento = documento.replace(':FECHA', today);
+                    var ventimp = window.open(' ', 'popimpr');
+                    ventimp.document.write(documento);
+                    ventimp.document.close();
+                });
             });
         });
 

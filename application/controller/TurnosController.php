@@ -80,6 +80,9 @@ class TurnosController extends Controller
             case "departamentos":
                 $resultado = DepartamentoModel::getAllDepartamentos();
                 break;
+            case "departamento":
+                $resultado = DepartamentoModel::getDepartamento(Request::post('departamento_id'));
+                break;
             case "departamentosNuevo":
                 $resultado = DepartamentoModel::createDepartamento(Request::post('departamento_name'), Request::post('departamento_jefe'));
                 break;
