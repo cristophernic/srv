@@ -97,7 +97,7 @@
             $("#form\\.registrarse").submit(function( event ) {
                 if ($( "input[name='user_name']" ).val() == ""){
                     $("#registro\\.mensaje").text( "Ingrese un nombre de usuario" ).show().fadeOut( 1000 );
-                    $( "input[name='user_name']" ).parent().append('<div class="invalid-feedback">Ingrese un nombre de usuario, sin espacios</div>');
+                    $( "input[name='user_name']" )addClass("is-invalid").parent().append('<div class="invalid-feedback">Ingrese un nombre de usuario, sin espacios</div>');
                     event.preventDefault();
                     return;
                 }
