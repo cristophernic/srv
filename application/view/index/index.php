@@ -626,7 +626,7 @@
 
                     documento = documento.replace(':Tabla', calendario);
                     documento = documento.replace(':FECHA', today);
-                    documento = documento.replace(':JEFE', JEFEA data.user_nombre);
+                    documento = documento.replace(':JEFE', JEFEA);
                     var ventimp = window.open(' ', 'popimpr');
                     ventimp.document.write(documento);
                     ventimp.document.close();
