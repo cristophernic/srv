@@ -496,6 +496,7 @@
                         mes: $("#turnos\\.mes").val(),
                         ano: $("#turnos\\.ano").val(),
                         profesional: $("#turnos\\.profesionales").val(),
+                        departamento_id: $("#departamentos\\.header option:selected").val()
                     }
 
                     $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
