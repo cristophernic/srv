@@ -97,20 +97,20 @@
 
         $("#boton\\.registrarse").submit(function( event ) {
             if ( $( "input[name='user_password_new']" ).val() == $( "input[name='user_password_repeat']" ).val() ) {
-                $("#registro.mensaje").text( "validando." ).show()
+                $("#registro\\.mensaje").text( "validando." ).show()
                 return;
             }
             else{
-                $("#registro.mensaje").text( "NO COINCIDEN LAS CONTRASEÑAS" ).show().fadeOut( 1000 );
+                $("#registro\\.mensaje").text( "NO COINCIDEN LAS CONTRASEÑAS" ).show().fadeOut( 1000 );
                 event.preventDefault();
             }
             
             if ( $( "input[name='user_email']" ).val() == $( "input[name='user_email_repeat']" ).val() ) {
-                $("#registro.mensaje").text( "validando." ).show()
+                $("#registro\\.mensaje").text( "validando." ).show()
                 return;
             }
             else{
-                $("#registro.mensaje").text( "NO COINCIDEN LOS EMAILS" ).show().fadeOut( 1000 );
+                $("#registro\\.mensaje").text( "NO COINCIDEN LOS EMAILS" ).show().fadeOut( 1000 );
                 event.preventDefault();
             }
         });
