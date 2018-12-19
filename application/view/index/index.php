@@ -623,7 +623,7 @@
                 $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
                     documento = documento.replace(':Tabla', calendario);
                     documento = documento.replace(':FECHA', today);
-                    documento = documento.replace(':JEFE', data.user_name);
+                    documento = documento.replace(':JEFE', data.user_nombre);
                     var ventimp = window.open(' ', 'popimpr');
                     ventimp.document.write(documento);
                     ventimp.document.close();
