@@ -163,7 +163,7 @@
                         let option = '<option value="' + item.departamento_id + '">' + item.departamento_name + '</option>';
                         $("#departamentos\\.header").append(option);
                     });
-                    makeCalendario();
+                    $("#departamentos\\.header").trigger("change");
                 }
             });
 
