@@ -77,7 +77,7 @@
                                         <input type="text" class="form-control" name="captcha" />
                                     </div>
                                     <p class="text-warning" style="display:none;" id="registro.mensaje"></p>
-                                    <input type="submit" value="Register" />
+                                    <button type="submit" type="button" class="btn btn-outline-secondary">Registrar</button>
                                 </form>
                             </div>
                         </div>
