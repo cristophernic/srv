@@ -31,7 +31,7 @@ class DepartamentoModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT departamentos.departamento_id, departamentos.departamento_name, departamentos.departamento_jefe users.user_nombre FROM departamentos INNER JOIN users ON (departamentos.departamento_jefe = users.user_id) WHERE departamentos.departamento_id = :departamento_id LIMIT 1";
+        $sql = "SELECT departamentos.departamento_id, departamentos.departamento_name, departamentos.departamento_jefe, users.user_nombre FROM departamentos INNER JOIN users ON (departamentos.departamento_jefe = users.user_id) WHERE departamentos.departamento_id = :departamento_id LIMIT 1";
         $query = $database->prepare($sql);
         $query->execute(array(':departamento_id' => $departamento_id));
 
