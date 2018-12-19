@@ -98,7 +98,7 @@ class TurnosModel
         return $query->fetch();
     }
 
-    public static function createTurnos($profesional, $fechainic,$turno)
+    public static function createTurnos($profesional, $fechainic,$turno, $departamento_id)
     {
         $return = new stdClass();
         $return->resultado = false;
@@ -108,13 +108,13 @@ class TurnosModel
         }
 
         if ($turno == 2){
-            $return->resultado = self::createTurnos($profesional,$fechainic,0);
-            $return->resultado = self::createTurnos($profesional,$fechainic,1);
+            $return->resultado = self::createTurnos($profesional,$fechainic,0, $departamento_id);
+            $return->resultado = self::createTurnos($profesional,$fechainic,1, $departamento_id);
         }
         else {
             $database = DatabaseFactory::getFactory()->getConnection();
 
-            $sql = "SELECT turno_profesional, turno_fechain, turno_turno FROM turnos WHERE turno_profesional = :turno_profesional AND turno_fechain = :turno_fechain AND turno_turno = :turno_turno";
+            $sql = "SELECT turno_profesional, turno_fechain, turno_turno, turno_departamento FROM turnos WHERE turno_profesional = :turno_profesional AND turno_fechain = :turno_fechain AND turno_turno = :turno_turno";
             $query = $database->prepare($sql);
             $query->execute(array(':turno_profesional' => $profesional, ':turno_fechain' => $fechainic, ':turno_turno' => intval($turno)));
 
@@ -122,9 +122,9 @@ class TurnosModel
                 $return->resultado = true;
             }
             else{
-                $sql = "INSERT INTO turnos (turno_profesional, turno_fechain, turno_turno) VALUES (:turno_profesional, :turno_fechain, :turno_turno)";
+                $sql = "INSERT INTO turnos (turno_profesional, turno_fechain, turno_turno, turno_departamento) VALUES (:turno_profesional, :turno_fechain, :turno_turno, :turno_departamento)";
                 $query = $database->prepare($sql);
-                $query->execute(array(':turno_profesional' => $profesional, ':turno_fechain' => $fechainic, ':turno_turno' => intval($turno)));
+                $query->execute(array(':turno_profesional' => $profesional, ':turno_fechain' => $fechainic, ':turno_turno' => intval($turno), ':turno_departamento' => $departamento_id));
 
                 if ($query->rowCount() == 1) {
                     $return->resultado = true;

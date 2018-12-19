@@ -177,6 +177,7 @@
                         profesional_nombre: $("#turnos\\.profesionales option:selected").text(), 
                         fechainic: $("#turnos\\.fecha\\.in").val(),
                         turno: $("#turnos\\.turno").val(),
+                        departamento_id: $("#departamentos\\.header option:selected").val()
                     }
 
                     $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
