@@ -178,7 +178,7 @@
                     if (Object.keys(data).length > 0) {
                         $.each(response, function(i, item) {
                             let option = '<option value="' + item.user_id + '">' + item.user_nombre + '</option>';
-                            $("#turnos\\.profesionales").append(fila);
+                            $("#turnos\\.profesionales").append(option);
                         });
                     }
                 });
