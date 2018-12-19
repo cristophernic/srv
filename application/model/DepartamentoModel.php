@@ -68,16 +68,16 @@ class DepartamentoModel
 
     public static function createUserDepartamento($departamento_id, $user_id)
     {
-        if (!$departamento_text || strlen($departamento_text) == 0) {
+        if (!$departamento_id) {
             Session::add('feedback_negative', Text::get('FEEDBACK_NOTE_CREATION_FAILED'));
             return false;
         }
 
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "INSERT INTO departamentos (departamento_name, departamento_jefe) VALUES (:departamento_name, :departamento_jefe)";
+        $sql = "INSERT INTO user_departamentos (departamento_id, user_id) VALUES (:departamento_id, :user_id)";
         $query = $database->prepare($sql);
-        $query->execute(array(':departamento_name' => $departamento_text, ':departamento_jefe' => $departamento_jefe,));
+        $query->execute(array(':departamento_id' => $departamento_id, ':user_id' => $user_id));
 
         if ($query->rowCount() == 1) {
             return true;
