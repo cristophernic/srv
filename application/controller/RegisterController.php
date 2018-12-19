@@ -20,7 +20,7 @@ class RegisterController extends Controller
         if ($registration_successful) {
             Redirect::home();
         } else {
-            Redirect::home();
+            $this->View->render('register/index');
         }
     }
     public function verify($user_id, $user_activation_verification_code)
