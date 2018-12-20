@@ -22,7 +22,7 @@ return array(
     "FEEDBACK_PASSWORD_FIELD_EMPTY" => "y la contraseña?.",
     "FEEDBACK_USERNAME_OR_PASSWORD_FIELD_EMPTY" => "Nombre de usuario o contraseña vacia.",
     "FEEDBACK_USERNAME_EMAIL_FIELD_EMPTY" => "Username / email field was empty.",
-    "FEEDBACK_EMAIL_FIELD_EMPTY" => "no ha escrito un correo electrónico.",
+    "FEEDBACK_EMAIL_FIELD_EMPTY" => "No ha escrito un correo electrónico.",
     "FEEDBACK_EMAIL_REPEAT_WRONG" => "Usted ha escrito mal el correo electrónico, vuelva a intentarlo.",
     "FEEDBACK_EMAIL_AND_PASSWORD_FIELDS_EMPTY" => "Email and password fields were empty.",
     "FEEDBACK_USERNAME_SAME_AS_OLD_ONE" => "Sorry, that username is the same as your current one. Please choose another one.",
