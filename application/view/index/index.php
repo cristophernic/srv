@@ -36,13 +36,13 @@
                     <div class="card-body">
                         <div class="form-row">
                             <div class="col-4">
-                                <div class="form-group">
+                                <div class="form-group m-0">
                                     <label for="departamentos.header">Departamento</label>
                                     <select id="departamentos.header" class="form-control"></select>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
+                                <div class="form-group m-0">
                                     <label for="fecha.mes">Mes</label>
                                     <select id="fecha.mes" class="form-control">
                                         <option value="01">Enero</option>
@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
+                                <div class="form-group m-0">
                                     <label for="fecha.ano">Año</label>
                                     <select id="fecha.ano" class="form-control">
                                         <option value="2017">2017</option>
