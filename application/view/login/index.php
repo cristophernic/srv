@@ -1,5 +1,5 @@
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light"><div class="container"><a class="navbar-brand" href="<?php echo Config::get('URL'); ?>">CALENDARIO DE TURNOS</a></div></nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light"><div class="container"><a class="navbar-brand" href="<?php echo Config::get('URL'); ?>">Calendario de Turnos Clínica Alemana Temuco</a></div></nav>
 <div class="container mt-3">
 <div class="row justify-content-center">
     <div class="col-6">
