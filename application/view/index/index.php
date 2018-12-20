@@ -467,12 +467,8 @@
                                     $("#usuarios\\.tabla").append(fila);
                                 });
 
-                                $(".editar-udep").on("click", function(){
-
-                                });
-                                $(".remover-udep").on("click", function(){
-
-                                });
+                                $(".editar-udep").on("click", function(){});
+                                $(".remover-udep").on("click", function(){});
                             }
                         });
                     });
