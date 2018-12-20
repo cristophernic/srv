@@ -79,6 +79,7 @@
             <div class="col mt-5">
                 <div class="card">
                     <div class="card-body">
+                        <div class="table-responsive">
                         <table class="table table-td table-hover table-bordered" id="table">
                             <thead class="bg-light">
                                 <tr>
@@ -91,6 +92,7 @@
                             <tbody id="table.calendario">
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
             </div>
