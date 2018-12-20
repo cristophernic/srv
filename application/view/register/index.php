@@ -1,3 +1,4 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light"><div class="container"><a class="navbar-brand" href="<?php echo Config::get('URL'); ?>apuntes">CALENDARIO DE TURNOS</a></div></nav>
 <div class="container mt-3 mb-5">
    <div class="row justify-content-center">
       <div class="col-8">
