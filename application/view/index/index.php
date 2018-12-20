@@ -382,7 +382,7 @@
                 $("#departamento\\.formulario\\.guardar").on("click", function(){
                     let data = "";
 
-                    if ($("#departamento\\.formulario\\.departamento\\.id").val() = ""){
+                    if ($("#departamento\\.formulario\\.departamento\\.id").val() == ""){
                         data = {
                             accion : "departamentosNuevo",
                             departamento_name: $("#departamento\\.formulario\\.texto").val(),
