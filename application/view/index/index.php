@@ -35,38 +35,41 @@
             <div class="card">
                     <div class="card-body">
                         <div class="form-row">
-                            <div class="col-1"><p>DEPARTAMENTO</p></div>
-                            <div class="col">
-                                <select id="departamentos.header" class="form-control">
-                                </select>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="departamentos.header">Departamento</label>
+                                    <select id="departamentos.header" class="form-control"></select>
+                                </div>
                             </div>
-                            <div class="col-1"></div>
-                            <div class="col-1"><p>MES</p></div>
-                            <div class="col">
-                                <select id="fecha.mes" class="form-control">
-                                    <option value="01">Enero</option>
-                                    <option value="02">Febrero</option>
-                                    <option value="03">Marzo</option>
-                                    <option value="04">Abril</option>
-                                    <option value="05">Mayo</option>
-                                    <option value="06">Junio</option>
-                                    <option value="07">Julio</option>
-                                    <option value="08">Agosto</option>
-                                    <option value="09">Septiembre</option>
-                                    <option value="10">Octubre</option>
-                                    <option value="11">Noviembre</option>
-                                    <option value="12">Diciembre</option>
-                                </select>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="fecha.mes">Mes</label>
+                                    <select id="fecha.mes" class="form-control">
+                                        <option value="01">Enero</option>
+                                        <option value="02">Febrero</option>
+                                        <option value="03">Marzo</option>
+                                        <option value="04">Abril</option>
+                                        <option value="05">Mayo</option>
+                                        <option value="06">Junio</option>
+                                        <option value="07">Julio</option>
+                                        <option value="08">Agosto</option>
+                                        <option value="09">Septiembre</option>
+                                        <option value="10">Octubre</option>
+                                        <option value="11">Noviembre</option>
+                                        <option value="12">Diciembre</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-1"></div>
-                            <div class="col-1"><p>AÑO</p></div>
-                            <div class="col">
-                                <select id="fecha.ano" class="form-control">
-                                    <option value="2017">2017</option>
-                                    <option value="2018">2018</option>
-                                    <option value="2019">2019</option>
-                                    <option value="2019">2020</option>
-                                </select>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="fecha.ano">Año</label>
+                                    <select id="fecha.ano" class="form-control">
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2019">2020</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
