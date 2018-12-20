@@ -27,7 +27,7 @@ return array(
     "FEEDBACK_EMAIL_AND_PASSWORD_FIELDS_EMPTY" => "Email and password fields were empty.",
     "FEEDBACK_USERNAME_SAME_AS_OLD_ONE" => "Sorry, that username is the same as your current one. Please choose another one.",
     "FEEDBACK_USERNAME_ALREADY_TAKEN" => "Sorry, that username is already taken. Please choose another one.",
-    "FEEDBACK_USER_EMAIL_ALREADY_TAKEN" => "Sorry, that email is already in use. Please choose another one.",
+    "FEEDBACK_USER_EMAIL_ALREADY_TAKEN" => "este correo ya está registrado, intente cambiar la contraseña.",
     "FEEDBACK_USERNAME_CHANGE_SUCCESSFUL" => "Your username has been changed successfully.",
     "FEEDBACK_USERNAME_AND_PASSWORD_FIELD_EMPTY" => "Username and password fields were empty.",
     "FEEDBACK_USERNAME_DOES_NOT_FIT_PATTERN" => "Username does not fit the name pattern: only a-Z and numbers are allowed, 2 to 64 characters.",
