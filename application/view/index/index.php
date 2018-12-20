@@ -33,7 +33,7 @@
                 </div>
             </nav>
             <div class="card">
-                    <div class="card-body">
+                    <div class="card-body p-2">
                         <div class="form-row">
                             <div class="col-4">
                                 <div class="form-group m-0">
