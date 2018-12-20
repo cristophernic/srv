@@ -94,17 +94,17 @@ class DepartamentoModel
      * @param string $departamento_text new text of the specific departamento
      * @return bool feedback (was the update successful ?)
      */
-    public static function updateDepartamento($departamento_id, $departamento_text)
+    public static function updateDepartamento($departamento_id, $departamento_name, $departamento_jefe)
     {
-        if (!$departamento_id || !$departamento_text) {
+        if (!$departamento_id || !$departamento_name) {
             return false;
         }
 
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "UPDATE departamentos SET departamento_name = :departamento_name WHERE departamento_id = :departamento_id AND user_id = :user_id LIMIT 1";
+        $sql = "UPDATE departamentos SET departamento_name = :departamento_name, departamento_jefe = :departamento_jefe WHERE departamento_id = :departamento_id LIMIT 1";
         $query = $database->prepare($sql);
-        $query->execute(array(':departamento_id' => $departamento_id, ':departamento_name' => $departamento_text, ':user_id' => Session::get('user_id')));
+        $query->execute(array(':departamento_id' => $departamento_id, ':departamento_name' => $departamento_name, ':departamento_jefe' => $departamento_jefe));
 
         if ($query->rowCount() == 1) {
             return true;

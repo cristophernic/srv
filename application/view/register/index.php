@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light"><div class="container"><a class="navbar-brand" href="<?php echo Config::get('URL'); ?>">CALENDARIO DE TURNOS</a></div></nav>
 <div class="container mt-3 mb-5">
-   <div class="row justify-content-center">
-      <div class="col-8">
-         <div class="card">
+    <div class="row justify-content-center">
+        <div class="col-8">
+        <div class="card">
             <div class="card-body">
-               <h5 class="card-title text-center mb-3">Sección restringida, solo disponible para usuarios capacitados en la plataforma</h5>
-	       <?php $this->renderFeedbackMessages(); ?>
-          <form id="form.registrarse" method="post" action="<?php echo Config::get('URL'); ?>register/register_action">
+                <h5 class="card-title text-center mb-3">Sección restringida, solo disponible para usuarios capacitados en la plataforma</h5>
+	            <?php $this->renderFeedbackMessages(); ?>
+                <form id="form.registrarse" method="post" action="<?php echo Config::get('URL'); ?>register/register_action">
                                     <div class="form-group">
                                         <label>Nombre del usuario <small>(todo junto)</small></label>
                                         <input type="text" class="form-control" name="user_name" pattern="[a-zA-Z0-9]{2,64}"/>
@@ -45,7 +45,7 @@
                                     <button type="submit" type="button" class="btn btn-outline-secondary">Registrar</button>
                                 </form>
             </div>
-         </div>
+        </div>
       </div>
    </div>
 </div>
