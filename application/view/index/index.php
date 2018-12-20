@@ -77,7 +77,7 @@
         </div>
         <div class="row mt-5 pt-5">
             <div class="col mt-5">
-                <div class="card ml-3">
+                <div class="card">
                     <div class="card-body">
                         <table class="table table-td table-hover table-bordered" id="table">
                             <thead class="bg-light">
