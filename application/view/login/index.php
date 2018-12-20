@@ -31,53 +31,8 @@
                                     <input type="hidden" name="csrf_token" value="<?= Csrf::makeToken(); ?>" />
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <button type="submit" type="button" class="btn btn-outline-primary"><i class="fas fa-user-check"></i> Ingresar</button>
-                                        <button class="btn btn-outline-secondary" id="boton.registrarse"><i class="fas fa-user-plus"></i> Registrarse</button>
+                                        <a class="btn btn-outline-secondary" href="<?php echo Config::get('URL'); ?>register"><i class="fas fa-user-plus"></i> Registrarse</a>
                                     </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 d-none" id="registro.turnos">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title text-center">Registrar un usuario en turnos</h5>
-                                <form id="form.registrarse" method="post" action="<?php echo Config::get('URL'); ?>register/register_action">
-                                    <div class="form-group">
-                                        <label>Nombre del usuario <small>(todo junto)</small></label>
-                                        <input type="text" class="form-control" name="user_name" pattern="[a-zA-Z0-9]{2,64}"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>RUT</label>
-                                        <input type="text" class="form-control" name="user_rut" pattern="[a-zA-Z0-9]{2,64}"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Telefono</label>
-                                        <input type="text" class="form-control" name="user_telefono" pattern="[a-zA-Z0-9]{2,64}"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Correo electrónico</label>
-                                        <input type="email" class="form-control" name="user_email" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Repetir correo</label>
-                                        <input type="email" class="form-control" name="user_email_repeat"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Contraseña <small>(Mayor o igual a 6 carácteres)</small></label>
-                                        <input type="password" class="form-control" name="user_password_new" pattern=".{6,}" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Repetir contraseña</label>
-                                        <input type="password" class="form-control" name="user_password_repeat" pattern=".{6,}" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Escriba los carácteres de la imágen</label>
-                                        <a href="#" onclick="document.getElementById('captcha').src = '<?php echo Config::get('URL'); ?>register/showCaptcha?' + Math.random(); return false">Recargar Captcha</a>
-                                        <img id="captcha" src="<?php echo Config::get('URL'); ?>register/showCaptcha" />
-                                        <input type="text" class="form-control" name="captcha" />
-                                    </div>
-                                    <p class="text-warning" style="display:none;" id="registro.mensaje"></p>
-                                    <button type="submit" type="button" class="btn btn-outline-secondary">Registrar</button>
                                 </form>
                             </div>
                         </div>
@@ -86,73 +41,4 @@
             </div>
         </div>
     </body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $("#boton\\.registrarse").on("click", function(e){
-                e.preventDefault();
-                $("#registro\\.turnos").removeClass("d-none");
-            });
-
-            $("#form\\.registrarse").submit(function( event ) {
-                if ($( "input[name='user_name']" ).val() == ""){
-                    $("#registro\\.mensaje").text( "Ingrese un nombre de usuario" ).show().fadeOut( 1000 );
-                    $( "input[name='user_name']" ).addClass("is-invalid").parent().append('<div class="invalid-feedback">Ingrese un nombre de usuario, sin espacios</div>');
-                    event.preventDefault();
-                    return;
-                }
-                else{
-                    $( "input[name='user_name']" ).removeClass("is-invalid").parent().children('<div>').remove();
-                }
-
-                if ($( "input[name='user_rut']" ).val() == ""){
-                    $("#registro\\.mensaje").text( "Ingrese un rut sin puntos y sin guión." ).show().fadeOut( 1000 );
-                    $( "input[name='user_rut']" ).addClass("is-invalid").parent().append('<div class="invalid-feedback">Ingrese un rut sin puntos y sin guión.</div>');
-                    event.preventDefault();
-                    return;
-                }
-                else{
-                    $( "input[name='user_rut']" ).removeClass("is-invalid").parent().children('<div>').remove();
-                }
-
-                if ($( "input[name='user_password_new']" ).val() == ""){
-                    $("#registro\\.mensaje").text( "Ingrese una contraseña" ).show().fadeOut( 1000 );
-                    event.preventDefault();
-                }
-                if ($( "input[name='user_password_new']" ).val() == ""){
-                    $("#registro\\.mensaje").text( "Ingrese una contraseña" ).show().fadeOut( 1000 );
-                    event.preventDefault();
-                }
-                if ($( "input[name='user_password_new']" ).val() == ""){
-                    $("#registro\\.mensaje").text( "Ingrese una contraseña" ).show().fadeOut( 1000 );
-                    event.preventDefault();
-                }
-                if ($( "input[name='user_password_new']" ).val() == ""){
-                    $("#registro\\.mensaje").text( "Ingrese una contraseña" ).show().fadeOut( 1000 );
-                    event.preventDefault();
-                }
-                if ($( "input[name='user_password_new']" ).val() == ""){
-                    $("#registro\\.mensaje").text( "Ingrese una contraseña" ).show().fadeOut( 1000 );
-                    event.preventDefault();
-                }
-                if ( $( "input[name='user_password_new']" ).val() == $( "input[name='user_password_repeat']" ).val() ) {
-                    $("#registro\\.mensaje").text( "validando." ).show()
-                    return;
-                }
-                else{
-                    $("#registro\\.mensaje").text( "NO COINCIDEN LAS CONTRASEÑAS" ).show().fadeOut( 1000 );
-                    event.preventDefault();
-                }
-                
-                if ( $( "input[name='user_email']" ).val() == $( "input[name='user_email_repeat']" ).val() ) {
-                    $("#registro\\.mensaje").text( "validando." ).show()
-                    return;
-                }
-                else{
-                    $("#registro\\.mensaje").text( "NO COINCIDEN LOS EMAILS" ).show().fadeOut( 1000 );
-                    event.preventDefault();
-                }
-            });
-        });
-    </script>
 </html>
