@@ -541,7 +541,7 @@
                     }
                 });
                 <?php endif; ?>
-                <?php if (Session::get("user_account_type") == 1) : ?>
+                <?php if (Session::get("user_account_type") == 2) : ?>
                 let options = '<option value="<?php echo Session::get('user_id'); ?>"><?php echo Session::get('user_name'); ?></option>';
                 $("#turnos\\.profesionales").append(options);
                 <?php endif; ?>
@@ -785,6 +785,7 @@
                     }
                 }
 
+                <?php if (Session::get("user_account_type") == 2) : ?>
                 $("#table\\.calendario tr td").on("click", function(){
                     let turno_id = $(this).data("id");
                     let calendario_id = $(this).data("calendario");
@@ -902,6 +903,7 @@
                         });
                     }
                 });
+                <?php } ?>
             });
       }
 
