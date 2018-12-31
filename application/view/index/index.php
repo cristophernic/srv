@@ -787,7 +787,7 @@
                     }
                 }
 
-                <?php if (Session::get("user_account_type") == 2) : ?>
+                <?php if (Session::get("user_account_type") > 1) : ?>
                 $("#table\\.calendario tr td").on("click", function(){
                     let turno_id = $(this).data("id");
                     let calendario_id = $(this).data("calendario");
