@@ -785,7 +785,7 @@
                                 nocheP = "";
                             }
 
-                            fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td class="text-center" data-id="' + defaultID +'">' + defaultName + '</td><td class="text-center ' + diaP +'" data-id="' + diaI +'">' + diaT +'</td><td class="text-center ' + nocheP +'" data-id="' + nocheI +'">' + nocheT +'</td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
+                            fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td class="text-center" data-id="' + defaultID +'" data-preset="1">' + defaultName + '</td><td class="text-center ' + diaP +'" data-id="' + diaI +'">' + diaT +'</td><td class="text-center ' + nocheP +'" data-id="' + nocheI +'">' + nocheT +'</td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
                         }
                         else{
                             fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td></td><td class="text-center"></td><td class="text-center"></td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';    
@@ -805,9 +805,48 @@
                 <?php if (Session::get("user_account_type") > 1) : ?>
                 $("#table\\.calendario tr td").on("click", function(){
                     let turno_id = $(this).data("id");
+                    let preset_id = $(this).data("preset");
                     let calendario_id = $(this).data("calendario");
                     $("#dialog\\.delete").remove();
 
+                    <?php if (Session::get("user_account_type") > 2) : ?>
+                    if (typeof turno_id === 'number' && typeof preset_id === 'number'){
+                        let data = {
+                            accion : "defaultOne",
+                            id: turno_id
+                        }
+
+                        $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
+                            if (Object.keys(response).length > 0) {
+                                let d = new Date(response.default_fecha.replace(/-/g, '\/'));
+                                let day = ("0" + d.getDate()).slice(-2);
+                                let month = ("0" + (d.getMonth() + 1)).slice(-2); 
+                                let dateComplete = day + "-" + month + "-" + d.getFullYear();
+
+                                $("#dialog\\.title").html('PROFESIONAL PREESTABLECIDO:');
+                                $("#dialog\\.body").html('<div class="row"><div class="col"><p>' + response.user_nombre + ', fecha: ' + dateComplete +'</p></div></div><div class="row"><div class="form-group col"><label for="turnos.profesionales" class="text-danger text-center mt-3"><strong>Reemplazar por:</strong></label><select class="form-control" id="default.profesionales"></select></div></div>');
+                                $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="' + response.default_id + '">Guardar</button>');
+                                cargarProfesionales();
+
+                                $("#dialog\\.delete").on("click", function(){
+                                    let id = $(this).data("id");
+                                    let datos = {
+                                        accion: "defaultUpdate",
+                                        id: id,
+                                        profesional: $("#default\\.profesionales").val()
+                                    }
+
+                                    $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
+                                        $("#dialog\\.view").modal("hide");
+                                        makeCalendario();
+                                    });
+                                });
+                                $("#dialog\\.view").modal("show");
+                            }
+
+                        });
+                    }
+                    <?php endif; ?>
                     if (typeof turno_id === 'number'){
                         let data = {
                             accion : "turnosUno",
@@ -942,6 +981,7 @@
                         $("#tabla\\.profesional").append(fila);
                         $("#turno\\.profesional\\.in").append(fila);
                         $("#departamento\\.formulario\\.jefe").append(option);
+                        $("#turnos\\.profesionales").append(option);
                     });
                 }
             });

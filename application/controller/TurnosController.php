@@ -98,6 +98,18 @@ class TurnosController extends Controller
             case "userDepartamentoNew":
                 $resultado = DepartamentoModel::createUserDepartamento(Request::post('departamento_id'), Request::post('user_id'));
                 break;
+            case "default":
+                $resultado = TurnosModel::getProfesionalesDefault(Request::post('departamento_id'), Request::post('mes'), Request::post('ano'));
+                break;
+            case "defaultOne":
+                $resultado = TurnosModel::getProfesionalDefault(Request::post('id'));
+                break;
+            case "defaultNuevo":
+                $resultado = TurnosModel::createProfesionalDefault(Request::post('departamento_id'), Request::post('default_fecha'),Request::post('profesional'));
+                break;
+            case "defaultUpdate":
+                $resultado = TurnosModel::updateProfesionalDefault(Request::post('id'),Request::post('profesional'));
+                break;
         }
         return $this->View->renderJSON($resultado);
 
