@@ -13,6 +13,7 @@ class TurnosModel
             $return->fecha = $fecha;
             $return->diaDeLaSemana = $diaDeLaSemana;
             $return->diasEnElMes = $diasEnElMes;
+            $return->default = self::getProfesionaleDefault($departamento, $mes, $ano);
             $return->turnos = self::getMonthTurnos($departamento, $mes, $ano);
             $return->comentarios = self::getAllComentarios($mes, $ano, $departamento);
 
@@ -46,6 +47,22 @@ class TurnosModel
         $sql = "SELECT turno_id, turno_profesional, turno_fechain, turno_turno, turno_departamento FROM turnos WHERE turno_fechain = :turno_fechain AND turno_departamento = :turno_departamento";
         $query = $database->prepare($sql);
         $query->execute(array(':turno_fechain' => $fecha, ':turno_departamento' => $departamento_id));
+
+        return $query->fetchAll();
+    }
+
+
+    public static function getProfesionaleDefault($departamento_id,$mes, $ano)
+    {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $fecha1 = $ano . "-" . $mes . "-" .'-01';
+        $fecha = new DateTime($ano . '-' . $mes .'-01');
+        $fecha2 = $ano . "-" . $mes . "-" . $fecha->format('t');
+
+        $sql = "SELECT default_id, turno_profesional, default_fecha FROM default_turno WHERE default_fecha BETWEEN :turno_fechain AND :turno_fechaout AND turno_departamento = :turno_departamento";
+        $query = $database->prepare($sql);
+        $query->execute(array(':turno_fechain' => $fecha1, ':turno_fechaout' => $fecha2, ':turno_departamento' => $departamento_id));
 
         return $query->fetchAll();
     }

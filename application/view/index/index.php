@@ -721,6 +721,11 @@
                             return comentario.comentario_fecha === dia;
                         });
 
+                        const defaultProfesional = default.filter(default =>{
+                            let dia = data.ano + '-' + data.mes + '-' + ("0" + h).slice(-2);
+                            return default.default_fecha === dia;
+                        });
+
                         let comentario = "";
 
                         if (comentariosDia.length > 0){
@@ -736,6 +741,13 @@
                             let diaI = "";
                             let nocheI = "";
                             let nocheP = "";
+
+                            let defaultID = "";
+                            let defaultName = "";
+
+                            if (Object.keys(defaultProfesional).length > 0) {
+                                //
+                            }
 
                             const diaF = turnosDia.filter(elDia => {
                                 return parseInt(elDia.turno_turno) === 0;
@@ -771,7 +783,7 @@
                                 nocheP = "";
                             }
 
-                            fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td></td><td class="text-center ' + diaP +'" data-id="' + diaI +'">' + diaT +'</td><td class="text-center ' + nocheP +'" data-id="' + nocheI +'">' + nocheT +'</td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
+                            fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td class="text-center" data-id="' + defaultID +'">' + defaultName + '</td><td class="text-center ' + diaP +'" data-id="' + diaI +'">' + diaT +'</td><td class="text-center ' + nocheP +'" data-id="' + nocheI +'">' + nocheT +'</td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
                         }
                         else{
                             fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td></td><td class="text-center"></td><td class="text-center"></td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';    
