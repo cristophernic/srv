@@ -750,7 +750,7 @@
                 
                 $("#dialog\\.delete").on("click", function(){
                     
-                    let semana $("#cambiar\\.semanas\\.semana").val();
+                    let semana = $("#cambiar\\.semanas\\.semana").val();
 
                     let datos = {
                         accion: "calendarioSimple",
