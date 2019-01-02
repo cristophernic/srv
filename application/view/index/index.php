@@ -770,10 +770,10 @@
                                 nocheP = "";
                             }
 
-                            fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td class="text-center ' + diaP +'" data-id="' + diaI +'">' + diaT +'</td><td class="text-center ' + nocheP +'" data-id="' + nocheI +'">' + nocheT +'</td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
+                            fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td></td><td class="text-center ' + diaP +'" data-id="' + diaI +'">' + diaT +'</td><td class="text-center ' + nocheP +'" data-id="' + nocheI +'">' + nocheT +'</td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
                         }
                         else{
-                            fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td class="text-center"></td><td class="text-center"></td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';    
+                            fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td></td><td class="text-center"></td><td class="text-center"></td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';    
                         }
 
                         if (i == 7){ 
