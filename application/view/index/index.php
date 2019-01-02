@@ -747,7 +747,8 @@
                             let defaultName = "";
 
                             if (Object.keys(defaultProfesional).length > 0) {
-                                //
+                                defaultID = defaultProfesional[0].default_id;
+                                defaultName = defaultProfesional[0].user_nombre;
                             }
 
                             const diaF = turnosDia.filter(elDia => {

@@ -60,7 +60,7 @@ class TurnosModel
         $fecha = new DateTime($ano . '-' . $mes .'-01');
         $fecha2 = $ano . "-" . $mes . "-" . $fecha->format('t');
 
-        $sql = "SELECT default_id, turno_profesional, default_fecha FROM default_turno WHERE default_fecha BETWEEN :turno_fechain AND :turno_fechaout AND turno_departamento = :turno_departamento";
+        $sql = "SELECT default_turno.default_id, default_turno.turno_profesional, default_turno.default_fecha, users.user_nombre FROM default_turno INNER JOIN users ON default_turno.turno_profesional = users.user_id WHERE default_fecha BETWEEN :turno_fechain AND :turno_fechaout AND turno_departamento = :turno_departamento";
         $query = $database->prepare($sql);
         $query->execute(array(':turno_fechain' => $fecha1, ':turno_fechaout' => $fecha2, ':turno_departamento' => $departamento_id));
 
