@@ -86,6 +86,7 @@
                             <thead class="bg-light">
                                 <tr>
                                     <th scope="col">Días / Fecha</th>
+                                    <th scope="col">Preestablecido</th>
                                     <th scope="col">Turno Diurno</th>
                                     <th scope="col">Turno Nocturno</th>
                                     <th scope="col">Comentarios</th>
