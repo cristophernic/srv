@@ -722,9 +722,9 @@
                             return comentario.comentario_fecha === dia;
                         });
 
-                        const defaultProfesional = defaultC.filter(default =>{
+                        const defaultProfesional = defaultC.filter(defaultA =>{
                             let dia = data.ano + '-' + data.mes + '-' + ("0" + h).slice(-2);
-                            return default.default_fecha === dia;
+                            return defaultA.default_fecha === dia;
                         });
 
                         let comentario = "";
