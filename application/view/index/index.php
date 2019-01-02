@@ -846,6 +846,7 @@
 
                         });
                     }
+                    else
                     <?php endif; ?>
                     if (typeof turno_id === 'number'){
                         let data = {
