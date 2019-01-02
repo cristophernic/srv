@@ -982,7 +982,7 @@
                         $("#tabla\\.profesional").append(fila);
                         $("#turno\\.profesional\\.in").append(fila);
                         $("#departamento\\.formulario\\.jefe").append(option);
-                        $("#turnos\\.profesionales").append(option);
+                        $("#default\\.profesionales").append(option);
                     });
                 }
             });
