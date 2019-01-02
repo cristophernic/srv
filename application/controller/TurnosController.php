@@ -23,6 +23,9 @@ class TurnosController extends Controller
             case "calendario":
                 $resultado = TurnosModel::calendar(Request::post('departamento'), Request::post('mes'),Request::post('ano'));
                 break;
+            case "calendarioSimple":
+                $resultado = TurnosModel::simpleCalendar(Request::post('departamento'), Request::post('mes'),Request::post('ano'),Request::post('semana_ini'),Request::post('semana_fin'));
+                break;
             case "profesionales":
                 $resultado = UserModel::getPublicProfilesOfAllUsers();
                 break;

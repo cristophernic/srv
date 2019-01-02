@@ -25,6 +25,19 @@ class TurnosModel
         }
     }
 
+    public static function simpleCalendar($departamento, $mes, $ano, $semana_ini, $semana_fin){
+
+        $fecha1 = $ano . "-" . $mes . "-". $semana_ini;
+        $fecha2 = $ano . '-' . $mes . '-'. $semana_fin;
+
+        $sql = "SELECT turnos.turno_id, turnos.turno_departamento, turnos.turno_profesional, turnos.turno_fechain, turnos.turno_turno, users.user_nombre FROM turnos INNER JOIN users ON turnos.turno_profesional = users.user_id WHERE turnos.turno_departamento = :departamento AND turnos.turno_fechain BETWEEN :turno_fechain AND :turno_fechaout";
+        $query = $database->prepare($sql);
+        $query->execute(array(':departamento' => $departamento, ':turno_fechain' => $fecha1, ':turno_fechaout' => $fecha2));
+
+        return $query->fetchAll();
+
+    }
+
     public static function getMonthTurnos($departamento,$mes, $ano)
     {
         $database = DatabaseFactory::getFactory()->getConnection();

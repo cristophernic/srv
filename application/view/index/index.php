@@ -733,34 +733,45 @@
             $("#boton\\.semana").on("click", function(){
 
                 $("#dialog\\.title").html("Elegir un Mes y una semana");
-                $("#dialog\\.body").html('<div class="row"><div class="form-group col-6"><label for="cambiar.semanas.mes">Mes</label><select class="form-control" id="imprimir.semanas.mes"><option value="1">Enero</option><option value="2">Febrero</option><option value="3">Marzo</option><option value="4">Abril</option><option value="5">Mayo</option><option value="6">Junio</option><option value="7">Julio</option><option value="8">Agosto</option><option value="9">Septiembre</option><option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option></select></div><div class="form-group col-6"><label for="cambiar.semanas.semana">Semana</label><select class="form-control" id="cambiar.semanas.semana"></select></div><div>');
+                $("#dialog\\.body").html('<div class="row"><div class="form-group col-6"><label for="cambiar.semanas.semana">Semana</label><select class="form-control" id="cambiar.semanas.semana"></select></div><div>');
                 $("#dialog\\.view").modal("show");
                 $("#dialog\\.delete").remove();
-                $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete">Guardar</button>');
+                $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete">Preparar reporte</button>');
 
-                
-                $("#imprimir\\.semanas\\.mes").on("click", function(){
-                    $("#cambiar\\.semanas\\.semana").empty();
-                    var year= this.getFullYear();
-                    var mes = this.getMonth();
-                    var primerdia = ((new Date(year, mes, 1).getDay()-1)%7+7)%7;
-                    var dias=new Date(year, mes+1,0).getDate()-7+primerdia;
-                    let semanas = Math.ceil(dias/7)+1;
-                    let i = 0;
-                    for (i; i <= semanas; i++){
-                        $("#cambiar\\.semanas\\.semana").append('<option value="'+ (i+1) +'">Semana '+ (i+1) +'</option>');
-                    }
-                });
+                var year= $("#fecha\\.ano").val();
+                var mes = $("#fecha\\.mes").val();
+                var primerdia = ((new Date(year, mes, 1).getDay()-1)%7+7)%7;
+                var dias=new Date(year, mes+1,0).getDate()-7+primerdia;
+                let semanas = Math.ceil(dias/7)+1;
+                let i = 0;
+                for (i; i <= semanas; i++){
+                    $("#cambiar\\.semanas\\.semana").append('<option value="'+ (i+1) +'">Semana '+ (i+1) +'</option>');
+                }
                 
                 $("#dialog\\.delete").on("click", function(){
+                    
+                    let semana $("#cambiar\\.semanas\\.semana").val();
+
                     let datos = {
-                        accion: "email",
-                        user_email: $("#cambiar\\.correo").val()
+                        accion: "calendarioSimple",
+                        mes: mes,
+                        ano: year,
+                        semana_ini: 7 * semana,
+                        semana_fin: 7 * (semana +1)
                     }
 
                     $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
-                        alert( response == true ? "cambiado" : "Error al cambiar correo, escriba un correo válido sin espacios");
-                        if (response == true) {$("#dialog\\.view").modal("hide");}
+                        if (Object.keys(response).length > 0) {
+                            $("#dialog\\.delete").attr("disabled", true);
+                            $("#dialog\\.body").html('<div class="d-none" id="imprimir.semanas"></div><button type="button" class="btn btn-danger" id="dialog.finalprint">Imprimir</button>');
+                            $("#imprimir\\.semanas").html('<table class="table table-td table-hover table-bordered"><thead class="bg-light" id="table.imprimir.semanas.head"><tr><th scope="col">Profesional</th></tr></thead><tbody id="table.imprimir.semanas"></tbody></table>');
+
+                            $.each(response, function(i, val){
+                                $("#table\\.imprimir\\.semanas\\.head").append('<tr><th scope="col">Profesional</th></tr>');
+                                $("#table\\.imprimir\\.semanas").append('<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
+                            });
+                            $("#table\\.imprimir\\.semanas\\.head").append('<tr><th scope="col">Total Semana</th></tr>');
+                        }
                     });
                 });
 
