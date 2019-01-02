@@ -10,6 +10,7 @@
                         <?php if (Session::get("user_account_type") == 6) : ?>
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.configuracion">Configuración unidad y usuarios</a></li>
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Asignar turnos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" id="boton.default">Asignar predeterminados</a></li>
                         <?php endif; ?>
                     </ul>
                     <ul class="navbar-nav">
@@ -210,6 +211,54 @@
                         profesional_nombre: $("#turnos\\.profesionales option:selected").text(), 
                         fechainic: $("#turnos\\.fecha\\.in").val(),
                         turno: $("#turnos\\.turno").val(),
+                        departamento_id: $("#departamentos\\.header option:selected").val()
+                    }
+
+                    $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
+                        if (response.resultado == false){
+                            $("#dialog\\.title").html("Error");
+                            $("#dialog\\.body").html('<p class="text-center">No puede asignar un médico a un turno ya ocupado, si desea cambiar, debe hacer click sobre el turno.</p>');
+                            $("#dialog\\.delete").remove();
+                        }
+                        else{
+                            $("#dialog\\.view").modal("hide");
+                            makeCalendario();
+                        }
+                    });
+                });
+            });
+
+
+            $("#boton\\.default").on("click", function(){
+                $("#dialog\\.title").html("INGRESAR PROFESIONAL PREDETERMINADO<br>(Departamento, fecha de turno y profesional asignado)");
+                $("#dialog\\.body").html('<div class="row"> <div class="form-group col-6"><label for="turnos.departamento">Departamento</label><input class="form-control" type="text" id="turnos.departamento" disabled></div><div class="form-group col-6"><label for="turnos.fecha.in">Fecha de turno</label><input class="form-control" type="date" id="turnos.fecha.in"></div><div class="form-group col-6"><label for="turnos.profesionales">Profesional asignado</label><select class="form-control" id="turnos.profesionales"></select></div></div>');
+                $("#dialog\\.view").modal("show");
+
+                $("#turnos\\.departamento").val($("#departamentos\\.header option:selected").text());
+
+                let data = {
+                    accion : "profesionalesFiltrados",
+                    departamento_id: $("#departamentos\\.header option:selected").val()
+                }
+
+                $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
+                    $("#turnos\\.profesionales").empty();
+                    if (Object.keys(data).length > 0) {
+                        $.each(response, function(i, item) {
+                            let option = '<option value="' + item.user_id + '">' + item.user_nombre + '</option>';
+                            $("#turnos\\.profesionales").append(option);
+                        });
+                    }
+                });
+
+                $("#dialog\\.delete").remove();
+                $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete">Guardar</button>');
+
+                $("#dialog\\.delete").on("click", function(){
+                    let datos = {
+                        accion: "defaultNuevo",
+                        profesional: $("#turnos\\.profesionales").val(),
+                        default_fecha: $("#turnos\\.fecha\\.in").val(),
                         departamento_id: $("#departamentos\\.header option:selected").val()
                     }
 
@@ -826,7 +875,22 @@
                                 $("#dialog\\.title").html('PROFESIONAL PREESTABLECIDO:');
                                 $("#dialog\\.body").html('<div class="row"><div class="col"><p>' + response.user_nombre + ', fecha: ' + dateComplete +'</p></div></div><div class="row"><div class="form-group col"><label for="turnos.profesionales" class="text-danger text-center mt-3"><strong>Reemplazar por:</strong></label><select class="form-control" id="default.profesionales"></select></div></div>');
                                 $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="' + response.default_id + '">Guardar</button>');
-                                cargarProfesionales();
+
+
+                                let data = {
+                                    accion : "profesionalesFiltrados",
+                                    departamento_id: $("#departamentos\\.header option:selected").val()
+                                }
+
+                                $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
+                                    $("#turnos\\.profesionales").empty();
+                                    if (Object.keys(data).length > 0) {
+                                        $.each(response, function(i, item) {
+                                            let option = '<option value="' + item.user_id + '">' + item.user_nombre + '</option>';
+                                            $("#default\\.profesionales").append(option);
+                                        });
+                                    }
+                                });
 
                                 $("#dialog\\.delete").on("click", function(){
                                     let id = $(this).data("id");
@@ -982,7 +1046,6 @@
                         $("#tabla\\.profesional").append(fila);
                         $("#turno\\.profesional\\.in").append(fila);
                         $("#departamento\\.formulario\\.jefe").append(option);
-                        $("#default\\.profesionales").append(option);
                     });
                 }
             });
