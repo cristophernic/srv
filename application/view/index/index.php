@@ -703,6 +703,7 @@
                     let h = 1;
                     let turnos = response.turnos;
                     let comentarios = response.comentarios;
+                    let defaultC = response.default;
 
                     for (h; h <= j; h++){
                         let rojo = "";
@@ -721,7 +722,7 @@
                             return comentario.comentario_fecha === dia;
                         });
 
-                        const defaultProfesional = default.filter(default =>{
+                        const defaultProfesional = defaultC.filter(default =>{
                             let dia = data.ano + '-' + data.mes + '-' + ("0" + h).slice(-2);
                             return default.default_fecha === dia;
                         });
