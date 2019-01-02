@@ -743,7 +743,7 @@
                 var primerdia = ((new Date(year, mes, 1).getDay()-1)%7+7)%7;
                 var dias=new Date(year, mes+1,0).getDate()-7+primerdia;
                 let semanas = Math.ceil(dias/7)+1;
-                let i = 0;
+                let i = 1;
                 for (i; i <= semanas; i++){
                     $("#cambiar\\.semanas\\.semana").append('<option value="'+ (i+1) +'">Semana '+ (i+1) +'</option>');
                 }
