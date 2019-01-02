@@ -290,7 +290,7 @@ class TurnosModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "UPDATE default_turno SET (turno_profesional = :turno_profesional) WHERE default_id = :default_id";
+        $sql = "UPDATE default_turno SET turno_profesional = :turno_profesional WHERE default_id = :default_id";
         $query = $database->prepare($sql);
         $query->execute(array(':default_id' => $default_id,':turno_profesional' => $turno_profesional));
 
