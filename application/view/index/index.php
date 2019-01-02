@@ -21,6 +21,7 @@
                                 <a class="dropdown-item" href="#" id="boton.pormes">Ver turnos por mes</a>
                             <?php endif; ?>
                                 <a class="dropdown-item" href="#" id="boton.imprimir">Ver resumen del mes</a>
+                                <a class="dropdown-item" href="#" id="boton.semana">Ver resumen semanal</a>
                                 <a class="dropdown-item" href="login/logout">Salir del programa</a>
                                 <div class="dropdown-divider"></div>
                                     <a class="dropdown-item dropdown-toggle" href="#" id="modificarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Modificar</a>
@@ -199,8 +200,6 @@
                     }
                 });
 
-
-
                 $("#dialog\\.delete").remove();
                 $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete">Guardar</button>');
 
@@ -227,7 +226,6 @@
                     });
                 });
             });
-
 
             $("#boton\\.default").on("click", function(){
                 $("#dialog\\.title").html("INGRESAR PROFESIONAL PREDETERMINADO<br>(Departamento, fecha de turno y profesional asignado)");
@@ -713,6 +711,59 @@
             });
 
             $("#boton\\.imprimir").on("click", function(){
+                var documento = '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="user-scalable=no,maximum-scale=1, minimum-scale=1, width=device-width, initial-scale=1, shrink-to-fit=no"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"><link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/solid.css" integrity="sha384-VGP9aw4WtGH/uPAOseYxZ+Vz/vaTb1ehm1bwx92Fm8dTrE+3boLfF1SpAtB1z7HW" crossorigin="anonymous"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7" crossorigin="anonymous"><title>Turnos</title></head><body><h3 class="text-center">Calendario de Turnos Clinica Alemana Temuco, Mes :MES<br>Unidad o Departamento :DEPARTAMENTO</h3><p>&nbsp;</p>:Tabla<p>&nbsp;</p><div class="row"><div class="col px-5"><p class="mb-0 text-center">:FECHA</p><hr><p class="text-center">Fecha</p></div><div class="col px-5"><p class="mb-0 text-center">:JEFE</p><hr><p class="text-center">Jefe de Unidad</p></div></body><script>document.addEventListener("DOMContentLoaded",function(event){var ventimp=window; var element = document.getElementById("table");element.classList.add("table-sm");ventimp.print();ventimp.close();});<\/script></html>'
+                documento = documento.replace(':MES', $("#fecha\\.mes option:selected").text() + ' ' + $("#fecha\\.ano option:selected").text() );
+                var element = document.getElementById("table");
+                var calendario = element.outerHTML;
+                let now = new Date();
+                let day = ("0" + now.getDate()).slice(-2);
+                let month = now.getMonth();
+                let meses = ["Enero","Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+                let today = (day)+ "-" + meses[month] + "-" + now.getFullYear();
+
+                documento = documento.replace(':Tabla', calendario);
+                documento = documento.replace(':FECHA', today);
+                documento = documento.replace(':JEFE', JEFEA);
+                documento = documento.replace(':DEPARTAMENTO', $("#departamentos\\.header option:selected").text())
+                var ventimp = window.open(' ', 'popimpr');
+                ventimp.document.write(documento);
+                ventimp.document.close();
+            });
+
+            $("#boton\\.semana").on("click", function(){
+
+                $("#dialog\\.title").html("Elegir un Mes y una semana");
+                $("#dialog\\.body").html('<div class="row"><div class="form-group col-6"><label for="cambiar.semanas.mes">Mes</label><select class="form-control" id="imprimir.semanas.mes"><option value="1">Enero</option><option value="2">Febrero</option><option value="3">Marzo</option><option value="4">Abril</option><option value="5">Mayo</option><option value="6">Junio</option><option value="7">Julio</option><option value="8">Agosto</option><option value="9">Septiembre</option><option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option></select></div><div class="form-group col-6"><label for="cambiar.semanas.semana">Semana</label><select class="form-control" id="cambiar.semanas.semana"></select></div><div>');
+                $("#dialog\\.view").modal("show");
+                $("#dialog\\.delete").remove();
+                $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete">Guardar</button>');
+
+                
+                $("#imprimir\\.semanas\\.mes").on("click", function(){
+                    $("#cambiar\\.semanas\\.semana").empty();
+                    var year= this.getFullYear();
+                    var mes = this.getMonth();
+                    var primerdia = ((new Date(year, mes, 1).getDay()-1)%7+7)%7;
+                    var dias=new Date(year, mes+1,0).getDate()-7+primerdia;
+                    let semanas = Math.ceil(dias/7)+1;
+                    let i = 0;
+                    for (i; i <= semanas; i++){
+                        $("#cambiar\\.semanas\\.semana").append('<option value="'+ (i+1) +'">Semana '+ (i+1) +'</option>');
+                    }
+                });
+                
+                $("#dialog\\.delete").on("click", function(){
+                    let datos = {
+                        accion: "email",
+                        user_email: $("#cambiar\\.correo").val()
+                    }
+
+                    $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
+                        alert( response == true ? "cambiado" : "Error al cambiar correo, escriba un correo válido sin espacios");
+                        if (response == true) {$("#dialog\\.view").modal("hide");}
+                    });
+                });
+
                 var documento = '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="user-scalable=no,maximum-scale=1, minimum-scale=1, width=device-width, initial-scale=1, shrink-to-fit=no"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"><link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/solid.css" integrity="sha384-VGP9aw4WtGH/uPAOseYxZ+Vz/vaTb1ehm1bwx92Fm8dTrE+3boLfF1SpAtB1z7HW" crossorigin="anonymous"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7" crossorigin="anonymous"><title>Turnos</title></head><body><h3 class="text-center">Calendario de Turnos Clinica Alemana Temuco, Mes :MES<br>Unidad o Departamento :DEPARTAMENTO</h3><p>&nbsp;</p>:Tabla<p>&nbsp;</p><div class="row"><div class="col px-5"><p class="mb-0 text-center">:FECHA</p><hr><p class="text-center">Fecha</p></div><div class="col px-5"><p class="mb-0 text-center">:JEFE</p><hr><p class="text-center">Jefe de Unidad</p></div></body><script>document.addEventListener("DOMContentLoaded",function(event){var ventimp=window; var element = document.getElementById("table");element.classList.add("table-sm");ventimp.print();ventimp.close();});<\/script></html>'
                 documento = documento.replace(':MES', $("#fecha\\.mes option:selected").text() + ' ' + $("#fecha\\.ano option:selected").text() );
                 var element = document.getElementById("table");
