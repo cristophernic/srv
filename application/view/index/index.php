@@ -41,7 +41,7 @@
                         <div class="form-row">
                             <div class="col-4">
                                 <div class="form-group m-0">
-                                    <label for="departamentos.header">Departamento</label>
+                                    <label for="departamentos.header">Elegir departamento o unidad</label>
                                     <select id="departamentos.header" class="form-control"></select>
                                 </div>
                             </div>
