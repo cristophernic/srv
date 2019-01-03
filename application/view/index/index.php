@@ -780,7 +780,7 @@
                             let tableHeader = '<tr><th scope="col">Profesional</th>';
                             let i = response.semana_ini;
                             
-                            if (response.mesAnt > 0 && i < response.mesAnt){
+                            if (response.mesAnt > 0 && i <= response.mesAnt){
                                 for (i; i <= response.mesAnt; i++){
                                     tableHeader += '<th scope="col">Día ' + i + '</th>'; 
                                 };
