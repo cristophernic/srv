@@ -37,7 +37,7 @@ class TurnosModel
         $semana_fin = 0;
 
         if ($semana == 1){
-            $intervalo = "P$diaDeLaSemanaD";
+            $intervalo = "P". $diaDeLaSemana."D";
             $Lunes = $fecha->sub(new DateInterval($intervalo));
             $semana_ini = $Lunes->format('d');
             $semana_fin = 7 - $diaDeLaSemana;
