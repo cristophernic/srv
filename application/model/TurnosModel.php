@@ -45,8 +45,8 @@ class TurnosModel
             $semana_ini = "0". strval($semana_ini);
         }
 
-        $fecha1 = $ano . "-" . $mes . "-". $semana_ini;
-        $fecha2 = $ano . '-' . $mes . '-'. $semana_fin;
+        echo $fecha1 = $ano . "-" . $mes . "-". $semana_ini;
+        echo $fecha2 = $ano . '-' . $mes . '-'. $semana_fin;
 
         $sql = "SELECT turnos.turno_id, turnos.turno_departamento, turnos.turno_profesional, turnos.turno_fechain, turnos.turno_turno, users.user_nombre FROM turnos INNER JOIN users ON turnos.turno_profesional = users.user_id WHERE turnos.turno_departamento = :departamento AND turnos.turno_fechain BETWEEN :turno_fechain AND :turno_fechaout";
         $query = $database->prepare($sql);
