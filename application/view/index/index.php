@@ -781,7 +781,7 @@
                                     if (response.mesAnt > 0 && h <= response.mesAnt){
                                         for (h; h <= response.mesAnt; h++){
                                             if (h == fecha){
-                                                fila += '<td class="bg-danger"></td>'; 
+                                                fila += '<td class="bg-warning"></td>'; 
                                             }
                                             else{
                                                 fila += '<td></td>'; 
@@ -793,7 +793,7 @@
                                     for (h; h <= response.semana_fin; h++){
                                         if (response.mesPres > 0 && h > response.mesPres){
                                             if (h == fecha){
-                                                fila += '<td class="bg-danger"></td>'; 
+                                                fila += '<td class="bg-warning"></td>'; 
                                             }
                                             else{
                                                 fila += '<td></td>'; 
@@ -801,7 +801,7 @@
                                         }
                                         else{
                                             if (h == fecha){
-                                                fila += '<td class="bg-danger"></td>'; 
+                                                fila += '<td class="bg-warning"></td>'; 
                                             }
                                             else{
                                                 fila += '<td></td>'; 
