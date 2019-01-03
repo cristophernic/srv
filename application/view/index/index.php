@@ -89,7 +89,7 @@
                                 <tr>
                                     <th scope="col" rowspan="2">Días / Fecha</th>
                                     <th scope="col" rowspan="2">Turnos programados</th>
-                                    <th scope="col" colspan="2">Turno realizados</th>
+                                    <th scope="col" colspan="2" class="text-center">Turno realizados</th>
                                     <th scope="col" rowspan="2">Comentarios</th>
                                 </tr>
                                 <tr>
