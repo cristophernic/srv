@@ -765,13 +765,13 @@
                             matrizProf = [];
 
                             $("#dialog\\.delete").attr("disabled", true);
-                            $("#dialog\\.body").html('<div class="d-none" id="imprimir.semanas"></div><button type="button" class="btn btn-danger" id="dialog.finalprint">Imprimir</button>');
-                            $("#imprimir\\.semanas").html('<table class="table table-td table-hover table-bordered"><thead class="bg-light" id="table.imprimir.semanas.head"><tr><th scope="col">Profesional</th></tr></thead><tbody id="table.imprimir.semanas"></tbody></table>');
+                            $("#dialog\\.body").html('<div class="" id="imprimir.semanas"></div><button type="button" class="btn btn-danger" id="dialog.finalprint">Imprimir</button>');
+                            $("#imprimir\\.semanas").html('<table class="table table-td table-hover table-bordered"><thead class="bg-light" id="table.imprimir.semanas.head"></thead><tbody id="table.imprimir.semanas"></tbody></table>');
 
                             $.each(response.data, function(i, val){
                                 if (matrizProf.includes(val.user_nombre) == false){
                                     matrizProf.push(val.user_nombre);
-                                    $("#table\\.imprimir\\.semanas").append('<tr><td>'+ val.user_nombre +'</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
+                                    $("#table\\.imprimir\\.semanas").append('<tr><td>'+ val.user_nombre +'</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
                                 }  
                             });
                             let tableHeader = '<tr><th scope="col">Profesional</th>';
