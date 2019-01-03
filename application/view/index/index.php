@@ -788,7 +788,13 @@
                             }
 
                             for (i; i <= response.semana_fin; i++){
-                                tableHeader += '<th scope="col">Día ' + i + '</th>';
+                                if (response.mesPres > 0 && i >= response.mesPres){
+                                    tableHeader += '<th scope="col">Día ' + (i - response.mesPres) + '</th>';
+                                }
+                                else{
+                                    tableHeader += '<th scope="col">Día ' + i + '</th>';
+                                }
+
                             };
 
                             tableHeader += '<th scope="col">Total Semana</th><tr>';

@@ -63,6 +63,9 @@ class TurnosModel
             if ($semana_fin > $fecha->format('t')){
                 $return->mesPres = $fecha->format('t');
             }
+            else{
+                $return->mesPres = 0;
+            }
             if ($semana_ini < 10){
                 $semana_ini = '0'. $semana_ini;
             }
