@@ -8,9 +8,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <?php if (Session::get("user_account_type") == 6) : ?>
-                            <li class="nav-item"><a class="nav-link" href="#" id="boton.configuracion">Configuración unidad y usuarios</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" id="boton.configuracion">Configuración unidad y profesionales</a></li>
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.default">Turnos programados</a></li>
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Asignar Turnos realizados</a></li>
+                        <?php endif; ?>
+                        <?php if (Session::get("user_account_type") == 1) : ?>
+                            <li class="nav-item"><a class="nav-link" href="#" id="boton.listado.profesionales">Ver listado de profesionales</a></li>
                         <?php endif; ?>
                     </ul>
                     <ul class="navbar-nav">
@@ -180,6 +183,36 @@
                 }
             });
 
+            <?php if (Session::get("user_account_type") == 1) : ?>
+                $("#boton\\.listado\\.profesionales").on("click", function(){
+                    let filtrar = $("#departamentos\\.header option:selected").val();
+                    let data = "";
+                    if (filtrar == "null"){
+                        data = {
+                            accion : "profesionalesDepartamento",
+                        }
+                    }
+                    else{
+                        data = {
+                            accion : "profesionalesFiltrados",
+                            departamento_id: filtrar
+                        }
+                    }
+
+                    $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
+                        $("#dialog\\.title").html("Profesionales en el departamento o unidad");
+                        $("#dialog\\.body").html('<table class="table"><thead class="thead-dark"><tr><th scope="col">#</th><th scope="col">Departamento</th><th scope="col">Nombre profesional</th><th scope="col">Telefono</th><th scope="col">Correo</th></tr></thead><tbody id="usuarios.tabla"></tbody></table>');
+                        $("#dialog\\.view").modal("show");
+                        if (Object.keys(data).length > 0) {
+                            $.each(response, function(i, item) {
+                                let fila = '<tr><td data-id="'+item.user_id+'">' + item.user_id + '</td><td>' + item.departamento_name + '</td><td>' + item.user_nombre + '</td><td>' + item.user_telefono + '</td><td>' + item.user_email + '</td></tr>';
+                                $("#usuarios\\.tabla").append(fila);
+                            });
+                        }
+                    });
+                });
+            <?php endif; ?>
+
             <?php if (Session::get("user_account_type") == 6) : ?>
             $("#boton\\.turno").on("click", function(){
                 $("#dialog\\.title").html("INGRESAR DATOS<br>(Departamento, fecha de turno, horario y profesional asignado)");
@@ -279,7 +312,7 @@
 
             $("#boton\\.configuracion").on("click", function(){
                 $("#dialog\\.title").html("Configuración");
-                $("#dialog\\.body").html('<ul class="nav nav-tabs" id="configuracionOption" role="tablist"><li class="nav-item"><a class="nav-link active show" data-toggle="tab" role="tab" aria-selected="false" id="departamento-tab" aria-controls="departamento" href="#a">Unidad o Departamento</a></li><li class="nav-item"><a class="nav-link" data-toggle="tab" role="tab" aria-selected="true" id="usuarios-tab" aria-controls="usuarios" href="#b">Listado de usuarios</a></li></ul><div class="tab-content" id="configuracionTab"><div class="tab-pane fade active show" role="tabpanel" aria-labelledby="departamento-tab" id="a"><div role="group" aria-label="Botones" class="btn-group my-3"><button type="button" class="btn btn-outline-primary" id="departamento.formulario.nuevo">Nuevo departamento</button><button type="button" class="btn btn-outline-primary d-none" id="departamento.formulario.guardar">Guardar</button><button type="button" class="btn btn-outline-secondary d-none" id="departamento.formulario.cancelar">Cancelar</button></div><div class="row"><div class="col-12 d-none" id="departamento.formulario"><div class="card my-2 border border-primary"><div class="card-body"><h5 class="card-title text-right"><strong>Nuevo Departamento</strong></h5><div class="form-group"><label for="departamento.formulario.texto"><strong>1.- Nombre del departamento</strong></label><input class="form-control" type="text" id="departamento.formulario.texto"></div><div class="form-group"><label for="departamento.formulario.jefe"><strong>2.- Jefe de departamento</strong></label><select class="form-control" id="departamento.formulario.jefe"></select><input type="hidden" id="departamento.formulario.departamento.id"/></div></div></div></div><div class="col-12" id="departamento.formulario.tabla.contenedor"><table class="table"><thead class="thead-dark"><tr><th scope="col">#</th><th scope="col">Nombre del departamento</th><th scope="col">Jefe de unidad</th><th scope="col">N° Integrantes</th><th scope="col">acciones</th></tr></thead><tbody id="departamentos.tabla"></tbody></table></div></div></div><div class="tab-pane fade" role="tabpanel" aria-labelledby="usuarios-tab" id="b"><div role="group" aria-label="Botones" class="btn-group my-3"><button type="button" class="btn btn-outline-primary" id="usuarios.formulario.nuevo">Asignar usuario a un departamento</button></div><div class="row"><div class="col-12 d-none" id="usuarios.formulario"><div class="card my-2 border border-primary"><div class="card-body"><h5 class="card-title text-right"><strong>Usuario a Departamento</strong></h5><div class="form-group"><label for="usuario.formulario.usuario"><strong>1.- Seleccione Profesional</strong></label><select class="form-control" id="usuario.formulario.usuario"></select></div><div class="form-group"><label for="usuario.formulario.departamento"><strong>2.- Seleccione Departamento</strong></label><select class="form-control" id="usuario.formulario.departamento"></select></div><div role="group" aria-label="Botones" class="btn-group my-3"><button type="button" class="btn btn-outline-danger d-none" id="usuarios.formulario.guardar">Guardar</button><button type="button" class="btn btn-outline-secondary d-none" id="usuarios.formulario.cancelar">Cancelar</button></div></div></div></div><div class="col-12" id="usuario.departamento.filtrar.contenedor"><div class="form-group"><label for="usuario.departamento.filtrar">Departamento</label><select class="form-control" id="usuario.departamento.filtrar"></select></div><table class="table"><thead class="thead-dark"><tr><th scope="col">#</th><th scope="col">Departamento</th><th scope="col">Nombre profesional</th><th scope="col">Telefono</th><th scope="col">Correo</th><th scope="col">acciones</th></tr></thead><tbody id="usuarios.tabla"></tbody></table></div></div></div></div>');
+                $("#dialog\\.body").html('<ul class="nav nav-tabs" id="configuracionOption" role="tablist"><li class="nav-item"><a class="nav-link active show" data-toggle="tab" role="tab" aria-selected="false" id="departamento-tab" aria-controls="departamento" href="#a">Unidad o Departamento</a></li><li class="nav-item"><a class="nav-link" data-toggle="tab" role="tab" aria-selected="true" id="usuarios-tab" aria-controls="usuarios" href="#b">Listado de profesionales</a></li></ul><div class="tab-content" id="configuracionTab"><div class="tab-pane fade active show" role="tabpanel" aria-labelledby="departamento-tab" id="a"><div role="group" aria-label="Botones" class="btn-group my-3"><button type="button" class="btn btn-outline-primary" id="departamento.formulario.nuevo">Nuevo departamento</button><button type="button" class="btn btn-outline-primary d-none" id="departamento.formulario.guardar">Guardar</button><button type="button" class="btn btn-outline-secondary d-none" id="departamento.formulario.cancelar">Cancelar</button></div><div class="row"><div class="col-12 d-none" id="departamento.formulario"><div class="card my-2 border border-primary"><div class="card-body"><h5 class="card-title text-right"><strong>Nuevo Departamento</strong></h5><div class="form-group"><label for="departamento.formulario.texto"><strong>1.- Nombre del departamento</strong></label><input class="form-control" type="text" id="departamento.formulario.texto"></div><div class="form-group"><label for="departamento.formulario.jefe"><strong>2.- Jefe de departamento</strong></label><select class="form-control" id="departamento.formulario.jefe"></select><input type="hidden" id="departamento.formulario.departamento.id"/></div></div></div></div><div class="col-12" id="departamento.formulario.tabla.contenedor"><table class="table"><thead class="thead-dark"><tr><th scope="col">#</th><th scope="col">Nombre del departamento</th><th scope="col">Jefe de unidad</th><th scope="col">N° Integrantes</th><th scope="col">acciones</th></tr></thead><tbody id="departamentos.tabla"></tbody></table></div></div></div><div class="tab-pane fade" role="tabpanel" aria-labelledby="usuarios-tab" id="b"><div role="group" aria-label="Botones" class="btn-group my-3"><button type="button" class="btn btn-outline-primary" id="usuarios.formulario.nuevo">Asignar usuario a un departamento</button></div><div class="row"><div class="col-12 d-none" id="usuarios.formulario"><div class="card my-2 border border-primary"><div class="card-body"><h5 class="card-title text-right"><strong>Usuario a Departamento</strong></h5><div class="form-group"><label for="usuario.formulario.usuario"><strong>1.- Seleccione Profesional</strong></label><select class="form-control" id="usuario.formulario.usuario"></select></div><div class="form-group"><label for="usuario.formulario.departamento"><strong>2.- Seleccione Departamento</strong></label><select class="form-control" id="usuario.formulario.departamento"></select></div><div role="group" aria-label="Botones" class="btn-group my-3"><button type="button" class="btn btn-outline-danger d-none" id="usuarios.formulario.guardar">Guardar</button><button type="button" class="btn btn-outline-secondary d-none" id="usuarios.formulario.cancelar">Cancelar</button></div></div></div></div><div class="col-12" id="usuario.departamento.filtrar.contenedor"><div class="form-group"><label for="usuario.departamento.filtrar">Departamento</label><select class="form-control" id="usuario.departamento.filtrar"></select></div><table class="table"><thead class="thead-dark"><tr><th scope="col">#</th><th scope="col">Departamento</th><th scope="col">Nombre profesional</th><th scope="col">Telefono</th><th scope="col">Correo</th><th scope="col">acciones</th></tr></thead><tbody id="usuarios.tabla"></tbody></table></div></div></div></div>');
                 $("#dialog\\.view").modal("show");
                 $("#dialog\\.delete").remove();
 
