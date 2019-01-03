@@ -54,7 +54,7 @@ class TurnosModel
 
         $sql = "SELECT turnos.turno_id, turnos.turno_departamento, turnos.turno_profesional, turnos.turno_fechain, turnos.turno_turno, users.user_nombre FROM turnos INNER JOIN users ON turnos.turno_profesional = users.user_id WHERE turnos.turno_departamento = :departamento AND turnos.turno_fechain BETWEEN :turno_fechain AND :turno_fechaout";
         $query = $database->prepare($sql);
-        $query->execute(array(':departamento' => intval($departamento), ':turno_fechain' => $fecha2, ':turno_fechaout' => $fecha1));
+        $query->execute(array(':departamento' => intval($departamento), ':turno_fechain' => $fecha1, ':turno_fechaout' => $fecha2));
 
         return $query->fetchAll();
 
