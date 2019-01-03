@@ -887,7 +887,7 @@
                                 var calendario = element.outerHTML;
                                 calendario = calendario.replace('d-none', '');
                                 documento = documento.replace(':TABLA', calendario);
-                                documento = documento.replace(':DEPARTAMENTO', '      ' + $("#departamentos\\.header option:selected").text());
+                                documento = documento.replace(':DEPARTAMENTO', '&nbsp;&nbsp;&nbsp;' + $("#departamentos\\.header option:selected").text());
                                 var ventimp = window.open(' ', 'popimpr');
                                 ventimp.document.write(documento);
                                 ventimp.document.close();
