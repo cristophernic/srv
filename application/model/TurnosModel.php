@@ -30,7 +30,7 @@ class TurnosModel
         $fecha = new DateTime($ano . '-' . $mes .'-01');
         $diaDeLaSemana = $fecha->format('N') -1; 
         $database = DatabaseFactory::getFactory()->getConnection();
-        
+
         $semana_inic = 1;
         $semana_fin = 0;
         if ($semana == 1){
@@ -40,6 +40,11 @@ class TurnosModel
             $semana_ini = ((7 * ($semana -1)) - $diaDeLaSemana)+1;
             $semana_fin = (7 * $semana) - $diaDeLaSemana; 
         }
+
+        if ($semana_ini < 10){
+            $semana_ini = "0". strval($semana_ini);
+        }
+
         $fecha1 = $ano . "-" . $mes . "-". $semana_ini;
         $fecha2 = $ano . '-' . $mes . '-'. $semana_fin;
 
