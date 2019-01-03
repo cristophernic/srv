@@ -1,7 +1,7 @@
     <body class="h-100">
         <div class="fixed-top">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">Calendario de Turnos Clínica Alemana Temuco</a>
+                <a class="navbar-brand" href="#">Turnos Clínica Alemana Temuco</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -9,8 +9,8 @@
                     <ul class="navbar-nav mr-auto">
                         <?php if (Session::get("user_account_type") == 6) : ?>
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.configuracion">Configuración unidad y usuarios</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Asignar turnos</a></li>
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.default">Asignar predeterminados</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Asignar turnos realizados</a></li>
                         <?php endif; ?>
                     </ul>
                     <ul class="navbar-nav">
