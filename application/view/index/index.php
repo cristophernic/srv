@@ -86,7 +86,7 @@
                         <div class="table-responsive">
                         <table class="table table-td table-hover table-bordered" id="table">
                             <thead>
-                                <tr class="bg-secondary">
+                                <tr>
                                     <th scope="col" rowspan="2" class="text-center" style="font-size:1.3rem">Días / Fecha</th>
                                     <th scope="col" rowspan="2" class="text-center" style="font-size:1.3rem">Turnos programados</th>
                                     <th scope="col" colspan="2" class="text-center" style="font-size:1.3rem">Turno realizados</th>
