@@ -45,6 +45,10 @@ class TurnosModel
             $semana_ini = "0". strval($semana_ini);
         }
 
+        if ($semana_fin < 10){
+            $semana_fin = "0". strval($semana_fin);
+        }
+
         $fecha1 = strval($ano) . "-" . strval($mes) . "-". strval($semana_ini);
         $fecha2 = strval($ano) . '-' . strval($mes) . '-'. strval($semana_fin);
 
