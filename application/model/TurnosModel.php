@@ -25,8 +25,20 @@ class TurnosModel
         }
     }
 
-    public static function simpleCalendar($departamento, $mes, $ano, $semana_ini, $semana_fin){
+    public static function simpleCalendar($departamento, $mes, $ano, $semana){
 
+        $fecha = new DateTime($ano . '-' . $mes .'-01');
+        $diaDeLaSemana = $fecha->format('N') -1; 
+
+        $semana_inic = 1;
+        $semana_fin = 0;
+        if ($semana == 1){
+            $semana_fin = 7 - $diaDeLaSemana;
+        }
+        else{
+            $semana_ini = ((7 * ($semana -1)) - $diaDeLaSemana)+1;
+            $semana_fin = (7 * $semana) - $diaDeLaSemana; 
+        }
         $fecha1 = $ano . "-" . $mes . "-". $semana_ini;
         $fecha2 = $ano . '-' . $mes . '-'. $semana_fin;
 
