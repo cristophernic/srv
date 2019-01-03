@@ -827,7 +827,7 @@
 
                             if (response.mesAnt > 0 && i <= response.mesAnt){
                                 for (i; i <= response.mesAnt; i++){
-                                    tableHeader += '<th scope="col">'+ dias[contadorDias]+ '<br>'+ i + '</th>';
+                                    tableHeader += '<th scope="col" class="text-center">'+ dias[contadorDias]+ '<br>'+ i + '</th>';
                                     contadorDias++; 
                                 };
                                 i = 1;
@@ -835,11 +835,11 @@
 
                             for (i; i <= response.semana_fin; i++){
                                 if (response.mesPres > 0 && i > response.mesPres){
-                                    tableHeader += '<th scope="col">' + dias[contadorDias]+ '<br>'+ (i - response.mesPres) + '</th>';
+                                    tableHeader += '<th scope="col" class="text-center">' + dias[contadorDias]+ '<br>'+ (i - response.mesPres) + '</th>';
                                     contadorDias++;
                                 }
                                 else{
-                                    tableHeader += '<th scope="col">' + dias[contadorDias]+ '<br>'+ i + '</th>';
+                                    tableHeader += '<th scope="col" class="text-center">' + dias[contadorDias]+ '<br>'+ i + '</th>';
                                     contadorDias++;
                                 }
                             };
