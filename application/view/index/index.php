@@ -12,7 +12,7 @@
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.default">Turnos programados</a></li>
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Asignar Turnos realizados</a></li>
                         <?php endif; ?>
-                        <?php if (Session::get("user_account_type") == 1) : ?>
+                        <?php if (Session::get("user_account_type") < 3) : ?>
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.listado.profesionales">Ver listado de profesionales</a></li>
                         <?php endif; ?>
                     </ul>
@@ -183,7 +183,7 @@
                 }
             });
 
-            <?php if (Session::get("user_account_type") == 1) : ?>
+            <?php if (Session::get("user_account_type") < 3) : ?>
                 $("#boton\\.listado\\.profesionales").on("click", function(){
                     let filtrar = $("#departamentos\\.header option:selected").val();
                     let data = "";
