@@ -756,8 +756,7 @@
                         accion: "calendarioSimple",
                         mes: mes,
                         ano: year,
-                        semana_ini: 7 * semana,
-                        semana_fin: 7 * (semana +1)
+                        semana: semana
                     }
 
                     $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){
