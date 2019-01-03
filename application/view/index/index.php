@@ -87,14 +87,14 @@
                         <table class="table table-td table-hover table-bordered" id="table">
                             <thead class="bg-light">
                                 <tr>
-                                    <th scope="col" rowspan="2">Días / Fecha</th>
-                                    <th scope="col" rowspan="2">Turnos programados</th>
+                                    <th scope="col" rowspan="2" class="text-center">Días / Fecha</th>
+                                    <th scope="col" rowspan="2" class="text-center">Turnos programados</th>
                                     <th scope="col" colspan="2" class="text-center">Turno realizados</th>
-                                    <th scope="col" rowspan="2">Comentarios</th>
+                                    <th scope="col" rowspan="2" class="text-center">Comentarios</th>
                                 </tr>
                                 <tr>
-                                    <th scope="col">Diurno</th>
-                                    <th scope="col">Nocturno</th>
+                                    <th scope="col" class="text-center">Diurno</th>
+                                    <th scope="col" class="text-center">Nocturno</th>
                                 </tr>
                             </thead>
                             <tbody id="table.calendario">
