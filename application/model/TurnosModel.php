@@ -41,12 +41,18 @@ class TurnosModel
             $Lunes = $fecha->sub(new DateInterval($intervalo));
             $semana_ini = $Lunes->format('d');
             $semana_fin = 7 - $diaDeLaSemana;
-            $return->mesAnt = $Lunes->format('t') ;
+            $return->mesAnt = $Lunes->format('t');
+            $mesA = intval($mes) -1;
+            if ($mesA < 10){
+                $mesA =  "0". $mesA; 
+            }
+            $fecha1 = "$ano-$mesA-$semana_ini";
         }
         else{
             $semana_ini = ((7 * ($semana -1)) - $diaDeLaSemana)+1;
             $semana_fin = (7 * $semana) - $diaDeLaSemana;
             $return->mesAnt = 0;
+            $fecha1 = "$ano-$mes-$semana_ini";
         }
 
         if ($semana_ini < 10){
@@ -57,7 +63,6 @@ class TurnosModel
             $semana_fin = '0'. $semana_fin;
         }
 
-        $fecha1 = "$ano-$mes-$semana_ini";
         $fecha2 = "$ano-$mes-$semana_fin";
 
         $return->semana_ini = $semana_ini;
