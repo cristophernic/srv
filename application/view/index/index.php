@@ -777,7 +777,7 @@
                             let tableHeader = '<tr><th scope="col">Profesional</th>';
                             let i = response.semana_ini;
                             
-                            for (i; response.semana_ini <= response.semana_fin; i++){
+                            for (i; i <= response.semana_fin; i++){
                                 tableHeader += '<th scope="col">Día ' + i + '</th>';
                             };
 
