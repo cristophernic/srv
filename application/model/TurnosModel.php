@@ -35,12 +35,17 @@ class TurnosModel
 
         $semana_ini = 1;
         $semana_fin = 0;
+
         if ($semana == 1){
+            $Lunes = date("Y-m-d",strtotime($fecha."- $diaDeLaSemana days"));
+            $semana_ini = $Lunes->format('d');
             $semana_fin = 7 - $diaDeLaSemana;
+            $return->mesAnt = $Lunes->format('t') ;
         }
         else{
             $semana_ini = ((7 * ($semana -1)) - $diaDeLaSemana)+1;
-            $semana_fin = (7 * $semana) - $diaDeLaSemana; 
+            $semana_fin = (7 * $semana) - $diaDeLaSemana;
+            $return->mesAnt = 0;
         }
 
         if ($semana_ini < 10){
