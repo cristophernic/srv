@@ -808,7 +808,7 @@
                                             }
                                         }
                                     };
-                                    fila += '</tr>';
+                                    fila += '<td></td></tr>';
                                     $("#table\\.imprimir\\.semanas").append(fila);
                                 }  
                             });
