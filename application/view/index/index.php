@@ -788,7 +788,7 @@
                             }
 
                             for (i; i <= response.semana_fin; i++){
-                                if (response.mesPres > 0 && i >= response.mesPres){
+                                if (response.mesPres > 0 && i > response.mesPres){
                                     tableHeader += '<th scope="col">Día ' + (i - response.mesPres) + '</th>';
                                 }
                                 else{
