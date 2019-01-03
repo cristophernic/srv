@@ -768,7 +768,7 @@
                             matrizProf = [];
 
                             $("#dialog\\.delete").attr("disabled", true);
-                            $("#dialog\\.body").html('<div class="" id="imprimir.semanas"></div><button type="button" class="btn btn-danger" id="dialog.finalprint">Imprimir</button>');
+                            $("#dialog\\.body").html('<div class="d-none" id="imprimir.semanas"></div><button type="button" class="btn btn-danger" id="dialog.finalprint">Imprimir</button>');
                             $("#imprimir\\.semanas").html('<table class="table table-td table-hover table-bordered"><thead class="bg-light" id="table.imprimir.semanas.head"></thead><tbody id="table.imprimir.semanas"></tbody></table>');
 
                             $.each(response.data, function(i, val){
@@ -835,6 +835,17 @@
                             tableHeader += '<th scope="col">Total Semana</th><tr>';
                             
                             $("#table\\.imprimir\\.semanas\\.head").append(tableHeader);
+
+                            $("#dialog\\.finalprint").on("click", function(){
+                                var documento = '<!doctype html><html lang="es"> <head> <meta charset="utf-8"> <meta name="viewport" content="user-scalable=no,maximum-scale=1, minimum-scale=1, width=device-width, initial-scale=1, shrink-to-fit=no"> <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"> <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"> <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/solid.css" integrity="sha384-VGP9aw4WtGH/uPAOseYxZ+Vz/vaTb1ehm1bwx92Fm8dTrE+3boLfF1SpAtB1z7HW" crossorigin="anonymous"> <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7" crossorigin="anonymous"> <title>Turnos</title> </head> <body> <p>Departamento :DEPARTAMENTO</p><p>&nbsp;</p>:TABLA <p>&nbsp;</p><div class="row"> <div class="col px-5"> <p class="mb-0 text-center">&nbsp;</p><hr> <p class="text-center">V° B° Coord. Departamento</p></div><div class="col px-5"> <p class="mb-0 text-center">&nbsp;</p><hr> <p class="text-center">V° B° Jefe Departamento</p></div><p><strong><u>Estimado Doctor(a): En la casilla correspondiente a su nombre y fecha, favor indicar horario de turno realizado y firma. En caso que no esté en nómina incorporar su nombre en las casillas vacías.</u></strong></p></body><script>document.addEventListener("DOMContentLoaded",function(event){var ventimp=window; var element=document.getElementById("table");element.classList.add("table-sm");ventimp.print();ventimp.close();});</script></html>';
+                                var element = document.getElementById("imprimir.semanas");
+                                var calendario = element.outerHTML;
+                                documento = documento.replace(':TABLA', calendario);
+                                documento = documento.replace(':DEPARTAMENTO', $("#departamentos\\.header option:selected").text());
+                                var ventimp = window.open(' ', 'popimpr');
+                                ventimp.document.write(documento);
+                                ventimp.document.close();
+                            });
                         }
                     });
                 });
