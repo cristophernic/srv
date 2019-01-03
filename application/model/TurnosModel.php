@@ -31,7 +31,7 @@ class TurnosModel
         $diaDeLaSemana = $fecha->format('N') -1; 
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $semana_inic = 1;
+        $semana_ini = 1;
         $semana_fin = 0;
         if ($semana == 1){
             $semana_fin = 7 - $diaDeLaSemana;
