@@ -79,7 +79,7 @@ class TurnosModel
         $return->semana_ini = $semana_ini;
         $return->semana_fin = $semana_fin;
 
-        $sql = "SELECT default_turno.turno_profesional, default_turno.default_fecha, users.user_nombre FROM default_turno INNER JOIN users ON default_turno.turno_profesional = users.user_id WHERE default_turno.turno_departamento = :departamento AND default_turno.default_fecha BETWEEN :turno_fechain AND :turno_fechaout";
+        $sql = "SELECT default_turno.turno_profesional, default_turno.default_fecha, users.user_nombre FROM default_turno INNER JOIN users ON default_turno.turno_profesional = users.user_id WHERE default_turno.turno_departamento = :departamento AND default_turno.default_fecha BETWEEN :turno_fechain AND :turno_fechaout ORDER BY default_turno.default_fecha";
         $query = $database->prepare($sql);
         $query->execute(array(':departamento' => $departamento, ':turno_fechain' => $fecha1, ':turno_fechaout' => $fecha2));
 
