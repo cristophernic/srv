@@ -774,11 +774,16 @@
                                     $("#table\\.imprimir\\.semanas").append('<tr><td>'+ val.user_nombre +'</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
                                 }  
                             });
+                            let tableHeader = '<tr><th scope="col">Profesional</th>';
+                            let i = response.semana_ini;
+                            
+                            for (i; response.semana_ini <= response.semana_fin; i++){
+                                tableHeader += '<th scope="col">Día ' + i + '</th>';
+                            };
 
-                            $.each(response, function(i, val){
-                                $("#table\\.imprimir\\.semanas\\.head").append('<tr><th scope="col">Profesional</th></tr>');
-                            });
-                            $("#table\\.imprimir\\.semanas\\.head").append('<tr><th scope="col">Total Semana</th></tr>');
+                            tableHeader += '<th scope="col">Total Semana</th><tr>';
+                            
+                            $("#table\\.imprimir\\.semanas\\.head").append(tableHeader);
                         }
                     });
                 });
