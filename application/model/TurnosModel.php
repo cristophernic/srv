@@ -42,17 +42,17 @@ class TurnosModel
         }
 
         if ($semana_ini < 10){
-            $semana_ini = "0". strval($semana_ini);
+            $semana_ini = "0". $semana_ini;
         }
 
         if ($semana_fin < 10){
-            $semana_fin = "0". strval($semana_fin);
+            $semana_fin = "0". $semana_fin;
         }
 
-        $fecha1 = strval($ano) . '-' . strval($mes) . '-'. strval($semana_ini);
-        $fecha2 = strval($ano) . '-' . strval($mes) . '-'. strval($semana_fin);
+        $fecha1 = $ano . "-". $mes . "-". $semana_ini;
+        $fecha2 = $ano . "-" . $mes . "-". $semana_fin;
 
-        $sql = "SELECT turnos.turno_id, turnos.turno_departamento, turnos.turno_profesional, turnos.turno_fechain, turnos.turno_turno, users.user_nombre FROM turnos INNER JOIN users ON turnos.turno_profesional = users.user_id WHERE `turnos.turno_departamento` = :departamento AND `turnos.turno_fechain` BETWEEN :turno_fechain AND :turno_fechaout";
+        $sql = "SELECT turnos.turno_id, turnos.turno_departamento, turnos.turno_profesional, turnos.turno_fechain, turnos.turno_turno, users.user_nombre FROM turnos INNER JOIN users ON turnos.turno_profesional = users.user_id WHERE turnos.turno_departamento = :departamento AND `turnos.turno_fechain` BETWEEN :turno_fechain AND :turno_fechaout";
         $query = $database->prepare($sql);
         $query->execute(array(':departamento' => intval($departamento), ':turno_fechain' => strval($fecha2), ':turno_fechaout' => strval($fecha1)));
 
