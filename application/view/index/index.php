@@ -745,7 +745,7 @@
                 let semanas = Math.ceil(dias/7)+1;
                 let i = 1;
                 for (i; i <= semanas; i++){
-                    $("#cambiar\\.semanas\\.semana").append('<option value="'+ (i+1) +'">Semana '+ (i+1) +'</option>');
+                    $("#cambiar\\.semanas\\.semana").append('<option value="'+ i +'">Semana '+ i +'</option>');
                 }
                 
                 $("#dialog\\.delete").on("click", function(){
