@@ -814,7 +814,7 @@
                                     if (response.mesAnt > 0 && h <= response.mesAnt){
                                         for (h; h <= response.mesAnt; h++){
                                             if (h == fecha){
-                                                fila += '<td style="background-color:#FFFFE0;"></td>'; 
+                                                fila += '<td style="background-color:#FFFFE0 !important;"></td>'; 
                                             }
                                             else{
                                                 fila += '<td></td>'; 
@@ -826,7 +826,7 @@
                                     for (h; h <= response.semana_fin; h++){
                                         if (response.mesPres > 0 && h > response.mesPres){
                                             if (h == fecha){
-                                                fila += '<td style="background-color:#FFFFE0;"></td>'; 
+                                                fila += '<td style="background-color:#FFFFE0 !important;"></td>'; 
                                             }
                                             else{
                                                 fila += '<td></td>'; 
@@ -834,7 +834,7 @@
                                         }
                                         else{
                                             if (h == fecha){
-                                                fila += '<td style="background-color:#FFFFE0;"></td>'; 
+                                                fila += '<td style="background-color:#FFFFE0 !important;"></td>'; 
                                             }
                                             else{
                                                 fila += '<td></td>'; 
