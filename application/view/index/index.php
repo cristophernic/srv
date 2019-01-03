@@ -754,6 +754,7 @@
 
                     let datos = {
                         accion: "calendarioSimple",
+                        departamento: $("#departamentos\\.header").val(),
                         mes: mes,
                         ano: year,
                         semana: semana
