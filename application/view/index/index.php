@@ -85,16 +85,16 @@
                     <div class="card-body">
                         <div class="table-responsive">
                         <table class="table table-td table-hover table-bordered" id="table">
-                            <thead class="bg-light">
+                            <thead>
                                 <tr class="bg-secondary">
-                                    <th scope="col" rowspan="2" class="text-center text-dark" style="font-size:1rem">Días / Fecha</th>
-                                    <th scope="col" rowspan="2" class="text-center text-dark" style="font-size:1rem">Turnos programados</th>
-                                    <th scope="col" colspan="2" class="text-center text-dark" style="font-size:1rem">Turno realizados</th>
-                                    <th scope="col" rowspan="2" class="text-center text-dark" style="font-size:1rem">Comentarios</th>
+                                    <th scope="col" rowspan="2" class="text-center" style="font-size:1.3rem">Días / Fecha</th>
+                                    <th scope="col" rowspan="2" class="text-center" style="font-size:1.3rem">Turnos programados</th>
+                                    <th scope="col" colspan="2" class="text-center" style="font-size:1.3rem">Turno realizados</th>
+                                    <th scope="col" rowspan="2" class="text-center" style="font-size:1.3rem">Comentarios</th>
                                 </tr>
-                                <tr class="bg-secondary">
-                                    <th scope="col" class="text-center text-dark" style="font-size:1rem">Diurno</th>
-                                    <th scope="col" class="text-center text-dark" style="font-size:1rem">Nocturno</th>
+                                <tr>
+                                    <th scope="col" class="text-center" style="font-size:1.3rem">Diurno</th>
+                                    <th scope="col" class="text-center" style="font-size:1.3rem">Nocturno</th>
                                 </tr>
                             </thead>
                             <tbody id="table.calendario">
