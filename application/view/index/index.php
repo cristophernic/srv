@@ -9,8 +9,8 @@
                     <ul class="navbar-nav mr-auto">
                         <?php if (Session::get("user_account_type") == 6) : ?>
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.configuracion">Configuración unidad y usuarios</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" id="boton.default">Asignar turnos programados</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Asignar turnos realizados</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" id="boton.default">Turnos programados</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Turnos realizados</a></li>
                         <?php endif; ?>
                     </ul>
                     <ul class="navbar-nav">
