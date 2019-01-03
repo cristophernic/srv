@@ -822,22 +822,26 @@
                             
                             let tableHeader = '<tr><th scope="col">Profesional</th>';
                             let i = response.semana_ini;
-                            
+                            let contadorDias = 0;
+                            let dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+
                             if (response.mesAnt > 0 && i <= response.mesAnt){
                                 for (i; i <= response.mesAnt; i++){
-                                    tableHeader += '<th scope="col">Día ' + i + '</th>'; 
+                                    tableHeader += '<th scope="col">'+ dias[contadorDias]+ ' '+ i + '</th>';
+                                    contadorDias++; 
                                 };
                                 i = 1;
                             }
 
                             for (i; i <= response.semana_fin; i++){
                                 if (response.mesPres > 0 && i > response.mesPres){
-                                    tableHeader += '<th scope="col">Día ' + (i - response.mesPres) + '</th>';
+                                    tableHeader += '<th scope="col">' + dias[contadorDias]+ ' '+ (i - response.mesPres) + '</th>';
+                                    contadorDias++;
                                 }
                                 else{
-                                    tableHeader += '<th scope="col">Día ' + i + '</th>';
+                                    tableHeader += '<th scope="col">' + dias[contadorDias]+ ' '+ i + '</th>';
+                                    contadorDias++;
                                 }
-
                             };
 
                             tableHeader += '<th scope="col">Total Semana</th><tr>';
