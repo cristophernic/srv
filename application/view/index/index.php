@@ -814,7 +814,7 @@
                             });
 
                             //añadir 5 filas más vacias
-                            let vacio = '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
+                            let vacio = '<tr><td><p>&nbsp;</p></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
                             let x = 0
                             for (x; x < 5; x++){
                                 $("#table\\.imprimir\\.semanas").append(vacio);
