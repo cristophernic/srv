@@ -774,7 +774,42 @@
                             $.each(response.data, function(i, val){
                                 if (matrizProf.includes(val.user_nombre) == false){
                                     matrizProf.push(val.user_nombre);
-                                    $("#table\\.imprimir\\.semanas").append('<tr><td>'+ val.user_nombre +'</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
+                                    let fila = '<tr><td>'+ val.user_nombre +'</td>';
+                                    let fecha = parseInt(val.default_fecha.slice(-2));
+                                    let h = response.semana_ini;
+
+                                    if (response.mesAnt > 0 && h <= response.mesAnt){
+                                        for (h; h <= response.mesAnt; h++){
+                                            if (h == fecha){
+                                                fila += '<td class="bg-red"></td>'; 
+                                            }
+                                            else{
+                                                fila += '<td></td>'; 
+                                            }
+                                        };
+                                        h = 1;
+                                    }
+
+                                    for (h; h <= response.semana_fin; h++){
+                                        if (response.mesPres > 0 && h > response.mesPres){
+                                            if (h == fecha){
+                                                fila += '<td class="bg-red"></td>'; 
+                                            }
+                                            else{
+                                                fila += '<td></td>'; 
+                                            }
+                                        }
+                                        else{
+                                            if (h == fecha){
+                                                fila += '<td class="bg-red"></td>'; 
+                                            }
+                                            else{
+                                                fila += '<td></td>'; 
+                                            }
+                                        }
+                                    };
+                                    fila += '</tr>';
+                                    $("#table\\.imprimir\\.semanas").append(fila);
                                 }  
                             });
                             let tableHeader = '<tr><th scope="col">Profesional</th>';
