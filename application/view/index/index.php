@@ -781,7 +781,11 @@
                             let i = response.semana_ini;
                             
                             for (i; i <= response.semana_fin; i++){
+
                                 tableHeader += '<th scope="col">Día ' + i + '</th>';
+                                if (respose.mesAnt > 0 && i == response.mesAnt){
+                                    i = 1;
+                                }
                             };
 
                             tableHeader += '<th scope="col">Total Semana</th><tr>';
