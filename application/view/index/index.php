@@ -945,7 +945,7 @@
                                 let month = ("0" + (d.getMonth() + 1)).slice(-2); 
                                 let dateComplete = day + "-" + month + "-" + d.getFullYear();
 
-                                $("#dialog\\.title").html('PROFESIONAL PREESTABLECIDO:');
+                                $("#dialog\\.title").html('PROFESIONAL PROGRAMADO:');
                                 $("#dialog\\.body").html('<div class="row"><div class="col"><p>' + response.user_nombre + ', fecha: ' + dateComplete +'</p></div></div><div class="row"><div class="form-group col"><label for="turnos.profesionales" class="text-danger text-center mt-3"><strong>Reemplazar por:</strong></label><select class="form-control" id="default.profesionales"></select></div></div>');
                                 $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="' + response.default_id + '">Guardar</button>');
 
