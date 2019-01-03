@@ -768,11 +768,11 @@
 
             $("#boton\\.semana").on("click", function(){
 
-                $("#dialog\\.title").html("Elegir un Mes y una semana");
-                $("#dialog\\.body").html('<div class="row"><div class="form-group col-6"><label for="cambiar.semanas.semana">Semana</label><select class="form-control" id="cambiar.semanas.semana"></select></div><div>');
+                $("#dialog\\.title").html("Elegir semana de mes seleccionado previamente");
+                $("#dialog\\.body").html('<div class="row"><div class="form-group col-6"><select class="form-control" id="cambiar.semanas.semana"></select></div><div>');
                 $("#dialog\\.view").modal("show");
                 $("#dialog\\.delete").remove();
-                $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete">Preparar reporte</button>');
+                $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete">Preparar reporte de impresion</button>');
 
                 var year= $("#fecha\\.ano").val();
                 var mes = $("#fecha\\.mes").val();
@@ -801,7 +801,7 @@
                             matrizProf = [];
 
                             $("#dialog\\.delete").attr("disabled", true);
-                            $("#dialog\\.body").html('<div class="d-none" id="imprimir.semanas"></div><button type="button" class="btn btn-danger" id="dialog.finalprint">Imprimir</button>');
+                            $("#dialog\\.body").html('<div class="d-none" id="imprimir.semanas"></div><button type="button" class="btn btn-danger" id="dialog.finalprint">Ver Impresion</button>');
                             $("#imprimir\\.semanas").html('<table class="table table-td table-hover table-bordered"><thead class="bg-light" id="table.imprimir.semanas.head"></thead><tbody id="table.imprimir.semanas"></tbody></table>');
 
                             $.each(response.data, function(i, val){
