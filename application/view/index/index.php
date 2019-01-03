@@ -773,7 +773,7 @@
                                     matrizProf.push(val.user_nombre);
                                     $("#table\\.imprimir\\.semanas").append('<tr><td>'+ val.user_nombre +'</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
                                 }  
-                            }
+                            });
 
                             $.each(response, function(i, val){
                                 $("#table\\.imprimir\\.semanas\\.head").append('<tr><th scope="col">Profesional</th></tr>');
