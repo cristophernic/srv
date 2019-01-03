@@ -88,7 +88,7 @@
                             <thead>
                                 <tr class="bg-light">
                                     <th scope="col" rowspan="2" class="text-center" style="font-size:1.2rem">Días / Fecha</th>
-                                    <th scope="col" rowspan="2" class="text-center" style="font-size:1.2rem">Turnos programados</th>
+                                    <th scope="col" rowspan="2" class="text-center" style="font-size:1.2rem">Turnos<br>programados</th>
                                     <th scope="col" colspan="2" class="text-center" style="font-size:1.2rem">Turno realizados</th>
                                     <th scope="col" rowspan="2" class="text-center" style="font-size:1.2rem">Comentarios</th>
                                 </tr>
