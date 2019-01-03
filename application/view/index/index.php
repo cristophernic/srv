@@ -853,7 +853,7 @@
                                 $("#table\\.imprimir\\.semanas").append(vacio);
                             }
                             
-                            let tableHeader = '<tr><th scope="col">Profesional</th>';
+                            let tableHeader = '<tr><th scope="col"><span class="h6">Profesional<br>de turno</span></th>';
                             let i = response.semana_ini;
                             let contadorDias = 0;
                             let dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
@@ -887,7 +887,7 @@
                                 var calendario = element.outerHTML;
                                 calendario = calendario.replace('d-none', '');
                                 documento = documento.replace(':TABLA', calendario);
-                                documento = documento.replace(':DEPARTAMENTO', $("#departamentos\\.header option:selected").text());
+                                documento = documento.replace(':DEPARTAMENTO', '      ' + $("#departamentos\\.header option:selected").text());
                                 var ventimp = window.open(' ', 'popimpr');
                                 ventimp.document.write(documento);
                                 ventimp.document.close();
