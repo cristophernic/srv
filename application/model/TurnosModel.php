@@ -357,7 +357,7 @@ class TurnosModel
             $query->execute(array(':turno_profesional' => $turno_profesional, ':default_fecha' => $fecha, ':turno_departamento' => $departamento_id));
 
             if ($query->rowCount() == 1) {
-                return true;
+                $return->resultado = true;
                 self::createTurnos($turno_profesional, $fecha, 2, $departamento_id);
             }
         }
