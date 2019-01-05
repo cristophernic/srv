@@ -27,7 +27,7 @@
                                 <a class="dropdown-item" href="#" id="boton.semana">Ver resumen semanal</a>
                                 <a class="dropdown-item" href="login/logout">Salir del programa</a>
                                 <div class="dropdown-divider"></div>
-                                <?php if (Session::get("user_account_type") < 2) : ?>
+                                <?php if (Session::get("user_account_type") > 1) : ?>
                                 <a class="dropdown-item dropdown-toggle" href="#" id="modificarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Modificar</a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="modificarDropdown">
                                     <a class="dropdown-item" href="#" id="modificar.nombre">Nombre</a>
