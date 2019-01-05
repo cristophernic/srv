@@ -10,7 +10,7 @@
                         <?php if (Session::get("user_account_type") == 6) : ?>
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.configuracion">Configuración unidad y profesionales</a></li>
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.default">Turnos programados</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Asignar Turnos realizados</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Turnos realizados</a></li>
                         <?php endif; ?>
                         <?php if (Session::get("user_account_type") < 3) : ?>
                             <li class="nav-item"><a class="nav-link" href="#" id="boton.listado.profesionales">Ver listado de profesionales</a></li>
@@ -27,13 +27,15 @@
                                 <a class="dropdown-item" href="#" id="boton.semana">Ver resumen semanal</a>
                                 <a class="dropdown-item" href="login/logout">Salir del programa</a>
                                 <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item dropdown-toggle" href="#" id="modificarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Modificar</a>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="modificarDropdown">
-                                        <a class="dropdown-item" href="#" id="modificar.nombre">Nombre</a>
-                                        <a class="dropdown-item" href="#" id="modificar.correo">Correo</a>
-                                        <a class="dropdown-item" href="#" id="modificar.contrasena">Contraseña</a>
-                                        <a class="dropdown-item" href="#" id="modificar.telefono">Teléfono</a>
-                                    </div>
+                                <?php if (Session::get("user_account_type") < 2) : ?>
+                                <a class="dropdown-item dropdown-toggle" href="#" id="modificarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Modificar</a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="modificarDropdown">
+                                    <a class="dropdown-item" href="#" id="modificar.nombre">Nombre</a>
+                                    <a class="dropdown-item" href="#" id="modificar.correo">Correo</a>
+                                    <a class="dropdown-item" href="#" id="modificar.contrasena">Contraseña</a>
+                                    <a class="dropdown-item" href="#" id="modificar.telefono">Teléfono</a>
+                                </div>
+                                <?php endif; ?>
                             </div>
                         </li>
                     </ul>
@@ -201,7 +203,7 @@
 
                     $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
                         $("#dialog\\.title").html("Profesionales en el departamento o unidad");
-                        $("#dialog\\.body").html('<table class="table"><thead class="thead-dark"><tr><th scope="col">#</th><th scope="col">Departamento</th><th scope="col">Nombre profesional</th><th scope="col">Telefono</th><th scope="col">Correo</th></tr></thead><tbody id="usuarios.tabla"></tbody></table>');
+                        $("#dialog\\.body").html('<button type="button" class="btn btn-outline-primary" id="boton.turnos.imprimir">Imprimir</button><table class="table" id="tabla.listado.profesionales"><thead class="thead-dark"><tr><th scope="col">#</th><th scope="col">Departamento</th><th scope="col">Nombre profesional</th><th scope="col">Telefono</th><th scope="col">Correo</th></tr></thead><tbody id="usuarios.tabla"></tbody></table>');
                         $("#dialog\\.view").modal("show");
                         if (Object.keys(data).length > 0) {
                             $.each(response, function(i, item) {
@@ -209,6 +211,12 @@
                                 $("#usuarios\\.tabla").append(fila);
                             });
                         }
+
+                        $("#boton\\.turnos\\.imprimir").on("click", function(){
+                            var documento =  '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="user-scalable=no,maximum-scale=1, minimum-scale=1, width=device-width, initial-scale=1, shrink-to-fit=no"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"><link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/solid.css" integrity="sha384-VGP9aw4WtGH/uPAOseYxZ+Vz/vaTb1ehm1bwx92Fm8dTrE+3boLfF1SpAtB1z7HW" crossorigin="anonymous"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7" crossorigin="anonymous"><title>Turnos</title></head><body><h3 class="text-center">Profesionales en departamento: :DEPARTAMENTO</h3><p>&nbsp;</p>:TABLA</body><script>document.addEventListener("DOMContentLoaded",function(event){var ventimp=window; var element = document.getElementById("table");element.classList.add("table-sm");ventimp.print();ventimp.close();});<\/script></html>';
+                            documento = documento.replace(':DEPARTAMENTO', $("#departamentos\\.header option:selected").text());
+                            documento = documento.replace(':TABLA', $("#tabla\\.listado\\.profesionales").html());
+                        });
                     });
                 });
             <?php endif; ?>
@@ -882,10 +890,13 @@
                             $("#table\\.imprimir\\.semanas\\.head").append(tableHeader);
 
                             $("#dialog\\.finalprint").on("click", function(){
-                                var documento = '<!doctype html><html lang="es"> <head> <meta charset="utf-8"> <meta name="viewport" content="user-scalable=no,maximum-scale=1, minimum-scale=1, width=device-width, initial-scale=1, shrink-to-fit=no"> <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"> <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"> <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/solid.css" integrity="sha384-VGP9aw4WtGH/uPAOseYxZ+Vz/vaTb1ehm1bwx92Fm8dTrE+3boLfF1SpAtB1z7HW" crossorigin="anonymous"> <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7" crossorigin="anonymous"> <title>Turnos</title></head> <body> <h4 class="mt-2">Departamento o unidad :DEPARTAMENTO</h4><p>&nbsp;</p>:TABLA <p>&nbsp;</p><div class="row"> <div class="col px-5"> <p class="mb-0 text-center">&nbsp;</p><hr> <p class="text-center">V° B° Coord. Unidad</p></div><div class="col px-5"> <p class="mb-0 text-center">&nbsp;</p><hr> <p class="text-center">V° B° Jefe Departamento</p></div></div><p><strong><u>Estimado Doctor(a): En la casilla correspondiente a su nombre y fecha, favor indicar horario de turno realizado y firma. En caso que no esté en nómina incorporar su nombre en las casillas vacías.</u></strong></p></body><script>document.addEventListener("DOMContentLoaded",function(event){var ventimp=window;ventimp.print();ventimp.close();});<\/script></html>';
+                                var documento = '<!doctype html><html lang="es"> <head> <meta charset="utf-8"> <meta name="viewport" content="user-scalable=no,maximum-scale=1, minimum-scale=1, width=device-width, initial-scale=1, shrink-to-fit=no"> <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"> <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"> <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/solid.css" integrity="sha384-VGP9aw4WtGH/uPAOseYxZ+Vz/vaTb1ehm1bwx92Fm8dTrE+3boLfF1SpAtB1z7HW" crossorigin="anonymous"> <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7" crossorigin="anonymous"> <title>Turnos</title></head> <body> <h4 class="mt-2">Departamento o unidad: :DEPARTAMENTO , :MESANO</h4><p>&nbsp;</p>:TABLA <p>&nbsp;</p><div class="row"> <div class="col px-5"> <p class="mb-0 text-center">&nbsp;</p><hr> <p class="text-center">V° B° Coord. Unidad</p></div><div class="col px-5"> <p class="mb-0 text-center">&nbsp;</p><hr> <p class="text-center">V° B° Jefe Departamento</p></div></div><p><strong><u>Estimado Doctor(a): En la casilla correspondiente a su nombre y fecha, favor indicar horario de turno realizado y firma. En caso que no esté en nómina incorporar su nombre en las casillas vacías.</u></strong></p></body><script>document.addEventListener("DOMContentLoaded",function(event){var ventimp=window;ventimp.print();ventimp.close();});<\/script></html>';
                                 var element = document.getElementById("imprimir.semanas");
                                 var calendario = element.outerHTML;
                                 calendario = calendario.replace('d-none', '');
+
+                                :MESANO
+
                                 documento = documento.replace(':TABLA', calendario);
                                 documento = documento.replace(':DEPARTAMENTO', '&nbsp;&nbsp;&nbsp;' + $("#departamentos\\.header option:selected").text());
                                 var ventimp = window.open(' ', 'popimpr');
