@@ -894,9 +894,7 @@
                                 var element = document.getElementById("imprimir.semanas");
                                 var calendario = element.outerHTML;
                                 calendario = calendario.replace('d-none', '');
-
-                                :MESANO
-
+                                documento = documento.replace(':MESANO', $("#fecha\\.mes option:selected").text() + " " + $("#fecha\\.ano option:selected").text());
                                 documento = documento.replace(':TABLA', calendario);
                                 documento = documento.replace(':DEPARTAMENTO', '&nbsp;&nbsp;&nbsp;' + $("#departamentos\\.header option:selected").text());
                                 var ventimp = window.open(' ', 'popimpr');
