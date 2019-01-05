@@ -335,18 +335,34 @@ class TurnosModel
 
     public static function createProfesionalDefault($departamento_id, $fecha, $turno_profesional)
     {
+        $return = new stdClass();
+        $return->resultado = false;
+
+        if (!$turno_profesional) {
+            $return->resultado = false;
+        }
+
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "INSERT INTO default_turno (turno_profesional, default_fecha, turno_departamento) VALUES (:turno_profesional, :default_fecha, :turno_departamento)";
+        $sql = "SELECT turno_profesional FROM default_turno WHERE turno_profesional = :turno_profesional AND default_fecha = :default_fecha AND turno_departamento = :turno_departamento";
         $query = $database->prepare($sql);
         $query->execute(array(':turno_profesional' => $turno_profesional, ':default_fecha' => $fecha, ':turno_departamento' => $departamento_id));
 
         if ($query->rowCount() == 1) {
-            return true;
+            $return->resultado = true;
+        }
+        else {
+            $sql = "INSERT INTO default_turno (turno_profesional, default_fecha, turno_departamento) VALUES (:turno_profesional, :default_fecha, :turno_departamento)";
+            $query = $database->prepare($sql);
+            $query->execute(array(':turno_profesional' => $turno_profesional, ':default_fecha' => $fecha, ':turno_departamento' => $departamento_id));
+
+            if ($query->rowCount() == 1) {
+                return true;
+                self::createTurnos($turno_profesional, $fecha, 2, $departamento_id);
+            }
         }
 
-        Session::add('feedback_negative', Text::get('FEEDBACK_NOTE_CREATION_FAILED'));
-        return false;
+        return $return;
     }
 
     public static function updateProfesionalDefault($default_id, $turno_profesional)
