@@ -8,12 +8,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <?php if (Session::get("user_account_type") == 6) : ?>
-                            <li class="nav-item"><a class="nav-link" href="#" id="boton.configuracion">Configuración unidad y profesionales</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" id="boton.default">Turnos programados</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" id="boton.turno">Turnos realizados</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" id="boton.configuracion"><small>Configuración unidad y profesionales</small></a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" id="boton.default"><small>Turnos programados</small></a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" id="boton.turno"><small>Turnos realizados</small></a></li>
                         <?php endif; ?>
                         <?php if (Session::get("user_account_type") < 3) : ?>
-                            <li class="nav-item"><a class="nav-link" href="#" id="boton.listado.profesionales">Ver listado de profesionales</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" id="boton.listado.profesionales"><small>Ver listado de profesionales</small></a></li>
                         <?php endif; ?>
                     </ul>
                     <ul class="navbar-nav">
