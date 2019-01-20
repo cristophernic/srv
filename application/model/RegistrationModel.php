@@ -207,8 +207,8 @@ class RegistrationModel
         $database = DatabaseFactory::getFactory()->getConnection();
 
         // write new users data into database
-        $sql = "INSERT INTO users (user_name, user_password_hash, user_email, user_creation_timestamp, user_activation_hash, user_provider_type,user_active, user_rut, user_telefono)
-                    VALUES (:user_name, :user_password_hash, :user_email, :user_creation_timestamp, :user_activation_hash, :user_provider_type,1, :user_rut, :user_telefono)";
+        $sql = "INSERT INTO users (user_name, user_password_hash, user_email, user_creation_timestamp, user_activation_hash, user_provider_type,user_active, user_rut, user_telefono, user_account_type)
+                    VALUES (:user_name, :user_password_hash, :user_email, :user_creation_timestamp, :user_activation_hash, :user_provider_type,1, :user_rut, :user_telefono, :user_account_type)";
         $query = $database->prepare($sql);
         $query->execute(array(':user_name' => $user_name,
                               ':user_password_hash' => $user_password_hash,
@@ -217,6 +217,7 @@ class RegistrationModel
                               ':user_activation_hash' => $user_activation_hash,
                               ':user_rut' => $user_rut,
                               ':user_telefono' => $user_telefono,
+                              ':user_account_type' => 2,
                               ':user_provider_type' => 'DEFAULT'));
         $count =  $query->rowCount();
         if ($count == 1) {
