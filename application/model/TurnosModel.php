@@ -288,10 +288,15 @@ class TurnosModel
 
         $turnos = self::getProfesionalesTurnos($comentario_fecha, $departamento_id);
 
-        foreach ($turnos as $turno) {
-            if ($turno->turno_profesional == Session::get('user_id')){
-                $return->autorizado = true;
+        if (Session::get("user_account_type") < 6){
+            foreach ($turnos as $turno) {
+                if ($turno->turno_profesional == Session::get('user_id')){
+                    $return->autorizado = true;
+                }
             }
+        }
+        else{
+            $return->autorizado = true;
         }
 
         if ($return->autorizado){
