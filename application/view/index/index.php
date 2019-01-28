@@ -25,7 +25,7 @@
                             <?php endif; ?>
                                 <a class="dropdown-item" href="#" id="boton.imprimir">Ver resumen del mes</a>
                                 <a class="dropdown-item" href="#" id="boton.semana">Ver resumen semanal</a>
-                                <a class="dropdown-item" href="login/logout">Salir del programa</a>Session::get("user_account_type")
+                                <a class="dropdown-item" href="login/logout">Salir del programa</a>
                                 <div class="dropdown-divider"></div>
                                 <?php if (Session::get("user_account_type") > 1) : ?>
                                 <a class="dropdown-item dropdown-toggle" href="#" id="modificarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Modificar</a>
