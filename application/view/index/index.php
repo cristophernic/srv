@@ -946,7 +946,7 @@
                         $("#table\\.nocturno").attr("colspan",1);
                         $("#table\\.turnos").attr("colspan",2);
                     }
-                    
+
                     let fila = "";
                     let dias = ["Lunes ", "Martes ", "Miércoles ", "Jueves ", "Viernes ", "Sábado ", "Domingo "];
                     let i = response.diaDeLaSemana;
@@ -1036,10 +1036,20 @@
                                 nocheP = "";
                             }
 
-                            fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td class="text-center" data-id="' + defaultID +'" data-preset="1">' + defaultName + '</td><td class="text-center ' + diaP +'" data-id="' + diaI +'">' + diaT +'</td><td class="text-center ' + nocheP +'" data-id="' + nocheI +'">' + nocheT +'</td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
+                            if (response.refuerzo == 1){
+                                fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td class="text-center" data-id="' + defaultID +'" data-preset="1">' + defaultName + '</td><td class="text-center ' + diaP +'" data-id="' + diaI +'">' + diaT +'</td><td></td><td class="text-center ' + nocheP +'" data-id="' + nocheI +'">' + nocheT +'</td><td></td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
+                            }
+                            else{
+                                fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td class="text-center" data-id="' + defaultID +'" data-preset="1">' + defaultName + '</td><td class="text-center ' + diaP +'" data-id="' + diaI +'">' + diaT +'</td><td class="text-center ' + nocheP +'" data-id="' + nocheI +'">' + nocheT +'</td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
+                            }
                         }
                         else{
-                            fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td></td><td class="text-center"></td><td class="text-center"></td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';    
+                            if (response.refuerzo == 1){
+                                fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td></td><td class="text-center"></td><td class="text-center"></td><td class="text-center"></td><td class="text-center"></td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
+                            }
+                            else{
+                                fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td></td><td class="text-center"></td><td class="text-center"></td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
+                            }
                         }
 
                         if (i == 7){ 
