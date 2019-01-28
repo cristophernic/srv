@@ -14,7 +14,7 @@ class DepartamentoModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT T1.departamento_id, T1.departamento_name, T1.departamento_jefe, T2.user_nombre, COUNT(T3.departamento_id) AS user_cantidad FROM departamentos AS T1 INNER JOIN users AS T2 ON (T1.departamento_jefe = T2.user_id) LEFT JOIN user_departamento AS T3 ON (T1.departamento_id = T3.departamento_id) group by T1.departamento_id";
+        $sql = "SELECT T1.departamento_id, T1.departamento_name, T1.departamento_jefe, T1.departamento_refuerzo, T2.user_nombre, COUNT(T3.departamento_id) AS user_cantidad FROM departamentos AS T1 INNER JOIN users AS T2 ON (T1.departamento_jefe = T2.user_id) LEFT JOIN user_departamento AS T3 ON (T1.departamento_id = T3.departamento_id) group by T1.departamento_id";
         $query = $database->prepare($sql);
         $query->execute();
 
@@ -31,7 +31,7 @@ class DepartamentoModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT departamentos.departamento_id, departamentos.departamento_name, departamentos.departamento_jefe, users.user_nombre FROM departamentos INNER JOIN users ON (departamentos.departamento_jefe = users.user_id) WHERE departamentos.departamento_id = :departamento_id LIMIT 1";
+        $sql = "SELECT departamentos.departamento_id, departamentos.departamento_name, departamentos.departamento_jefe, users.user_nombre, departamentos.departamento_refuerzo FROM departamentos INNER JOIN users ON (departamentos.departamento_jefe = users.user_id) WHERE departamentos.departamento_id = :departamento_id LIMIT 1";
         $query = $database->prepare($sql);
         $query->execute(array(':departamento_id' => $departamento_id));
 
@@ -44,7 +44,7 @@ class DepartamentoModel
      * @param string $departamento_text departamento text that will be created
      * @return bool feedback (was the departamento created properly ?)
      */
-    public static function createDepartamento($departamento_text, $departamento_jefe)
+    public static function createDepartamento($departamento_text, $departamento_jefe, $departamento_refuerzo)
     {
         if (!$departamento_text || strlen($departamento_text) == 0) {
             Session::add('feedback_negative', Text::get('FEEDBACK_NOTE_CREATION_FAILED'));
@@ -53,9 +53,9 @@ class DepartamentoModel
 
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "INSERT INTO departamentos (departamento_name, departamento_jefe) VALUES (:departamento_name, :departamento_jefe)";
+        $sql = "INSERT INTO departamentos (departamento_name, departamento_jefe, departamento_refuerzo) VALUES (:departamento_name, :departamento_jefe, :departamento_refuerzo)";
         $query = $database->prepare($sql);
-        $query->execute(array(':departamento_name' => $departamento_text, ':departamento_jefe' => $departamento_jefe,));
+        $query->execute(array(':departamento_name' => $departamento_text, ':departamento_jefe' => $departamento_jefe, ':departamento_refuerzo' => $departamento_refuerzo));
 
         if ($query->rowCount() == 1) {
             return true;
@@ -94,7 +94,7 @@ class DepartamentoModel
      * @param string $departamento_text new text of the specific departamento
      * @return bool feedback (was the update successful ?)
      */
-    public static function updateDepartamento($departamento_id, $departamento_name, $departamento_jefe)
+    public static function updateDepartamento($departamento_id, $departamento_name, $departamento_jefe, $departamento_refuerzo)
     {
         if (!$departamento_id || !$departamento_name) {
             return false;
@@ -102,9 +102,9 @@ class DepartamentoModel
 
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "UPDATE departamentos SET departamento_name = :departamento_name, departamento_jefe = :departamento_jefe WHERE departamento_id = :departamento_id LIMIT 1";
+        $sql = "UPDATE departamentos SET departamento_name = :departamento_name, departamento_jefe = :departamento_jefe, departamento_refuerzo = :departamento_refuerzo WHERE departamento_id = :departamento_id LIMIT 1";
         $query = $database->prepare($sql);
-        $query->execute(array(':departamento_id' => $departamento_id, ':departamento_name' => $departamento_name, ':departamento_jefe' => $departamento_jefe));
+        $query->execute(array(':departamento_id' => $departamento_id, ':departamento_name' => $departamento_name, ':departamento_jefe' => $departamento_jefe, ':$departamento_refuerzo' => $departamento_refuerzo));
 
         if ($query->rowCount() == 1) {
             return true;

@@ -94,12 +94,12 @@
                                 <tr class="bg-light">
                                     <th scope="col" rowspan="2" class="text-center" style="font-size:1.2rem">Días / Fecha</th>
                                     <th scope="col" rowspan="2" class="text-center" style="font-size:1.2rem">Turnos<br>programados</th>
-                                    <th scope="col" colspan="4" class="text-center" style="font-size:1.2rem">Turno realizados</th>
+                                    <th scope="col" colspan="4" class="text-center" style="font-size:1.2rem" id="table.turnos">Turno realizados</th>
                                     <th scope="col" rowspan="2" class="text-center" style="font-size:1.2rem">Comentarios</th>
                                 </tr>
                                 <tr class="bg-light">
-                                    <th scope="col" colspan="2" class="text-center" style="font-size:1.2rem">Diurno</th>
-                                    <th scope="col" colspan="2" class="text-center" style="font-size:1.2rem">Nocturno</th>
+                                    <th scope="col" colspan="2" class="text-center" style="font-size:1.2rem" id="table.diurno">Diurno</th>
+                                    <th scope="col" colspan="2" class="text-center" style="font-size:1.2rem" id="table.nocturno">Nocturno</th>
                                 </tr>
                             </thead>
                             <tbody id="table.calendario">
@@ -329,6 +329,15 @@
                 $("#dialog\\.view").modal("show");
                 $("#dialog\\.delete").remove();
 
+                $("#departamento\\.formulario\\.refuerzo").on("change", function(){
+                    if ($("#departamento\\.formulario\\.refuerzo").is(':checked') == true){
+                        $("#departamento\\.formulario\\.refuerzo\\.label").text("Si");
+                    }
+                    else{
+                        $("#departamento\\.formulario\\.refuerzo\\.label").text("No");
+                    }
+                });
+
                 let data = {
                     accion : "departamentos",
                 }
@@ -486,6 +495,7 @@
                             accion : "departamentosNuevo",
                             departamento_name: $("#departamento\\.formulario\\.texto").val(),
                             departamento_jefe: $("#departamento\\.formulario\\.jefe option:selected").val(),
+                            departamento_refuerzo: $("#departamento\\.formulario\\.refuerzo").val()
                         }
                     }
                     else{
@@ -493,7 +503,8 @@
                             accion : "departamentosUpdate",
                             departamento_name: $("#departamento\\.formulario\\.texto").val(),
                             departamento_jefe: $("#departamento\\.formulario\\.jefe option:selected").val(),
-                            departamento_id: $("#departamento\\.formulario\\.departamento\\.id").val()
+                            departamento_id: $("#departamento\\.formulario\\.departamento\\.id").val(),
+                            departamento_refuerzo: $("#departamento\\.formulario\\.refuerzo").val()
                         }
                     }
 

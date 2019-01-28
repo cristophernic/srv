@@ -87,10 +87,10 @@ class TurnosController extends Controller
                 $resultado = DepartamentoModel::getDepartamento(Request::post('departamento_id'));
                 break;
             case "departamentosNuevo":
-                $resultado = DepartamentoModel::createDepartamento(Request::post('departamento_name'), Request::post('departamento_jefe'));
+                $resultado = DepartamentoModel::createDepartamento(Request::post('departamento_name'), Request::post('departamento_jefe'), Request::post('departamento_refuerzo'));
                 break;
             case "departamentosUpdate":
-                $resultado = DepartamentoModel::updateDepartamento(Request::post('departamento_id'), Request::post('departamento_name'), Request::post('departamento_jefe'));
+                $resultado = DepartamentoModel::updateDepartamento(Request::post('departamento_id'), Request::post('departamento_name'), Request::post('departamento_jefe'), Request::post('departamento_refuerzo'));
                 break;
             case "departamentosEliminar":
                 $resultado = DepartamentoModel::deleteDepartamento(Request::post('departamento_id'));
