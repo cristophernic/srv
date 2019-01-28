@@ -104,7 +104,7 @@ class DepartamentoModel
 
         $sql = "UPDATE departamentos SET departamento_name = :departamento_name, departamento_jefe = :departamento_jefe, departamento_refuerzo = :departamento_refuerzo WHERE departamento_id = :departamento_id LIMIT 1";
         $query = $database->prepare($sql);
-        $query->execute(array(':departamento_id' => $departamento_id, ':departamento_name' => $departamento_name, ':departamento_jefe' => $departamento_jefe, ':$departamento_refuerzo' => $departamento_refuerzo));
+        $query->execute(array(':departamento_id' => $departamento_id, ':departamento_name' => $departamento_name, ':departamento_jefe' => $departamento_jefe, ':departamento_refuerzo' => $departamento_refuerzo));
 
         if ($query->rowCount() == 1) {
             return true;
