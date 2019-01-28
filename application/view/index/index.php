@@ -371,7 +371,7 @@
                                 $("#departamento\\.formulario\\.texto").val(response.departamento_name);
                                 $("#departamento\\.formulario\\.jefe").val(response.departamento_jefe);
                                 $("#departamento\\.formulario\\.departamento\\.id").val(response.departamento_id);
-                                $("#departamento\\.formulario\\.refuerzo").prop("checked", response.departamento_refuerzo == true ? true:false); 
+                                $("#departamento\\.formulario\\.refuerzo").prop("checked", response.departamento_refuerzo == true ? true:false).trigger("change"); 
                             });
 
                             $("#departamento\\.formulario\\.nuevo").addClass("d-none");
