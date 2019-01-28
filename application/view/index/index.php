@@ -495,7 +495,7 @@
                             accion : "departamentosNuevo",
                             departamento_name: $("#departamento\\.formulario\\.texto").val(),
                             departamento_jefe: $("#departamento\\.formulario\\.jefe option:selected").val(),
-                            departamento_refuerzo: $("#departamento\\.formulario\\.refuerzo").val()
+                            departamento_refuerzo: $("#departamento\\.formulario\\.refuerzo").is(':checked') == true ? 1 : 0
                         }
                     }
                     else{
@@ -504,7 +504,7 @@
                             departamento_name: $("#departamento\\.formulario\\.texto").val(),
                             departamento_jefe: $("#departamento\\.formulario\\.jefe option:selected").val(),
                             departamento_id: $("#departamento\\.formulario\\.departamento\\.id").val(),
-                            departamento_refuerzo: $("#departamento\\.formulario\\.refuerzo").val()
+                            departamento_refuerzo: $("#departamento\\.formulario\\.refuerzo").is(':checked') == true ? 1 : 0
                         }
                     }
 
