@@ -936,6 +936,17 @@
                 $("#table\\.calendario").empty();
 
                 if (Object.keys(data).length > 0) {
+                    if (response.refuerzo == 1){
+                        $("#table\\.diurno").attr("colspan",2);
+                        $("#table\\.nocturno").attr("colspan",2);
+                        $("#table\\.turnos").attr("colspan",4);
+                    }
+                    else{
+                        $("#table\\.diurno").attr("colspan",1);
+                        $("#table\\.nocturno").attr("colspan",1);
+                        $("#table\\.turnos").attr("colspan",2);
+                    }
+                    
                     let fila = "";
                     let dias = ["Lunes ", "Martes ", "Miércoles ", "Jueves ", "Viernes ", "Sábado ", "Domingo "];
                     let i = response.diaDeLaSemana;

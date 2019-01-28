@@ -13,6 +13,7 @@ class TurnosModel
             $return->fecha = $fecha;
             $return->diaDeLaSemana = $diaDeLaSemana;
             $return->diasEnElMes = $diasEnElMes;
+            $return->refuerzo = DepartamentoModel::getDepartamento($departamento)->departamento_refuerzo;
             $return->default = self::getProfesionalesDefault($departamento, $mes, $ano);
             $return->turnos = self::getMonthTurnos($departamento, $mes, $ano);
             $return->comentarios = self::getAllComentarios($mes, $ano, $departamento);
