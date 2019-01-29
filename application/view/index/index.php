@@ -1018,7 +1018,7 @@
                                 return parseInt(elDia.turno_turno) === 0;
                             });
 
-                            let refuerzoDiaF = "";
+                            var refuerzoDiaF = "";
                             if (response.refuerzo == 1){
                                 if (Object.keys(refuerzosDia).length > 0) {
                                     refuerzoDiaF = refuerzosDia.filter(elrefuerzoDia => {
@@ -1032,7 +1032,7 @@
                                 return parseInt(laNoche.turno_turno) === 1;
                             });
 
-                            let refuerzoNocheF ="";
+                            var refuerzoNocheF ="";
                             if (response.refuerzo == 1){
                                 if (Object.keys(refuerzosDia).length > 0) {
                                     refuerzoNocheF = refuerzosDia.filter(larefuerzoNoche => {
