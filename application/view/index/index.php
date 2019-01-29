@@ -969,12 +969,10 @@
                             return turno.turno_fechain === dia;
                         });
 
-                        if (response.refuerzo == 1){
-                            const refuerzosDia = refuerzos.filter(refuerzo => {
-                                let dia = data.ano + '-' + data.mes + '-' + ("0" + h).slice(-2);
-                                return refuerzo.refuerzo_fechain === dia;
-                            });
-                        }
+                        const refuerzosDia = refuerzos.filter(refuerzo => {
+                            let dia = data.ano + '-' + data.mes + '-' + ("0" + h).slice(-2);
+                            return refuerzo.refuerzo_fechain === dia;
+                        });
 
                         const comentariosDia = comentarios.filter(comentario =>{
                             let dia = data.ano + '-' + data.mes + '-' + ("0" + h).slice(-2);
