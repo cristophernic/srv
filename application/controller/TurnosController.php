@@ -38,6 +38,9 @@ class TurnosController extends Controller
             case "turnosUno":
                 $resultado = TurnosModel::getTurno(Request::post('id'));
                 break;
+            case "turnosUnoRefuerzo":
+                $resultado = TurnosModel::getTurnoRefuerzo(Request::post('id'));
+                break;
             case "turnosNuevo":
                 $resultado = TurnosModel::createTurnos(Request::post('profesional'),Request::post('fechainic'),Request::post('turno'),Request::post('departamento_id'));
                 break;

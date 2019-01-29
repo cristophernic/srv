@@ -113,7 +113,7 @@ class TurnosModel
         $fecha = new DateTime($ano . '-' . $mes .'-01');
         $fecha2 = $ano . "-" . $mes . "-" . $fecha->format('t');
 
-        $sql = "SELECT refuerzo.refuerzo_id, refuerzo.refuerzo_departamento, refuerzo.refuerzo_profesional, refuerzo.refuerzo_fechain, refuerzo.refuerzo_turno, users.user_nombre FROM refuerzo INNER JOIN users ON refuerzo.refuerzo_profesional = users.user_id WHERE refuerzo.refuerzo_departamento = :departamento AND refuerzo.refuerzo_fechain BETWEEN :refuerzo_fechain AND :refuerzo_fechaout";
+        $sql = "SELECT refuerzo.refuerzo_id, refuerzo.refuerzo_departamento, refuerzo.refuerzo_profesional, refuerzo.refuerzo_fechain, refuerzo.refuerzo_turno,refuerzo.refuerzo_horas, users.user_nombre FROM refuerzo INNER JOIN users ON refuerzo.refuerzo_profesional = users.user_id WHERE refuerzo.refuerzo_departamento = :departamento AND refuerzo.refuerzo_fechain BETWEEN :refuerzo_fechain AND :refuerzo_fechaout";
         $query = $database->prepare($sql);
         $query->execute(array(':departamento' => $departamento, ':refuerzo_fechain' => $fecha1, ':refuerzo_fechaout' => $fecha2));
         
@@ -191,6 +191,17 @@ class TurnosModel
         $sql = "SELECT turnos.turno_id, turnos.turno_profesional, turnos.turno_fechain, turnos.turno_turno, users.user_nombre FROM turnos INNER JOIN users ON turnos.turno_profesional = users.user_id WHERE turno_id = :turno_id LIMIT 1";
         $query = $database->prepare($sql);
         $query->execute(array(':turno_id' => $id_turno));
+
+        return $query->fetch();
+    }
+
+    public static function getTurnoRefuerzo($id_refuerzo)
+    {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $sql = "SELECT refuerzo.refuerzo_id, refuerzo.refuerzo_profesional, refuerzo.refuerzo_fechain, refuerzo.refuerzo_turno, refuerzo.refuerzo_horas, users.user_nombre FROM refuerzo INNER JOIN users ON refuerzo.refuerzo_profesional = users.user_id WHERE refuerzo_id = :refuerzo_id LIMIT 1";
+        $query = $database->prepare($sql);
+        $query->execute(array(':refuerzo_id' => $id_refuerzo));
 
         return $query->fetch();
     }
