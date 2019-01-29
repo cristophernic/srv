@@ -24,7 +24,7 @@
                                 <a class="dropdown-item" href="#" id="boton.pormes">Ver turnos por mes</a>
                             <?php endif; ?>
                                 <a class="dropdown-item" href="#" id="boton.imprimir">Ver resumen del mes</a>
-                                <a class="dropdown-item" href="#" id="boton.semana">Ver resumen semanal</a>
+                                <a class="dropdown-item d-none" href="#" id="boton.semana">Ver resumen semanal</a>
                                 <a class="dropdown-item" href="login/logout">Salir del programa</a>
                                 <div class="dropdown-divider"></div>
                                 <?php if (Session::get("user_account_type") > 1) : ?>
@@ -1198,24 +1198,25 @@
                         $.post("https://turnoscat.crecimientofetal.cl/turnos/api", data).done(function(response){
                             if (Object.keys(response).length > 0) {
                                 <?php if (Session::get("user_account_type") == 2) : ?>
-                                if (<?php echo Session::get('user_id'); ?> == response.turno_profesional){
+                                if (<?php echo Session::get('user_id'); ?> == response.refuerzo_profesional){
                                 <?php endif; ?>
-                                    let d = new Date(response.turno_fechain.replace(/-/g, '\/'));
+                                    let d = new Date(response.refuerzo_fechain.replace(/-/g, '\/'));
                                     let day = ("0" + d.getDate()).slice(-2);
                                     let month = ("0" + (d.getMonth() + 1)).slice(-2); 
                                     let dateComplete = day + "-" + month + "-" + d.getFullYear();
 
-                                    $("#dialog\\.title").html('CAMBIO PROFESIONAL DE TURNO:');
-                                    $("#dialog\\.body").html('<div class="row"><div class="col"><p>' + response.user_nombre + ', fecha: ' + dateComplete +'</p></div></div><div class="row"><div class="form-group col"><label for="turnos.profesionales" class="text-danger text-center mt-3"><strong>Reemplazar por:</strong></label><select class="form-control" id="turnos.profesionales"></select></div></div>');
-                                    $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="' + response.turno_id + '">Guardar</button>');
+                                    $("#dialog\\.title").html('CAMBIO PROFESIONAL DE REFUERZO:');
+                                    $("#dialog\\.body").html('<div class="row"><div class="col"><p>' + response.user_nombre + ', fecha: ' + dateComplete +'</p></div></div><div class="row"><div class="form-group col"><label for="turnos.profesionales" class="text-danger text-center mt-3"><strong>Reemplazar por:</strong></label><select class="form-control" id="turnos.profesionales"></select></div><div class="form-group col"><label for="turnos.horas" class="text-danger text-center mt-3"><strong>Horas de refuerzo:</strong></label><select class="form-control" id="turnos.horas"><option value="1">1 Horas</option><option value="2">2 Horas</option><option value="3">3 Horas</option><option value="4">4 Horas</option><option value="5">5 Horas</option><option value="6">6 Horas</option><option value="7">7 Horas</option><option value="8">8 Horas</option><option value="9">9 Horas</option><option value="10">10 Horas</option><option value="11">11 Horas</option><option value="12" selected>12 Horas</option></select></div></div>');
+                                    $("#dialog\\.footer").append('<button type="button" class="btn btn-danger" id="dialog.delete" data-id="' + response.refuerzo_id + '">Guardar</button>');
                                     cargarProfesionales();
 
                                     $("#dialog\\.delete").on("click", function(){
                                         let id = $(this).data("id");
                                         let datos = {
-                                            accion: "turnosCambiar",
+                                            accion: "turnosCambiarRefuerzo",
                                             id: id,
                                             profesional: $("#turnos\\.profesionales").val(),
+                                            horas: $("#turnos\\.horas").val(),
                                         }
 
                                         $.post("https://turnoscat.crecimientofetal.cl/turnos/api", datos).done(function(response){

@@ -316,6 +316,26 @@ class TurnosModel
         return false;
     }
 
+    public static function changeTurnosRefuerzo($refuerzo_id, $refuerzo_profesional, $refuerzo_horas)
+    {
+        if (!$refuerzo_id || !$refuerzo_profesional) {
+            return false;
+        }
+
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $sql = "UPDATE refuerzo SET refuerzo_profesional = :refuerzo_profesional, refuerzo_horas = :refuerzo_horas WHERE refuerzo_id = :refuerzo_id LIMIT 1";
+        $query = $database->prepare($sql);
+        $query->execute(array(':refuerzo_profesional' => $refuerzo_profesional, ':refuerzo_horas' => $refuerzo_horas, ':refuerzo_id' => $refuerzo_id));
+
+        if ($query->rowCount() == 1) {
+            return true;
+        }
+
+        Session::add('feedback_negative', Text::get('FEEDBACK_NOTE_EDITING_FAILED'));
+        return false;
+    }
+
     public static function deleteTurnos($turno_id)
     {
         if (!$turno_id) {
