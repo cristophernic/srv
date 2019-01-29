@@ -953,6 +953,7 @@
                     let j = response.diasEnElMes;
                     let h = 1;
                     let turnos = response.turnos;
+                    let refuerzos = response.refuerzos;
                     let comentarios = response.comentarios;
                     let defaultC = response.default;
 
@@ -967,6 +968,13 @@
                             let dia = data.ano + '-' + data.mes + '-' + ("0" + h).slice(-2);
                             return turno.turno_fechain === dia;
                         });
+
+                        if (response.refuerzo == 1){
+                            const refuerzosDia = refuerzos.filter(refuerzo => {
+                                let dia = data.ano + '-' + data.mes + '-' + ("0" + h).slice(-2);
+                                return refuerzo.refuerzo_fechain === dia;
+                            });
+                        }
 
                         const comentariosDia = comentarios.filter(comentario =>{
                             let dia = data.ano + '-' + data.mes + '-' + ("0" + h).slice(-2);
@@ -989,10 +997,16 @@
                         if (Object.keys(turnosDia).length > 0) {
                             let diaT = "";
                             let nocheT = "";
+                            let refuerzoDiaT = "";
+                            let refuerzoNocheT = "";
                             let diaP = "";
                             let diaI = "";
+                            let refuerzoDiaP = "";
+                            let refuerzoDiaI = "";
                             let nocheI = "";
                             let nocheP = "";
+                            let refuerzoNocheI = "";
+                            let refuerzoNocheP = "";
 
                             let defaultID = "";
                             let defaultName = "";
@@ -1006,14 +1020,41 @@
                                 return parseInt(elDia.turno_turno) === 0;
                             });
 
+                            if (response.refuerzo == 1){
+                                const refuerzoDiaF = refuerzosDia.filter(elrefuerzoDia => {
+                                    return parseInt(elrefuerzoDia.refuerzo_turno) === 0;
+                                });  
+                            }
+                            
+
                             const nocheF = turnosDia.filter(laNoche => {
                                 return parseInt(laNoche.turno_turno) === 1;
                             });
+
+                            if (response.refuerzo == 1){
+                                const refuerzoNocheF = refuerzosDia.filter(larefuerzoNoche => {
+                                    return parseInt(larefuerzoNoche.refuerzo_turno) === 1;
+                                });
+                            }
 
                             if (diaF.length > 0){
                                 diaT = diaF[0].user_nombre;
                                 diaI = diaF[0].turno_id;
                                 diaP = diaF[0].turno_profesional;
+                            }
+
+                            if (response.refuerzo == 1){
+                                if (refuerzodiaF.length > 0){
+                                    refuerzoDiaT = refuerzoDiaF[0].user_nombre;
+                                    refuerzoDiaI = refuerzoDiaF[0].refuerzo_id;
+                                    refuerzoDiaP = refuerzoDiaF[0].refuerzo_profesional;
+                                }
+
+                                if (refuerzonocheF.length > 0){
+                                    refuerzoNocheT = refuerzoNocheF[0].user_nombre;
+                                    refuerzoNocheI = refuerzoNocheF[0].refuerzo_id;
+                                    refuerzoNocheP = refuerzoNocheF[0].refuerzo_profesional;
+                                }
                             }
 
                             if (nocheF.length > 0){
@@ -1037,7 +1078,23 @@
                             }
 
                             if (response.refuerzo == 1){
-                                fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td class="text-center" data-id="' + defaultID +'" data-preset="1">' + defaultName + '</td><td class="text-center ' + diaP +'" data-id="' + diaI +'">' + diaT +'</td><td></td><td class="text-center ' + nocheP +'" data-id="' + nocheI +'">' + nocheT +'</td><td></td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
+                                if (refuerzoDiaP == <?php echo Session::get('user_id'); ?>){
+                                    refuerzoDiaP = "text-danger";
+                                }
+                                else{
+                                    refuerzoDiaP = "";
+                                }
+
+                                if (refuerzoNocheP == <?php echo Session::get('user_id'); ?>){
+                                    refuerzoNocheP = "text-danger";
+                                }
+                                else{
+                                    refuerzoNocheP = "";
+                                }  
+                            }
+
+                            if (response.refuerzo == 1){
+                                fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td class="text-center" data-id="' + defaultID +'" data-preset="1">' + defaultName + '</td><td class="text-center ' + diaP +'" data-id="' + diaI +'">' + diaT +'</td><td class="text-center ' + refuerzoDiaP +'" data-id="' + refuerzoDiaI +'">' + refuerzoDiaT +'</td><td class="text-center ' + nocheP +'" data-id="' + nocheI +'">' + nocheT +'</td><td class="text-center ' + refuerzoNocheP +'" data-id="' + refuerzoNocheI +'">' + refuerzoNocheT +'</td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
                             }
                             else{
                                 fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td class="text-center" data-id="' + defaultID +'" data-preset="1">' + defaultName + '</td><td class="text-center ' + diaP +'" data-id="' + diaI +'">' + diaT +'</td><td class="text-center ' + nocheP +'" data-id="' + nocheI +'">' + nocheT +'</td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';

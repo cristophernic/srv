@@ -16,6 +16,7 @@ class TurnosModel
             $return->refuerzo = DepartamentoModel::getDepartamento($departamento)->departamento_refuerzo;
             $return->default = self::getProfesionalesDefault($departamento, $mes, $ano);
             $return->turnos = self::getMonthTurnos($departamento, $mes, $ano);
+            $return->refuerzos = self::getMonthRefuerzos($departamento, $mes, $ano);
             $return->comentarios = self::getAllComentarios($mes, $ano, $departamento);
 
             return $return;
@@ -100,6 +101,21 @@ class TurnosModel
         $sql = "SELECT turnos.turno_id, turnos.turno_departamento, turnos.turno_profesional, turnos.turno_fechain, turnos.turno_turno, users.user_nombre FROM turnos INNER JOIN users ON turnos.turno_profesional = users.user_id WHERE turnos.turno_departamento = :departamento AND turnos.turno_fechain BETWEEN :turno_fechain AND :turno_fechaout";
         $query = $database->prepare($sql);
         $query->execute(array(':departamento' => $departamento, ':turno_fechain' => $fecha1, ':turno_fechaout' => $fecha2));
+        
+        return $query->fetchAll();
+    }
+
+    public static function getMonthRefuerzos($departamento,$mes, $ano)
+    {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $fecha1 = $ano . "-" . $mes . "-" .'-01';
+        $fecha = new DateTime($ano . '-' . $mes .'-01');
+        $fecha2 = $ano . "-" . $mes . "-" . $fecha->format('t');
+
+        $sql = "SELECT refuerzo.refuerzo_id, refuerzo.refuerzo_departamento, refuerzo.refuerzo_profesional, refuerzo.refuerzo_fechain, refuerzo.refuerzo_turno, users.user_nombre FROM refuerzo INNER JOIN users ON refuerzo.refuerzo_profesional = users.user_id WHERE refuerzo.refuerzo_departamento = :departamento AND refuerzo.refuerzo_fechain BETWEEN :refuerzo_fechain AND :refuerzo_fechaout";
+        $query = $database->prepare($sql);
+        $query->execute(array(':departamento' => $departamento, ':refuerzo_fechain' => $fecha1, ':refuerzo_fechaout' => $fecha2));
         
         return $query->fetchAll();
     }
@@ -217,6 +233,48 @@ class TurnosModel
                 $sql = "INSERT INTO turnos (turno_profesional, turno_fechain, turno_turno, turno_departamento) VALUES (:turno_profesional, :turno_fechain, :turno_turno, :turno_departamento)";
                 $query = $database->prepare($sql);
                 $query->execute(array(':turno_profesional' => $profesional, ':turno_fechain' => $fechainic, ':turno_turno' => intval($turno), ':turno_departamento' => $departamento_id));
+
+                if ($query->rowCount() == 1) {
+                    $return->resultado = true;
+                }
+                $refuerzo = DepartamentoModel::getDepartamento($departamento_id)->departamento_refuerzo;
+
+                if ($refuerzo == 1){
+                    self::createRefuerzo($profesional, $fechainic,$turno, $departamento_id);
+                }
+            }
+        }
+
+        return $return;
+    }
+
+    public static function createRefuerzo($profesional, $fechainic,$turno, $departamento_id)
+    {
+        $return = new stdClass();
+        $return->resultado = false;
+
+        if (!$profesional) {
+            $return->resultado = false;
+        }
+
+        if ($turno == 2){
+            $return->resultado = self::createRefuerzo($profesional,$fechainic,0, $departamento_id);
+            $return->resultado = self::createRefuerzo($profesional,$fechainic,1, $departamento_id);
+        }
+        else {
+            $database = DatabaseFactory::getFactory()->getConnection();
+
+            $sql = "SELECT refuerzo_profesional, refuerzo_fechain, refuerzo_turno, refuerzo_departamento FROM refuerzo WHERE refuerzo_profesional = :refuerzo_profesional AND refuerzo_fechain = :refuerzo_fechain AND refuerzo_turno = :refuerzo_turno";
+            $query = $database->prepare($sql);
+            $query->execute(array(':refuerzo_profesional' => $profesional, ':refuerzo_fechain' => $fechainic, ':refuerzo_turno' => intval($turno)));
+
+            if ($query->rowCount() == 1) {
+                $return->resultado = true;
+            }
+            else{
+                $sql = "INSERT INTO refuerzo (refuerzo_profesional, refuerzo_fechain, refuerzo_turno, refuerzo_departamento) VALUES (:refuerzo_profesional, :refuerzo_fechain, :refuerzo_turno, :refuerzo_departamento)";
+                $query = $database->prepare($sql);
+                $query->execute(array(':refuerzo_profesional' => $profesional, ':refuerzo_fechain' => $fechainic, ':refuerzo_turno' => intval($turno), ':refuerzo_departamento' => $departamento_id));
 
                 if ($query->rowCount() == 1) {
                     $return->resultado = true;
