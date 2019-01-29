@@ -1018,9 +1018,10 @@
                                 return parseInt(elDia.turno_turno) === 0;
                             });
 
+                            let refuerzoDiaF = "";
                             if (response.refuerzo == 1){
                                 if (Object.keys(refuerzosDia).length > 0) {
-                                    const refuerzoDiaF = refuerzosDia.filter(elrefuerzoDia => {
+                                    refuerzoDiaF = refuerzosDia.filter(elrefuerzoDia => {
                                         return parseInt(elrefuerzoDia.refuerzo_turno) === 0;
                                     });
                                 }
@@ -1031,9 +1032,10 @@
                                 return parseInt(laNoche.turno_turno) === 1;
                             });
 
+                            let refuerzoNocheF ="";
                             if (response.refuerzo == 1){
                                 if (Object.keys(refuerzosDia).length > 0) {
-                                    const refuerzoNocheF = refuerzosDia.filter(larefuerzoNoche => {
+                                    refuerzoNocheF = refuerzosDia.filter(larefuerzoNoche => {
                                         return parseInt(larefuerzoNoche.refuerzo_turno) === 1;
                                     });
                                 }
