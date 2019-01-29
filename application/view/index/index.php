@@ -1050,13 +1050,22 @@
                             if (response.refuerzo == 1){
                                 if (Object.keys(refuerzosDia).length > 0) {
                                     if (refuerzoDiaF.length > 0){
-                                        refuerzoDiaT = refuerzoDiaF[0].user_nombre;
+                                        if (refuerzoDiaF[0].refuerzo_horas != 12){
+                                            refuerzoDiaT = refuerzoDiaF[0].user_nombre + ' <span class="badge badge-pill badge-dark">' + refuerzoDiaF[0].refuerzo_horas +'</span>';
+                                        else{
+                                            refuerzoDiaT = refuerzoDiaF[0].user_nombre;
+                                        }
+
                                         refuerzoDiaI = refuerzoDiaF[0].refuerzo_id;
                                         refuerzoDiaP = refuerzoDiaF[0].refuerzo_profesional;
                                     }
 
                                     if (refuerzoNocheF.length > 0){
-                                        refuerzoNocheT = refuerzoNocheF[0].user_nombre;
+                                        if (refuerzoNocheF[0].refuerzo_horas != 12){
+                                            refuerzoNocheT = refuerzoNocheF[0].user_nombre + ' <span class="badge badge-pill badge-dark">' + refuerzoNocheF[0].refuerzo_horas +'</span>';
+                                        else{
+                                            refuerzoNocheT = refuerzoNocheF[0].user_nombre;
+                                        }
                                         refuerzoNocheI = refuerzoNocheF[0].refuerzo_id;
                                         refuerzoNocheP = refuerzoNocheF[0].refuerzo_profesional;
                                     }
