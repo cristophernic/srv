@@ -1049,13 +1049,13 @@
 
                             if (response.refuerzo == 1){
                                 if (Object.keys(refuerzosDia).length > 0) {
-                                    if (refuerzodiaF.length > 0){
+                                    if (refuerzoDiaF.length > 0){
                                         refuerzoDiaT = refuerzoDiaF[0].user_nombre;
                                         refuerzoDiaI = refuerzoDiaF[0].refuerzo_id;
                                         refuerzoDiaP = refuerzoDiaF[0].refuerzo_profesional;
                                     }
 
-                                    if (refuerzonocheF.length > 0){
+                                    if (refuerzoNocheF.length > 0){
                                         refuerzoNocheT = refuerzoNocheF[0].user_nombre;
                                         refuerzoNocheI = refuerzoNocheF[0].refuerzo_id;
                                         refuerzoNocheP = refuerzoNocheF[0].refuerzo_profesional;
