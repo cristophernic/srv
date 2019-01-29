@@ -1052,7 +1052,7 @@
                                     if (refuerzoDiaF.length > 0){
                                         if (refuerzoDiaF[0].refuerzo_horas != 12){
                                             refuerzoDiaT = refuerzoDiaF[0].user_nombre + ' <span class="badge badge-pill badge-dark">' + refuerzoDiaF[0].refuerzo_horas +'</span>';
-                                        else{
+                                        }else{
                                             refuerzoDiaT = refuerzoDiaF[0].user_nombre;
                                         }
 
@@ -1063,7 +1063,7 @@
                                     if (refuerzoNocheF.length > 0){
                                         if (refuerzoNocheF[0].refuerzo_horas != 12){
                                             refuerzoNocheT = refuerzoNocheF[0].user_nombre + ' <span class="badge badge-pill badge-dark">' + refuerzoNocheF[0].refuerzo_horas +'</span>';
-                                        else{
+                                        }else{
                                             refuerzoNocheT = refuerzoNocheF[0].user_nombre;
                                         }
                                         refuerzoNocheI = refuerzoNocheF[0].refuerzo_id;
