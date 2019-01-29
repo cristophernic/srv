@@ -1021,9 +1021,11 @@
                             });
 
                             if (response.refuerzo == 1){
-                                const refuerzoDiaF = refuerzosDia.filter(elrefuerzoDia => {
-                                    return parseInt(elrefuerzoDia.refuerzo_turno) === 0;
-                                });  
+                                if (Object.keys(refuerzosDia).length > 0) {
+                                    const refuerzoDiaF = refuerzosDia.filter(elrefuerzoDia => {
+                                        return parseInt(elrefuerzoDia.refuerzo_turno) === 0;
+                                    });
+                                }
                             }
                             
 
@@ -1032,9 +1034,11 @@
                             });
 
                             if (response.refuerzo == 1){
-                                const refuerzoNocheF = refuerzosDia.filter(larefuerzoNoche => {
-                                    return parseInt(larefuerzoNoche.refuerzo_turno) === 1;
-                                });
+                                if (Object.keys(refuerzosDia).length > 0) {
+                                    const refuerzoNocheF = refuerzosDia.filter(larefuerzoNoche => {
+                                        return parseInt(larefuerzoNoche.refuerzo_turno) === 1;
+                                    });
+                                }
                             }
 
                             if (diaF.length > 0){
@@ -1044,16 +1048,18 @@
                             }
 
                             if (response.refuerzo == 1){
-                                if (refuerzodiaF.length > 0){
-                                    refuerzoDiaT = refuerzoDiaF[0].user_nombre;
-                                    refuerzoDiaI = refuerzoDiaF[0].refuerzo_id;
-                                    refuerzoDiaP = refuerzoDiaF[0].refuerzo_profesional;
-                                }
+                                if (Object.keys(refuerzosDia).length > 0) {
+                                    if (refuerzodiaF.length > 0){
+                                        refuerzoDiaT = refuerzoDiaF[0].user_nombre;
+                                        refuerzoDiaI = refuerzoDiaF[0].refuerzo_id;
+                                        refuerzoDiaP = refuerzoDiaF[0].refuerzo_profesional;
+                                    }
 
-                                if (refuerzonocheF.length > 0){
-                                    refuerzoNocheT = refuerzoNocheF[0].user_nombre;
-                                    refuerzoNocheI = refuerzoNocheF[0].refuerzo_id;
-                                    refuerzoNocheP = refuerzoNocheF[0].refuerzo_profesional;
+                                    if (refuerzonocheF.length > 0){
+                                        refuerzoNocheT = refuerzoNocheF[0].user_nombre;
+                                        refuerzoNocheI = refuerzoNocheF[0].refuerzo_id;
+                                        refuerzoNocheP = refuerzoNocheF[0].refuerzo_profesional;
+                                    }
                                 }
                             }
 
@@ -1078,19 +1084,21 @@
                             }
 
                             if (response.refuerzo == 1){
-                                if (refuerzoDiaP == <?php echo Session::get('user_id'); ?>){
-                                    refuerzoDiaP = "text-danger";
-                                }
-                                else{
-                                    refuerzoDiaP = "";
-                                }
+                                if (Object.keys(refuerzosDia).length > 0) {
+                                    if (refuerzoDiaP == <?php echo Session::get('user_id'); ?>){
+                                        refuerzoDiaP = "text-danger";
+                                    }
+                                    else{
+                                        refuerzoDiaP = "";
+                                    }
 
-                                if (refuerzoNocheP == <?php echo Session::get('user_id'); ?>){
-                                    refuerzoNocheP = "text-danger";
+                                    if (refuerzoNocheP == <?php echo Session::get('user_id'); ?>){
+                                        refuerzoNocheP = "text-danger";
+                                    }
+                                    else{
+                                        refuerzoNocheP = "";
+                                    }
                                 }
-                                else{
-                                    refuerzoNocheP = "";
-                                }  
                             }
 
                             if (response.refuerzo == 1){
