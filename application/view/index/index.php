@@ -92,14 +92,20 @@
                         <table class="table table-td table-hover table-bordered" id="table">
                             <thead>
                                 <tr class="bg-light">
-                                    <th scope="col" rowspan="2" class="text-center" style="font-size:1.2rem">Días / Fecha</th>
-                                    <th scope="col" rowspan="2" class="text-center" style="font-size:1.2rem">Turnos<br>programados</th>
+                                    <th scope="col" id="table.header.dia" rowspan="2" class="text-center" style="font-size:1.2rem">Días / Fecha</th>
+                                    <th scope="col" id="table.header.turnos" rowspan="2" class="text-center" style="font-size:1.2rem">Turnos<br>programados</th>
                                     <th scope="col" colspan="4" class="text-center" style="font-size:1.2rem" id="table.turnos">Turno realizados</th>
-                                    <th scope="col" rowspan="2" class="text-center" style="font-size:1.2rem">Comentarios</th>
+                                    <th scope="col" id="table.header.comentarios" rowspan="2" class="text-center" style="font-size:1.2rem">Comentarios</th>
                                 </tr>
                                 <tr class="bg-light">
                                     <th scope="col" colspan="2" class="text-center" style="font-size:1.2rem" id="table.diurno">Diurno</th>
                                     <th scope="col" colspan="2" class="text-center" style="font-size:1.2rem" id="table.nocturno">Nocturno</th>
+                                </tr>
+                                <tr class="bg-light d-none" id="table.diurno.extra">
+                                    <th scope="col" colspan="1" class="text-center" id="table.diurno.residente">1er Residente</th>
+                                    <th scope="col" colspan="1" class="text-center" id="table.diurno.refuerzo">Refuerzo</th>
+                                    <th scope="col" colspan="1" class="text-center" id="table.nocturno.residente">1er Residente</th>
+                                    <th scope="col" colspan="1" class="text-center" id="table.nocturno.refuerzo">Refuerzo</th>
                                 </tr>
                             </thead>
                             <tbody id="table.calendario">
@@ -940,11 +946,19 @@
                         $("#table\\.diurno").attr("colspan",2);
                         $("#table\\.nocturno").attr("colspan",2);
                         $("#table\\.turnos").attr("colspan",4);
+                        $("#table\\.diurno\\.extra").removeClass("d-none");
+                        $("#table\\.header\\.dia").attr("rowspan",3);
+                        $("#table\\.header\\.turnos").attr("rowspan",3);
+                        $("#table\\.header\\.comentarios").attr("rowspan",3);
                     }
                     else{
                         $("#table\\.diurno").attr("colspan",1);
                         $("#table\\.nocturno").attr("colspan",1);
                         $("#table\\.turnos").attr("colspan",2);
+                        $("#table\\.diurno\\.extra").addClass("d-none");
+                        $("#table\\.header\\.dia").attr("rowspan",2);
+                        $("#table\\.header\\.turnos").attr("rowspan",2);
+                        $("#table\\.header\\.comentarios").attr("rowspan",2);
                     }
 
                     let fila = "";
