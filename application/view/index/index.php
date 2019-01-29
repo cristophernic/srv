@@ -1125,18 +1125,18 @@
                             }
 
                             if (response.refuerzo == 1){
-                                fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td class="text-center" data-id="' + defaultID +'" data-preset="1">' + defaultName + '</td><td class="text-center ' + diaP +'" data-id="' + diaI +'">' + diaT +'</td><td class="text-center ' + refuerzoDiaP +'" data-id="' + refuerzoDiaI +'" data-refuerzo="1">' + refuerzoDiaT +'</td><td class="text-center ' + nocheP +'" data-id="' + nocheI +'">' + nocheT +'</td><td class="text-center ' + refuerzoNocheP +'" data-id="' + refuerzoNocheI +'" data-refuerzo="1">' + refuerzoNocheT +'</td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
+                                fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td class="text-center" data-id="' + defaultID +'" data-preset="1">' + defaultName + '</td><td class="text-center bg-light ' + diaP +'" data-id="' + diaI +'">' + diaT +'</td><td class="text-center ' + refuerzoDiaP +'" data-id="' + refuerzoDiaI +'" data-refuerzo="1">' + refuerzoDiaT +'</td><td class="text-center bg-light ' + nocheP +'" data-id="' + nocheI +'">' + nocheT +'</td><td class="text-center ' + refuerzoNocheP +'" data-id="' + refuerzoNocheI +'" data-refuerzo="1">' + refuerzoNocheT +'</td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
                             }
                             else{
-                                fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td class="text-center" data-id="' + defaultID +'" data-preset="1">' + defaultName + '</td><td class="text-center ' + diaP +'" data-id="' + diaI +'">' + diaT +'</td><td class="text-center ' + nocheP +'" data-id="' + nocheI +'">' + nocheT +'</td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
+                                fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td class="text-center" data-id="' + defaultID +'" data-preset="1">' + defaultName + '</td><td class="text-center bg-light ' + diaP +'" data-id="' + diaI +'">' + diaT +'</td><td class="text-center bg-light ' + nocheP +'" data-id="' + nocheI +'">' + nocheT +'</td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
                             }
                         }
                         else{
                             if (response.refuerzo == 1){
-                                fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td></td><td class="text-center"></td><td class="text-center"></td><td class="text-center"></td><td class="text-center"></td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
+                                fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td></td><td class="text-center bg-light"></td><td class="text-center"></td><td class="text-center bg-light"></td><td class="text-center"></td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
                             }
                             else{
-                                fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td></td><td class="text-center"></td><td class="text-center"></td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
+                                fila = '<tr><td class="bg-light ' + rojo +'">' + dias[elDia] + h + '</td><td></td><td class="text-center bg-light"></td><td class="text-center bg-light"></td><td class="text-center" data-calendario="' + h + '">'+comentario+'</td></tr>';
                             }
                         }
 
